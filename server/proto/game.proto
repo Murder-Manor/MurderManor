@@ -1,0 +1,13 @@
+syntax = "proto3";
+package gameapi;
+
+service Extra {
+   rpc ServiceInfo (ServiceInfoRequest) returns (ServiceInfoReply);
+}
+
+message ServiceInfoRequest {
+}
+
+message ServiceInfoReply {
+   bool ready = 1;
+}
