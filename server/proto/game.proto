@@ -16,6 +16,7 @@ service Game {
    rpc NewPlayer(NewPlayerRequest) returns (Player);
    rpc GetPlayer(GetPlayerRequest) returns (Player);
    rpc ListPlayers(ListPlayersRequest) returns (stream Player);
+   rpc MovePlayer(MovePlayerRequest) returns (Player);
 }
 
 message NewPlayerRequest {
@@ -29,6 +30,17 @@ message GetPlayerRequest {
 message ListPlayersRequest {
 }
 
+message Vector2 {
+   float x = 1;
+   float y = 2;
+}
+
+message MovePlayerRequest {
+   string id = 1;
+   Vector2 newCoordinates = 2;
+   Vector2 newDirection = 3;
+}
+
 message Player {
    enum Role {
       Wolf = 0;
@@ -39,4 +51,6 @@ message Player {
    string id = 1;
    string name = 2;
    Role role = 3;
+   Vector2 coordinates = 4;
+   Vector2 direction = 5;
 }

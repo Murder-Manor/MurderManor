@@ -8,7 +8,8 @@ use proto::extra_server::{Extra, ExtraServer};
 use proto::{ServiceInfoRequest, ServiceInfoReply};
 
 use proto::game_server::{Game, GameServer};
-use proto::{NewPlayerRequest, GetPlayerRequest, ListPlayersRequest, Player};
+use proto::{NewPlayerRequest, GetPlayerRequest, ListPlayersRequest,
+            MovePlayerRequest, Player};
 
 use uuid::Uuid;
 
@@ -48,6 +49,8 @@ impl Game for GameAPI {
                 id: player_uuid.to_hyphenated().to_string(),
                 name: request.into_inner().name,
                 role: proto::player::Role::Wolf as i32,
+                coordinates: Some(proto::Vector2 { x: 0.0, y: 0.0 }),
+                direction: Some(proto::Vector2 {x: 1.0, y: 0.0}),
             };
 
             let players = &self.players;
@@ -93,6 +96,29 @@ impl Game for GameAPI {
             });
 
             Ok(Response::new(rx))
+        }
+
+    async fn move_player(&self,
+                         request: Request<MovePlayerRequest>
+                         ) ->
+        Result<Response<Player>, Status> {
+            let request = request.into_inner();
+            let player_uuid = request.id;
+            let player_uuid = player_uuid.as_bytes();
+            let player_uuid = match Uuid::from_slice(player_uuid) {
+                Ok(id) => id,
+                Err(_) => return Err(
+                    Status::new(Code::FailedPrecondition, "Wrong UUID format"))
+            };
+
+            match self.players.lock().await.get_mut(&player_uuid) {
+                Some(player) => {
+                    player.coordinates = request.new_coordinates;
+                    player.direction = request.new_direction;
+                    return Ok(Response::new(player.clone()))
+                }
+                None => return Err(Status::new(Code::Internal, "Cannot fetch player")),
+            };
         }
 }
 
