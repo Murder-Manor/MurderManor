@@ -13,11 +13,20 @@ message ServiceInfoReply {
 }
 
 service Game {
-   rpc NewPlayer(NewPlayerInfo) returns (Player);
+   rpc NewPlayer(NewPlayerRequest) returns (Player);
+   rpc GetPlayer(GetPlayerRequest) returns (Player);
+   rpc ListPlayers(ListPlayersRequest) returns (stream Player);
 }
 
-message NewPlayerInfo {
+message NewPlayerRequest {
    string name = 1;
+}
+
+message GetPlayerRequest {
+   string id = 1;
+}
+
+message ListPlayersRequest {
 }
 
 message Player {

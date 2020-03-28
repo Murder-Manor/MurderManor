@@ -1,10 +1,14 @@
-use tonic::{transport::Server, Request, Response, Status};
+use std::sync::Arc;
+use std::collections::HashMap;
+
+use tonic::{transport::Server, Request, Response, Status, Code};
+use tokio::sync::{mpsc, Mutex};
 
 use proto::extra_server::{Extra, ExtraServer};
 use proto::{ServiceInfoRequest, ServiceInfoReply};
 
 use proto::game_server::{Game, GameServer};
-use proto::{NewPlayerInfo, Player};
+use proto::{NewPlayerRequest, GetPlayerRequest, ListPlayersRequest, Player};
 
 use uuid::Uuid;
 
@@ -13,7 +17,9 @@ pub mod proto {
 }
 
 #[derive(Debug, Default)]
-pub struct GameAPI{}
+pub struct GameAPI{
+    players: Arc<Mutex<HashMap<Uuid, Player>>>
+}
 
 #[tonic::async_trait]
 impl Extra for GameAPI {
@@ -34,16 +40,59 @@ impl Extra for GameAPI {
 #[tonic::async_trait]
 impl Game for GameAPI {
     async fn new_player(&self,
-                        request: Request<NewPlayerInfo>
+                        request: Request<NewPlayerRequest>
                         ) ->
         Result<Response<Player>, Status> {
+            let player_uuid = Uuid::new_v4();
             let player = Player {
-                id: Uuid::new_v4().to_hyphenated().to_string(),
+                id: player_uuid.to_hyphenated().to_string(),
                 name: request.into_inner().name,
                 role: proto::player::Role::Wolf as i32,
             };
 
+            let players = &self.players;
+            players.lock().await.insert(player_uuid, player.clone());
+
             Ok(Response::new(player))
+        }
+
+    async fn get_player(&self,
+                        request: Request<GetPlayerRequest>
+                        ) ->
+        Result<Response<Player>, Status> {
+            let player_uuid = request.into_inner().id;
+            let player_uuid = player_uuid.as_bytes();
+            let player_uuid = match Uuid::from_slice(player_uuid) {
+                Ok(id) => id,
+                Err(_) => return Err(
+                    Status::new(Code::FailedPrecondition, "Wrong UUID format"))
+            };
+
+            match self.players.lock().await.get(&player_uuid) {
+                Some(player) => Ok(Response::new(player.clone())),
+                None => return Ok(Response::new(Player::default()))
+            }
+        }
+
+    type ListPlayersStream = mpsc::Receiver<Result<Player, Status>>;
+
+    async fn list_players(&self,
+                        _request: Request<ListPlayersRequest>
+                        ) ->
+        Result<Response<Self::ListPlayersStream>, Status> {
+            let players = self.players.clone();
+            let (mut tx, rx) = mpsc::channel(4);
+
+            tokio::spawn(async move {
+                let players = players.lock().await;
+                for (_, player) in players.iter() {
+                    tx.send(Ok(player.clone())).await.unwrap();
+                }
+
+                println!("Sent");
+            });
+
+            Ok(Response::new(rx))
         }
 }
 
