@@ -3,6 +3,9 @@ use tonic::{transport::Server, Request, Response, Status};
 use proto::extra_server::{Extra, ExtraServer};
 use proto::{ServiceInfoRequest, ServiceInfoReply};
 
+use proto::game_server::{Game, GameServer};
+use proto::{NewPlayerInfo, Player};
+
 pub mod proto {
     tonic::include_proto!("gameapi");
 }
@@ -26,13 +29,32 @@ impl Extra for GameAPI {
     }
 }
 
+#[tonic::async_trait]
+impl Game for GameAPI {
+    async fn new_player(&self,
+                        request: Request<NewPlayerInfo>
+                        ) ->
+        Result<Response<Player>, Status> {
+            let player = Player {
+                name: request.into_inner().name,
+                role: proto::player::Role::Wolf as i32,
+            };
+
+            Ok(Response::new(player))
+        }
+}
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = "[::1]:50051".parse()?;
-    let api = GameAPI::default();
+    let extra = GameAPI::default();
+    let game = GameAPI::default();
+
+    println!("Running game server on {:?}", addr);
 
     Server::builder()
-        .add_service(ExtraServer::new(api))
+        .add_service(ExtraServer::new(extra))
+        .add_service(GameServer::new(game))
         .serve(addr)
         .await?;
 

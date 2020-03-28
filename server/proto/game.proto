@@ -2,7 +2,7 @@ syntax = "proto3";
 package gameapi;
 
 service Extra {
-   rpc ServiceInfo (ServiceInfoRequest) returns (ServiceInfoReply);
+   rpc ServiceInfo(ServiceInfoRequest) returns (ServiceInfoReply);
 }
 
 message ServiceInfoRequest {
@@ -10,4 +10,23 @@ message ServiceInfoRequest {
 
 message ServiceInfoReply {
    bool ready = 1;
+}
+
+service Game {
+   rpc NewPlayer(NewPlayerInfo) returns (Player);
+}
+
+message NewPlayerInfo {
+   string name = 1;
+}
+
+message Player {
+   enum Role {
+      Wolf = 0;
+      Fish = 1;
+      Tiger = 2;
+      Turkey = 3;
+   }
+   string name = 1;
+   Role role = 2;
 }
