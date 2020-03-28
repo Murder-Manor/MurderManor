@@ -1,6 +1,6 @@
 use proto::extra_client::ExtraClient;
 use proto::game_client::GameClient;
-use proto::{ServiceInfoRequest, NewPlayerRequest};
+use proto::{ServiceInfoRequest, NewPlayerRequest, ListPlayersRequest};
 
 pub mod proto {
     tonic::include_proto!("gameapi");
@@ -18,6 +18,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let request = tonic::Request::new(NewPlayerRequest{name: String::from("Woof")});
     let response = game_client.new_player(request).await?;
     println!("RESPONSE: {:?}", response);
+
+    let request = tonic::Request::new(ListPlayersRequest{});
+    let mut stream = game_client
+        .list_players(request)
+        .await?
+        .into_inner();
+
+    while let Some(player) = stream.message().await? {
+        println!("New player: {:?}", player);
+    }
 
     Ok(())
 }
