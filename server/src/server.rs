@@ -6,6 +6,8 @@ use proto::{ServiceInfoRequest, ServiceInfoReply};
 use proto::game_server::{Game, GameServer};
 use proto::{NewPlayerInfo, Player};
 
+use uuid::Uuid;
+
 pub mod proto {
     tonic::include_proto!("gameapi");
 }
@@ -36,6 +38,7 @@ impl Game for GameAPI {
                         ) ->
         Result<Response<Player>, Status> {
             let player = Player {
+                id: Uuid::new_v4().to_hyphenated().to_string(),
                 name: request.into_inner().name,
                 role: proto::player::Role::Wolf as i32,
             };

@@ -27,6 +27,7 @@ message Player {
       Tiger = 2;
       Turkey = 3;
    }
-   string name = 1;
-   Role role = 2;
+   string id = 1;
+   string name = 2;
+   Role role = 3;
 }
