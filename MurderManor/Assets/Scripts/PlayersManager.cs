@@ -15,14 +15,15 @@ public class PlayersManager : MonoBehaviour {
     private Dictionary<string, GameObject> _characters = new Dictionary<String, GameObject>();
 
     public string endpoint = "[::1]:50051";
-    public GameObject mainPlayer = null;
+    public GameObject mainCharacter = null;
+    public GameObject spawnedPrefab = null;
 
     private void Start() {
         _grpc_channel = new Grpc.Core.Channel(
             endpoint, Grpc.Core.ChannelCredentials.Insecure);
         _client = new Game.GameClient(_grpc_channel);
-        var mainPlayerCasted = mainPlayer.GetComponent<CharacterMove>();
-        _characters[mainPlayerCasted.id] = mainPlayer;
+        var character = mainCharacter.GetComponent<CharacterMove>();
+        character.id = NewPlayer(character.characterName);
     }
 
     private void Update() {
@@ -33,18 +34,20 @@ public class PlayersManager : MonoBehaviour {
         _time_to_next_update_ms = update_rate_ms;
 
         // Synchronize map of characters
-        System.Threading.Tasks.Task.Run(async () => {
-            using (var response = _client.ListPlayers(new ListPlayersRequest{})) {
-                var cancellationToken = default(System.Threading.CancellationToken);
-                while(await response.ResponseStream.MoveNext(cancellationToken)) {
-                    var currChar = response.ResponseStream.Current;
-                    if(!_characters.ContainsKey(currChar.Id)) {
-                        _characters[currChar.Id] = Instantiate(mainPlayer);
-                        Debug.Log("Adding " + currChar.Name);
-                    }
+        using (var response = _client.ListPlayers(new ListPlayersRequest{})) {
+            var cancellationToken = default(System.Threading.CancellationToken);
+            while(true) {
+                var next = response.ResponseStream.MoveNext(cancellationToken);
+                next.Wait();
+                if(!next.Result)
+                    break;
+                var currChar = response.ResponseStream.Current;
+                if(!_characters.ContainsKey(currChar.Id)) {
+                    _characters[currChar.Id] = Instantiate(spawnedPrefab);
+                    Debug.Log("Adding " + currChar.Id);
                 }
             }
-        });
+        }
 
         // Update position of each character in case a change have been made
         Debug.Log("End of player sync");
@@ -52,6 +55,7 @@ public class PlayersManager : MonoBehaviour {
 
     public string NewPlayer(string name) {
         var player = _client.NewPlayer(new NewPlayerRequest{Name = name});
+        _characters[player.Id] = null;
         return player.Id;
     }
 
