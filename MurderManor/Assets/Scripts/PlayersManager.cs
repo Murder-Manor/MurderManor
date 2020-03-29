@@ -34,6 +34,30 @@ public class PlayersManager : MonoBehaviour {
         _time_to_next_update_ms = update_rate_ms;
 
         // Synchronize map of characters
+        UpdateCharsMap();
+
+        // Cleanup by destroying all characters that did not respond for 2s
+        var toDelete = new List<string>();
+        foreach(var entry in _characters) {
+            if(Time.time - entry.Value.GetComponent<CharacterMove>().GetLastUpdatedTime() < 2.0f)
+                continue;
+            Destroy(entry.Value);
+            toDelete.Add(entry.Key);
+        }
+        foreach(var key in toDelete)
+            _characters.Remove(key);
+
+        // Update controlled characters
+        SendCharsUpdate();
+    }
+
+    private void SendCharsUpdate() {
+        foreach(var entry in _controlled_characters) {
+            MovePlayer(entry.Key, entry.Value.GetPosition(), entry.Value.GetDirection());
+        }
+    }
+
+    private void UpdateCharsMap() {
         using (var response = _client.ListPlayers(new ListPlayersRequest{})) {
             var cancellationToken = default(System.Threading.CancellationToken);
             while(true) {
@@ -48,6 +72,7 @@ public class PlayersManager : MonoBehaviour {
                 // Instantiate a new character if we didn't have it
                 if(!_characters.ContainsKey(currChar.Id)) {
                     _characters[currChar.Id] = Instantiate(spawnedPrefab);
+                    // Teleport it at the beginning to avoid collision issues
                     Debug.Log("Adding " + currChar.Id);
                 }
                 // Update position of each character in case a change have been made
@@ -57,11 +82,6 @@ public class PlayersManager : MonoBehaviour {
                 charMove.SetDirection(new UnityEngine.Vector3(
                             currChar.Direction.X, currChar.Direction.Y, currChar.Direction.Z));
             }
-        }
-
-        // Update controlled characters
-        foreach(var entry in _controlled_characters) {
-            MovePlayer(entry.Key, entry.Value.GetPosition(), entry.Value.GetDirection());
         }
     }
 

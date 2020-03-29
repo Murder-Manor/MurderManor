@@ -31,18 +31,19 @@ namespace Gameapi {
             "AXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCImgKEU1vdmVQbGF5ZXJS",
             "ZXF1ZXN0EgoKAmlkGAEgASgJEiIKCHBvc2l0aW9uGAIgASgLMhAuZ2FtZWFw",
             "aS5WZWN0b3IzEiMKCWRpcmVjdGlvbhgDIAEoCzIQLmdhbWVhcGkuVmVjdG9y",
-            "MyLCAQoGUGxheWVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSIgoEcm9s",
+            "MyLZAQoGUGxheWVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSIgoEcm9s",
             "ZRgDIAEoDjIULmdhbWVhcGkuUGxheWVyLlJvbGUSIgoIcG9zaXRpb24YBCAB",
             "KAsyEC5nYW1lYXBpLlZlY3RvcjMSIwoJZGlyZWN0aW9uGAUgASgLMhAuZ2Ft",
-            "ZWFwaS5WZWN0b3IzIjEKBFJvbGUSCAoEV29sZhAAEggKBEZpc2gQARIJCgVU",
-            "aWdlchACEgoKBlR1cmtleRADMk4KBUV4dHJhEkUKC1NlcnZpY2VJbmZvEhsu",
-            "Z2FtZWFwaS5TZXJ2aWNlSW5mb1JlcXVlc3QaGS5nYW1lYXBpLlNlcnZpY2VJ",
-            "bmZvUmVwbHky8gEKBEdhbWUSNwoJTmV3UGxheWVyEhkuZ2FtZWFwaS5OZXdQ",
-            "bGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISNwoJR2V0UGxheWVyEhku",
-            "Z2FtZWFwaS5HZXRQbGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISPQoL",
-            "TGlzdFBsYXllcnMSGy5nYW1lYXBpLkxpc3RQbGF5ZXJzUmVxdWVzdBoPLmdh",
-            "bWVhcGkuUGxheWVyMAESOQoKTW92ZVBsYXllchIaLmdhbWVhcGkuTW92ZVBs",
-            "YXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllcmIGcHJvdG8z"));
+            "ZWFwaS5WZWN0b3IzEhUKDWxhc3RVcGRhdGVkbXMYBiABKA0iMQoEUm9sZRII",
+            "CgRXb2xmEAASCAoERmlzaBABEgkKBVRpZ2VyEAISCgoGVHVya2V5EAMyTgoF",
+            "RXh0cmESRQoLU2VydmljZUluZm8SGy5nYW1lYXBpLlNlcnZpY2VJbmZvUmVx",
+            "dWVzdBoZLmdhbWVhcGkuU2VydmljZUluZm9SZXBseTLyAQoER2FtZRI3CglO",
+            "ZXdQbGF5ZXISGS5nYW1lYXBpLk5ld1BsYXllclJlcXVlc3QaDy5nYW1lYXBp",
+            "LlBsYXllchI3CglHZXRQbGF5ZXISGS5nYW1lYXBpLkdldFBsYXllclJlcXVl",
+            "c3QaDy5nYW1lYXBpLlBsYXllchI9CgtMaXN0UGxheWVycxIbLmdhbWVhcGku",
+            "TGlzdFBsYXllcnNSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXIwARI5CgpNb3Zl",
+            "UGxheWVyEhouZ2FtZWFwaS5Nb3ZlUGxheWVyUmVxdWVzdBoPLmdhbWVhcGku",
+            "UGxheWVyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -53,7 +54,7 @@ namespace Gameapi {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ListPlayersRequest), global::Gameapi.ListPlayersRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Vector3), global::Gameapi.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.MovePlayerRequest), global::Gameapi.MovePlayerRequest.Parser, new[]{ "Id", "Position", "Direction" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Position", "Direction" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Position", "Direction", "LastUpdatedms" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null)
           }));
     }
     #endregion
@@ -1061,6 +1062,7 @@ namespace Gameapi {
       role_ = other.role_;
       position_ = other.position_ != null ? other.position_.Clone() : null;
       direction_ = other.direction_ != null ? other.direction_.Clone() : null;
+      lastUpdatedms_ = other.lastUpdatedms_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1124,6 +1126,17 @@ namespace Gameapi {
       }
     }
 
+    /// <summary>Field number for the "lastUpdatedms" field.</summary>
+    public const int LastUpdatedmsFieldNumber = 6;
+    private uint lastUpdatedms_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint LastUpdatedms {
+      get { return lastUpdatedms_; }
+      set {
+        lastUpdatedms_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Player);
@@ -1142,6 +1155,7 @@ namespace Gameapi {
       if (Role != other.Role) return false;
       if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Direction, other.Direction)) return false;
+      if (LastUpdatedms != other.LastUpdatedms) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1153,6 +1167,7 @@ namespace Gameapi {
       if (Role != 0) hash ^= Role.GetHashCode();
       if (position_ != null) hash ^= Position.GetHashCode();
       if (direction_ != null) hash ^= Direction.GetHashCode();
+      if (LastUpdatedms != 0) hash ^= LastUpdatedms.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1186,6 +1201,10 @@ namespace Gameapi {
         output.WriteRawTag(42);
         output.WriteMessage(Direction);
       }
+      if (LastUpdatedms != 0) {
+        output.WriteRawTag(48);
+        output.WriteUInt32(LastUpdatedms);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1208,6 +1227,9 @@ namespace Gameapi {
       }
       if (direction_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Direction);
+      }
+      if (LastUpdatedms != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(LastUpdatedms);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1240,6 +1262,9 @@ namespace Gameapi {
           Direction = new global::Gameapi.Vector3();
         }
         Direction.MergeFrom(other.Direction);
+      }
+      if (other.LastUpdatedms != 0) {
+        LastUpdatedms = other.LastUpdatedms;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1276,6 +1301,10 @@ namespace Gameapi {
               Direction = new global::Gameapi.Vector3();
             }
             input.ReadMessage(Direction);
+            break;
+          }
+          case 48: {
+            LastUpdatedms = input.ReadUInt32();
             break;
           }
         }
