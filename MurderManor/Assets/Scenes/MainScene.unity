@@ -480,6 +480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088b5b4ebedfb442fbde57d798ac8d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endpoint: '[::1]:50051'
+  mainPlayer: {fileID: 1661447292}
 --- !u!4 &1240677875
 Transform:
   m_ObjectHideFlags: 0
