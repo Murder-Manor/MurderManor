@@ -14,11 +14,21 @@ public class CharacterMove : MonoBehaviour {
 
     // These variables must be set in unity interface
     public Animator m_Animator = null;
-    public string characterName;
 
     private float lastUpdatedTime = 0.0f;
+    private string characterName;
 
     void Start() {
+    }
+
+    public void SetCharacterName(string characterName) {
+        this.characterName = characterName;
+        Debug.Log("New char: " + characterName);
+        gameObject.transform.Find("NameDisplay").GetComponent<TextMesh>().text = characterName;
+    }
+
+    public string GetCharacterName() {
+        return characterName;
     }
 
     void Update() {

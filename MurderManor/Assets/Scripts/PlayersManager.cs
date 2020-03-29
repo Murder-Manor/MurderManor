@@ -32,7 +32,7 @@ public class PlayersManager : MonoBehaviour {
         _client = new Game.GameClient(_grpc_channel);
         started = true;
 
-        mainCharacter.GetComponent<CharacterMove>().name = name;
+        mainCharacter.GetComponent<CharacterMove>().SetCharacterName(name);
         NewPlayer(mainCharacter);
         return true;
     }
@@ -84,6 +84,7 @@ public class PlayersManager : MonoBehaviour {
                 // Instantiate a new character if we didn't have it
                 if(!_characters.ContainsKey(currChar.Id)) {
                     _characters[currChar.Id] = Instantiate(spawnedPrefab);
+                    _characters[currChar.Id].GetComponent<CharacterMove>().SetCharacterName(currChar.Name);
                     // Teleport it at the beginning to avoid collision issues
                     Debug.Log("Adding " + currChar.Id);
                 }
@@ -100,7 +101,7 @@ public class PlayersManager : MonoBehaviour {
     public string NewPlayer(GameObject player) {
         if(!started) return "";
         var character = player.GetComponent<CharacterMove>();
-        var returnedPlayer = _client.NewPlayer(new NewPlayerRequest{Name = character.name});
+        var returnedPlayer = _client.NewPlayer(new NewPlayerRequest{Name = character.GetCharacterName()});
         _controlled_characters[returnedPlayer.Id] = character;
         character.id = returnedPlayer.Id;
         character.enabled = true;
