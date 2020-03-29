@@ -19,12 +19,10 @@ public class CharacterMove : MonoBehaviour {
 
     // These variables must be set in unity interface
     public Animator m_Animator = null;
-    public PlayersManager playersManager = null;
     public string characterName;
 
     void Start() {
         characterController = GetComponent<CharacterController>();
-        id = playersManager.NewPlayer(characterName);
     }
 
     void Update() {
@@ -39,7 +37,14 @@ public class CharacterMove : MonoBehaviour {
 
         moveDirection *= speed;
         characterController.Move(moveDirection * Time.deltaTime);
-        playersManager.MovePlayer(id, transform.position, transform.rotation.eulerAngles);
+    }
+
+    Vector3 GetPosition() {
+        return transform.position;
+    }
+
+    Vector3 GetDirection() {
+        return transform.rotation.eulerAngles;
     }
 }
 
