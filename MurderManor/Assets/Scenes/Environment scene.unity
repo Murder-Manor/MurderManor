@@ -35459,8 +35459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088b5b4ebedfb442fbde57d798ac8d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endpoint: '[::1]:50051'
-  mainPlayer: {fileID: 0}
+  mainCharacter: {fileID: 0}
+  spawnedPrefab: {fileID: 0}
 --- !u!4 &1240677875
 Transform:
   m_ObjectHideFlags: 0
@@ -42050,17 +42050,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 19060e7f97435674c87cffdcd1e794f2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.45
+      value: -7.699
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 19060e7f97435674c87cffdcd1e794f2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.28
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 19060e7f97435674c87cffdcd1e794f2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.21
+      value: -5.872
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 19060e7f97435674c87cffdcd1e794f2,
         type: 3}
@@ -47059,6 +47059,11 @@ PrefabInstance:
       propertyPath: playersManager
       value: 
       objectReference: {fileID: 1240677874}
+    - target: {fileID: 3437808100020103350, guid: a06b88596482f1e4fba0201ccb91d322,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3437808100020103351, guid: a06b88596482f1e4fba0201ccb91d322,
         type: 3}
       propertyPath: m_Name

@@ -11,7 +11,7 @@ public class ObjectPicker : MonoBehaviour
     void Start()
     {
         Collider m_ObjectCollider = GetComponent<Collider>();
-}
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,8 +33,14 @@ public class ObjectPicker : MonoBehaviour
            
         }
 
-        Debug.Log(closestObject);
-
+        if (Input.GetButtonDown("Pickup"))
+        {
+            closestObject.transform.parent = transform;
+            //closestObject.transform.position = transform.position;
+            closestObject.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z + 0.2f);
+            closestObject.GetComponent<Rigidbody>().isKinematic = true;
+            Debug.Log(closestObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
