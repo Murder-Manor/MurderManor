@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.35872743, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -230,8 +230,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.48281157, y: -0.000020551879, z: 0.000011330888, w: 0.8757243}
-  m_LocalPosition: {x: 0.00014362842, y: 4.8538566, z: -3.0639312}
+  m_LocalRotation: {x: 0.48281157, y: -0.00002052578, z: 0.000011316499, w: 0.8757243}
+  m_LocalPosition: {x: 0.00014381105, y: 4.8538566, z: -3.0639312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 196818850}
@@ -295,8 +295,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104912640}
-  m_LocalRotation: {x: 0.48281157, y: -0.000020551879, z: 0.000011330888, w: 0.8757243}
-  m_LocalPosition: {x: 0.00014362842, y: 4.8538566, z: -3.0639312}
+  m_LocalRotation: {x: 0.48281157, y: -0.00002052578, z: 0.000011316499, w: 0.8757243}
+  m_LocalPosition: {x: 0.00014381105, y: 4.8538566, z: -3.0639312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1128828035}
@@ -451,6 +451,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1240677873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1240677875}
+  - component: {fileID: 1240677874}
+  m_Layer: 0
+  m_Name: PlayersManager
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1240677874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240677873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088b5b4ebedfb442fbde57d798ac8d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1240677875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240677873}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408142300
 GameObject:
   m_ObjectHideFlags: 0
@@ -5246,8 +5289,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   jumpSpeed: 8
-  gravity: 20
   m_Animator: {fileID: 2029418641}
+  playersManager: {fileID: 1240677874}
+  characterName: Arthur
 --- !u!143 &1661447294
 CharacterController:
   m_ObjectHideFlags: 0
