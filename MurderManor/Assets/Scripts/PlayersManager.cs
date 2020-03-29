@@ -19,8 +19,8 @@ public class PlayersManager : MonoBehaviour {
         return player.Id;
     }
 
-    public void MovePlayer(string id, UnityEngine.Vector2 position,
-                           UnityEngine.Vector2 direction) {
+    public void MovePlayer(string id, UnityEngine.Vector3 position,
+                           UnityEngine.Vector3 direction) {
         _client.MovePlayer(new MovePlayerRequest{
             Id = id,
             NewCoordinates =

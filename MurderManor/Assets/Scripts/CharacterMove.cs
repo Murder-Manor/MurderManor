@@ -13,29 +13,34 @@ public class CharacterMove : MonoBehaviour {
 
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
-    public float gravity = 20.0f;
-    [SerializeField]
-    private Animator m_Animator = null;
 
+    private string id;
     private Vector3 moveDirection = Vector3.zero;
 
-    void Start() { characterController = GetComponent<CharacterController>(); }
+    // These variables must be set in unity interface
+    public Animator m_Animator = null;
+    public PlayersManager playersManager = null;
+    public string characterName;
+
+    void Start() {
+        characterController = GetComponent<CharacterController>();
+        id = playersManager.NewPlayer(characterName);
+        Debug.Log(id);
+    }
 
     void Update() {
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f,
                                     Input.GetAxis("Vertical"));
-        if (moveDirection != Vector3.zero) {
+
+        m_Animator.SetBool("Walk", moveDirection != Vector3.zero);
+        if (moveDirection != Vector3.zero)
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(moveDirection.normalized), 0.5f);
-            m_Animator.SetBool("Walk", true);
-        }
-
-        else
-            m_Animator.SetBool("Walk", false);
 
         moveDirection *= speed;
         characterController.Move(moveDirection * Time.deltaTime);
+        playersManager.MovePlayer(id, transform.position, transform.rotation.eulerAngles);
     }
 }
 
