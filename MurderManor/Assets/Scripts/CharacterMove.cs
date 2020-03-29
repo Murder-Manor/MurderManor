@@ -15,7 +15,7 @@ public class CharacterMove : MonoBehaviour {
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     [SerializeField]
-    private Animator m_Animator;
+    private Animator m_Animator = null;
 
     private Vector3 moveDirection = Vector3.zero;
 
