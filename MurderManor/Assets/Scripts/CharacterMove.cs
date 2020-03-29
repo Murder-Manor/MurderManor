@@ -45,7 +45,7 @@ public class CharacterMove : MonoBehaviour {
 
         m_Animator.SetBool("Walk", movement != Vector3.zero);
 
-        if ( movement != Vector3.zero)
+        if(movement != Vector3.zero)
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(movement.normalized), 0.5f);
