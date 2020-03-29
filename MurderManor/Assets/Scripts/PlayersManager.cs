@@ -10,23 +10,35 @@ public class PlayersManager : MonoBehaviour {
     private static float update_rate_ms = 10.0f;
     private Game.GameClient _client;
     private Grpc.Core.Channel _grpc_channel;
+    private bool started = false;
 
     private float _time_to_next_update_ms = update_rate_ms;
     private Dictionary<string, GameObject> _characters = new Dictionary<String, GameObject>();
     private Dictionary<string, CharacterMove> _controlled_characters = new Dictionary<String, CharacterMove>();
 
-    public string endpoint = "[::1]:50051";
     public GameObject mainCharacter = null;
     public GameObject spawnedPrefab = null;
 
     private void Start() {
+    }
+
+    public bool Connect(string name, string endpoint) {
+        if (name == "") name= "Arthur";
+        if (endpoint == "") endpoint = "[::1]:50051";
+        Debug.Log(endpoint);
+
         _grpc_channel = new Grpc.Core.Channel(
             endpoint, Grpc.Core.ChannelCredentials.Insecure);
         _client = new Game.GameClient(_grpc_channel);
+        started = true;
+
+        mainCharacter.GetComponent<CharacterMove>().name = name;
         NewPlayer(mainCharacter);
+        return true;
     }
 
     private void Update() {
+        if(!started) return;
         // Update every update_rate_ms
         _time_to_next_update_ms -= Time.deltaTime * 1000;
         if(_time_to_next_update_ms > 0.0f)
@@ -86,15 +98,18 @@ public class PlayersManager : MonoBehaviour {
     }
 
     public string NewPlayer(GameObject player) {
+        if(!started) return "";
         var character = player.GetComponent<CharacterMove>();
         var returnedPlayer = _client.NewPlayer(new NewPlayerRequest{Name = character.name});
         _controlled_characters[returnedPlayer.Id] = character;
         character.id = returnedPlayer.Id;
+        character.enabled = true;
         return returnedPlayer.Id;
     }
 
     public void MovePlayer(string id, UnityEngine.Vector3 position,
                            UnityEngine.Vector3 direction) {
+        if(!started) return;
         _client.MovePlayer(new MovePlayerRequest{
             Id = id,
             Position =
