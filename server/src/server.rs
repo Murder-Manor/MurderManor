@@ -63,9 +63,8 @@ impl Game for GameAPI {
                         request: Request<GetPlayerRequest>
                         ) ->
         Result<Response<Player>, Status> {
-            let player_uuid = request.into_inner().id;
-            let player_uuid = player_uuid.as_bytes();
-            let player_uuid = match Uuid::from_slice(player_uuid) {
+            let player_uuid = String::from(request.into_inner().id);
+            let player_uuid = match Uuid::parse_str(&player_uuid) {
                 Ok(id) => id,
                 Err(_) => return Err(
                     Status::new(Code::FailedPrecondition, "Wrong UUID format"))
@@ -103,12 +102,11 @@ impl Game for GameAPI {
                          ) ->
         Result<Response<Player>, Status> {
             let request = request.into_inner();
-            let player_uuid = request.id;
-            let player_uuid = player_uuid.as_bytes();
-            let player_uuid = match Uuid::from_slice(player_uuid) {
+            let player_uuid = String::from(request.id);
+            let player_uuid = match Uuid::parse_str(&player_uuid) {
                 Ok(id) => id,
-                Err(_) => return Err(
-                    Status::new(Code::FailedPrecondition, "Wrong UUID format"))
+                Err(e) => return Err(
+                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
             };
 
             match self.players.lock().await.get_mut(&player_uuid) {
