@@ -27,22 +27,22 @@ namespace Gameapi {
             "CgpnYW1lLnByb3RvEgdnYW1lYXBpIhQKElNlcnZpY2VJbmZvUmVxdWVzdCIh",
             "ChBTZXJ2aWNlSW5mb1JlcGx5Eg0KBXJlYWR5GAEgASgIIiAKEE5ld1BsYXll",
             "clJlcXVlc3QSDAoEbmFtZRgBIAEoCSIeChBHZXRQbGF5ZXJSZXF1ZXN0EgoK",
-            "AmlkGAEgASgJIhQKEkxpc3RQbGF5ZXJzUmVxdWVzdCIfCgdWZWN0b3IyEgkK",
-            "AXgYASABKAISCQoBeRgCIAEoAiJxChFNb3ZlUGxheWVyUmVxdWVzdBIKCgJp",
-            "ZBgBIAEoCRIoCg5uZXdDb29yZGluYXRlcxgCIAEoCzIQLmdhbWVhcGkuVmVj",
-            "dG9yMhImCgxuZXdEaXJlY3Rpb24YAyABKAsyEC5nYW1lYXBpLlZlY3RvcjIi",
-            "xQEKBlBsYXllchIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEiIKBHJvbGUY",
-            "AyABKA4yFC5nYW1lYXBpLlBsYXllci5Sb2xlEiUKC2Nvb3JkaW5hdGVzGAQg",
-            "ASgLMhAuZ2FtZWFwaS5WZWN0b3IyEiMKCWRpcmVjdGlvbhgFIAEoCzIQLmdh",
-            "bWVhcGkuVmVjdG9yMiIxCgRSb2xlEggKBFdvbGYQABIICgRGaXNoEAESCQoF",
-            "VGlnZXIQAhIKCgZUdXJrZXkQAzJOCgVFeHRyYRJFCgtTZXJ2aWNlSW5mbxIb",
-            "LmdhbWVhcGkuU2VydmljZUluZm9SZXF1ZXN0GhkuZ2FtZWFwaS5TZXJ2aWNl",
-            "SW5mb1JlcGx5MvIBCgRHYW1lEjcKCU5ld1BsYXllchIZLmdhbWVhcGkuTmV3",
-            "UGxheWVyUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyEjcKCUdldFBsYXllchIZ",
-            "LmdhbWVhcGkuR2V0UGxheWVyUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyEj0K",
-            "C0xpc3RQbGF5ZXJzEhsuZ2FtZWFwaS5MaXN0UGxheWVyc1JlcXVlc3QaDy5n",
-            "YW1lYXBpLlBsYXllcjABEjkKCk1vdmVQbGF5ZXISGi5nYW1lYXBpLk1vdmVQ",
-            "bGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXJiBnByb3RvMw=="));
+            "AmlkGAEgASgJIhQKEkxpc3RQbGF5ZXJzUmVxdWVzdCIqCgdWZWN0b3IzEgkK",
+            "AXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCImgKEU1vdmVQbGF5ZXJS",
+            "ZXF1ZXN0EgoKAmlkGAEgASgJEiIKCHBvc2l0aW9uGAIgASgLMhAuZ2FtZWFw",
+            "aS5WZWN0b3IzEiMKCWRpcmVjdGlvbhgDIAEoCzIQLmdhbWVhcGkuVmVjdG9y",
+            "MyLCAQoGUGxheWVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSIgoEcm9s",
+            "ZRgDIAEoDjIULmdhbWVhcGkuUGxheWVyLlJvbGUSIgoIcG9zaXRpb24YBCAB",
+            "KAsyEC5nYW1lYXBpLlZlY3RvcjMSIwoJZGlyZWN0aW9uGAUgASgLMhAuZ2Ft",
+            "ZWFwaS5WZWN0b3IzIjEKBFJvbGUSCAoEV29sZhAAEggKBEZpc2gQARIJCgVU",
+            "aWdlchACEgoKBlR1cmtleRADMk4KBUV4dHJhEkUKC1NlcnZpY2VJbmZvEhsu",
+            "Z2FtZWFwaS5TZXJ2aWNlSW5mb1JlcXVlc3QaGS5nYW1lYXBpLlNlcnZpY2VJ",
+            "bmZvUmVwbHky8gEKBEdhbWUSNwoJTmV3UGxheWVyEhkuZ2FtZWFwaS5OZXdQ",
+            "bGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISNwoJR2V0UGxheWVyEhku",
+            "Z2FtZWFwaS5HZXRQbGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISPQoL",
+            "TGlzdFBsYXllcnMSGy5nYW1lYXBpLkxpc3RQbGF5ZXJzUmVxdWVzdBoPLmdh",
+            "bWVhcGkuUGxheWVyMAESOQoKTW92ZVBsYXllchIaLmdhbWVhcGkuTW92ZVBs",
+            "YXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -51,9 +51,9 @@ namespace Gameapi {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.NewPlayerRequest), global::Gameapi.NewPlayerRequest.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetPlayerRequest), global::Gameapi.GetPlayerRequest.Parser, new[]{ "Id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ListPlayersRequest), global::Gameapi.ListPlayersRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Vector2), global::Gameapi.Vector2.Parser, new[]{ "X", "Y" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.MovePlayerRequest), global::Gameapi.MovePlayerRequest.Parser, new[]{ "Id", "NewCoordinates", "NewDirection" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Coordinates", "Direction" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Vector3), global::Gameapi.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.MovePlayerRequest), global::Gameapi.MovePlayerRequest.Parser, new[]{ "Id", "Position", "Direction" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Position", "Direction" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null)
           }));
     }
     #endregion
@@ -649,11 +649,11 @@ namespace Gameapi {
 
   }
 
-  public sealed partial class Vector2 : pb::IMessage<Vector2> {
-    private static readonly pb::MessageParser<Vector2> _parser = new pb::MessageParser<Vector2>(() => new Vector2());
+  public sealed partial class Vector3 : pb::IMessage<Vector3> {
+    private static readonly pb::MessageParser<Vector3> _parser = new pb::MessageParser<Vector3>(() => new Vector3());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Vector2> Parser { get { return _parser; } }
+    public static pb::MessageParser<Vector3> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -666,22 +666,23 @@ namespace Gameapi {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector2() {
+    public Vector3() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector2(Vector2 other) : this() {
+    public Vector3(Vector3 other) : this() {
       x_ = other.x_;
       y_ = other.y_;
+      z_ = other.z_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector2 Clone() {
-      return new Vector2(this);
+    public Vector3 Clone() {
+      return new Vector3(this);
     }
 
     /// <summary>Field number for the "x" field.</summary>
@@ -706,13 +707,24 @@ namespace Gameapi {
       }
     }
 
+    /// <summary>Field number for the "z" field.</summary>
+    public const int ZFieldNumber = 3;
+    private float z_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as Vector2);
+    public float Z {
+      get { return z_; }
+      set {
+        z_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Vector2 other) {
+    public override bool Equals(object other) {
+      return Equals(other as Vector3);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Vector3 other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -721,6 +733,7 @@ namespace Gameapi {
       }
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -729,6 +742,7 @@ namespace Gameapi {
       int hash = 1;
       if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
       if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
+      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -750,6 +764,10 @@ namespace Gameapi {
         output.WriteRawTag(21);
         output.WriteFloat(Y);
       }
+      if (Z != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Z);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -764,6 +782,9 @@ namespace Gameapi {
       if (Y != 0F) {
         size += 1 + 4;
       }
+      if (Z != 0F) {
+        size += 1 + 4;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -771,7 +792,7 @@ namespace Gameapi {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Vector2 other) {
+    public void MergeFrom(Vector3 other) {
       if (other == null) {
         return;
       }
@@ -780,6 +801,9 @@ namespace Gameapi {
       }
       if (other.Y != 0F) {
         Y = other.Y;
+      }
+      if (other.Z != 0F) {
+        Z = other.Z;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -798,6 +822,10 @@ namespace Gameapi {
           }
           case 21: {
             Y = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            Z = input.ReadFloat();
             break;
           }
         }
@@ -832,8 +860,8 @@ namespace Gameapi {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MovePlayerRequest(MovePlayerRequest other) : this() {
       id_ = other.id_;
-      newCoordinates_ = other.newCoordinates_ != null ? other.newCoordinates_.Clone() : null;
-      newDirection_ = other.newDirection_ != null ? other.newDirection_.Clone() : null;
+      position_ = other.position_ != null ? other.position_.Clone() : null;
+      direction_ = other.direction_ != null ? other.direction_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -853,25 +881,25 @@ namespace Gameapi {
       }
     }
 
-    /// <summary>Field number for the "newCoordinates" field.</summary>
-    public const int NewCoordinatesFieldNumber = 2;
-    private global::Gameapi.Vector2 newCoordinates_;
+    /// <summary>Field number for the "position" field.</summary>
+    public const int PositionFieldNumber = 2;
+    private global::Gameapi.Vector3 position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Gameapi.Vector2 NewCoordinates {
-      get { return newCoordinates_; }
+    public global::Gameapi.Vector3 Position {
+      get { return position_; }
       set {
-        newCoordinates_ = value;
+        position_ = value;
       }
     }
 
-    /// <summary>Field number for the "newDirection" field.</summary>
-    public const int NewDirectionFieldNumber = 3;
-    private global::Gameapi.Vector2 newDirection_;
+    /// <summary>Field number for the "direction" field.</summary>
+    public const int DirectionFieldNumber = 3;
+    private global::Gameapi.Vector3 direction_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Gameapi.Vector2 NewDirection {
-      get { return newDirection_; }
+    public global::Gameapi.Vector3 Direction {
+      get { return direction_; }
       set {
-        newDirection_ = value;
+        direction_ = value;
       }
     }
 
@@ -889,8 +917,8 @@ namespace Gameapi {
         return true;
       }
       if (Id != other.Id) return false;
-      if (!object.Equals(NewCoordinates, other.NewCoordinates)) return false;
-      if (!object.Equals(NewDirection, other.NewDirection)) return false;
+      if (!object.Equals(Position, other.Position)) return false;
+      if (!object.Equals(Direction, other.Direction)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -898,8 +926,8 @@ namespace Gameapi {
     public override int GetHashCode() {
       int hash = 1;
       if (Id.Length != 0) hash ^= Id.GetHashCode();
-      if (newCoordinates_ != null) hash ^= NewCoordinates.GetHashCode();
-      if (newDirection_ != null) hash ^= NewDirection.GetHashCode();
+      if (position_ != null) hash ^= Position.GetHashCode();
+      if (direction_ != null) hash ^= Direction.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -917,13 +945,13 @@ namespace Gameapi {
         output.WriteRawTag(10);
         output.WriteString(Id);
       }
-      if (newCoordinates_ != null) {
+      if (position_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(NewCoordinates);
+        output.WriteMessage(Position);
       }
-      if (newDirection_ != null) {
+      if (direction_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(NewDirection);
+        output.WriteMessage(Direction);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -936,11 +964,11 @@ namespace Gameapi {
       if (Id.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
       }
-      if (newCoordinates_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(NewCoordinates);
+      if (position_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
       }
-      if (newDirection_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(NewDirection);
+      if (direction_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Direction);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -956,17 +984,17 @@ namespace Gameapi {
       if (other.Id.Length != 0) {
         Id = other.Id;
       }
-      if (other.newCoordinates_ != null) {
-        if (newCoordinates_ == null) {
-          NewCoordinates = new global::Gameapi.Vector2();
+      if (other.position_ != null) {
+        if (position_ == null) {
+          Position = new global::Gameapi.Vector3();
         }
-        NewCoordinates.MergeFrom(other.NewCoordinates);
+        Position.MergeFrom(other.Position);
       }
-      if (other.newDirection_ != null) {
-        if (newDirection_ == null) {
-          NewDirection = new global::Gameapi.Vector2();
+      if (other.direction_ != null) {
+        if (direction_ == null) {
+          Direction = new global::Gameapi.Vector3();
         }
-        NewDirection.MergeFrom(other.NewDirection);
+        Direction.MergeFrom(other.Direction);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -984,17 +1012,17 @@ namespace Gameapi {
             break;
           }
           case 18: {
-            if (newCoordinates_ == null) {
-              NewCoordinates = new global::Gameapi.Vector2();
+            if (position_ == null) {
+              Position = new global::Gameapi.Vector3();
             }
-            input.ReadMessage(NewCoordinates);
+            input.ReadMessage(Position);
             break;
           }
           case 26: {
-            if (newDirection_ == null) {
-              NewDirection = new global::Gameapi.Vector2();
+            if (direction_ == null) {
+              Direction = new global::Gameapi.Vector3();
             }
-            input.ReadMessage(NewDirection);
+            input.ReadMessage(Direction);
             break;
           }
         }
@@ -1031,7 +1059,7 @@ namespace Gameapi {
       id_ = other.id_;
       name_ = other.name_;
       role_ = other.role_;
-      coordinates_ = other.coordinates_ != null ? other.coordinates_.Clone() : null;
+      position_ = other.position_ != null ? other.position_.Clone() : null;
       direction_ = other.direction_ != null ? other.direction_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1074,22 +1102,22 @@ namespace Gameapi {
       }
     }
 
-    /// <summary>Field number for the "coordinates" field.</summary>
-    public const int CoordinatesFieldNumber = 4;
-    private global::Gameapi.Vector2 coordinates_;
+    /// <summary>Field number for the "position" field.</summary>
+    public const int PositionFieldNumber = 4;
+    private global::Gameapi.Vector3 position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Gameapi.Vector2 Coordinates {
-      get { return coordinates_; }
+    public global::Gameapi.Vector3 Position {
+      get { return position_; }
       set {
-        coordinates_ = value;
+        position_ = value;
       }
     }
 
     /// <summary>Field number for the "direction" field.</summary>
     public const int DirectionFieldNumber = 5;
-    private global::Gameapi.Vector2 direction_;
+    private global::Gameapi.Vector3 direction_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Gameapi.Vector2 Direction {
+    public global::Gameapi.Vector3 Direction {
       get { return direction_; }
       set {
         direction_ = value;
@@ -1112,7 +1140,7 @@ namespace Gameapi {
       if (Id != other.Id) return false;
       if (Name != other.Name) return false;
       if (Role != other.Role) return false;
-      if (!object.Equals(Coordinates, other.Coordinates)) return false;
+      if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Direction, other.Direction)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1123,7 +1151,7 @@ namespace Gameapi {
       if (Id.Length != 0) hash ^= Id.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Role != 0) hash ^= Role.GetHashCode();
-      if (coordinates_ != null) hash ^= Coordinates.GetHashCode();
+      if (position_ != null) hash ^= Position.GetHashCode();
       if (direction_ != null) hash ^= Direction.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1150,9 +1178,9 @@ namespace Gameapi {
         output.WriteRawTag(24);
         output.WriteEnum((int) Role);
       }
-      if (coordinates_ != null) {
+      if (position_ != null) {
         output.WriteRawTag(34);
-        output.WriteMessage(Coordinates);
+        output.WriteMessage(Position);
       }
       if (direction_ != null) {
         output.WriteRawTag(42);
@@ -1175,8 +1203,8 @@ namespace Gameapi {
       if (Role != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Role);
       }
-      if (coordinates_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Coordinates);
+      if (position_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
       }
       if (direction_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Direction);
@@ -1201,15 +1229,15 @@ namespace Gameapi {
       if (other.Role != 0) {
         Role = other.Role;
       }
-      if (other.coordinates_ != null) {
-        if (coordinates_ == null) {
-          Coordinates = new global::Gameapi.Vector2();
+      if (other.position_ != null) {
+        if (position_ == null) {
+          Position = new global::Gameapi.Vector3();
         }
-        Coordinates.MergeFrom(other.Coordinates);
+        Position.MergeFrom(other.Position);
       }
       if (other.direction_ != null) {
         if (direction_ == null) {
-          Direction = new global::Gameapi.Vector2();
+          Direction = new global::Gameapi.Vector3();
         }
         Direction.MergeFrom(other.Direction);
       }
@@ -1237,15 +1265,15 @@ namespace Gameapi {
             break;
           }
           case 34: {
-            if (coordinates_ == null) {
-              Coordinates = new global::Gameapi.Vector2();
+            if (position_ == null) {
+              Position = new global::Gameapi.Vector3();
             }
-            input.ReadMessage(Coordinates);
+            input.ReadMessage(Position);
             break;
           }
           case 42: {
             if (direction_ == null) {
-              Direction = new global::Gameapi.Vector2();
+              Direction = new global::Gameapi.Vector3();
             }
             input.ReadMessage(Direction);
             break;

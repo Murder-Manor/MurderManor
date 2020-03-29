@@ -49,12 +49,14 @@ impl Game for GameAPI {
                 id: player_uuid.to_hyphenated().to_string(),
                 name: request.into_inner().name,
                 role: proto::player::Role::Wolf as i32,
-                coordinates: Some(proto::Vector2 { x: 0.0, y: 0.0 }),
-                direction: Some(proto::Vector2 {x: 1.0, y: 0.0}),
+                position: Some(proto::Vector3::default()),
+                direction: Some(proto::Vector3::default()),
             };
 
             let players = &self.players;
             players.lock().await.insert(player_uuid, player.clone());
+
+            println!("New player: {:?}", player);
 
             Ok(Response::new(player))
         }
@@ -111,8 +113,8 @@ impl Game for GameAPI {
 
             match self.players.lock().await.get_mut(&player_uuid) {
                 Some(player) => {
-                    player.coordinates = request.new_coordinates;
-                    player.direction = request.new_direction;
+                    player.position = request.position;
+                    player.direction = request.direction;
                     return Ok(Response::new(player.clone()))
                 }
                 None => return Err(Status::new(Code::Internal, "Cannot fetch player")),
