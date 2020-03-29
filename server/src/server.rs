@@ -1,5 +1,6 @@
 use std::sync::Arc;
 use std::collections::HashMap;
+use std::time::{SystemTime, Duration};
 
 use tonic::{transport::Server, Request, Response, Status, Code};
 use tokio::sync::{mpsc, Mutex};
@@ -17,9 +18,9 @@ pub mod proto {
     tonic::include_proto!("gameapi");
 }
 
-#[derive(Debug, Default)]
 pub struct GameAPI{
-    players: Arc<Mutex<HashMap<Uuid, Player>>>
+    players: Arc<Mutex<HashMap<Uuid, Player>>>,
+    start_time: SystemTime,
 }
 
 #[tonic::async_trait]
@@ -45,12 +46,18 @@ impl Game for GameAPI {
                         ) ->
         Result<Response<Player>, Status> {
             let player_uuid = Uuid::new_v4();
+            let update_time = match SystemTime::now().duration_since(self.start_time) {
+                Ok(t) => t.as_millis() as u64,
+                Err(e) => return Err(
+                    Status::new(Code::Internal, format!("internal error: {}", e)))
+            };
             let player = Player {
                 id: player_uuid.to_hyphenated().to_string(),
                 name: request.into_inner().name,
                 role: proto::player::Role::Wolf as i32,
                 position: Some(proto::Vector3::default()),
                 direction: Some(proto::Vector3::default()),
+                last_updatedms: update_time,
             };
 
             let players = &self.players;
@@ -84,16 +91,15 @@ impl Game for GameAPI {
                         _request: Request<ListPlayersRequest>
                         ) ->
         Result<Response<Self::ListPlayersStream>, Status> {
-            let players = self.players.clone();
+            self.cleanup().await;
+            let orig_players = self.players.clone();
             let (mut tx, rx) = mpsc::channel(4);
 
             tokio::spawn(async move {
-                let players = players.lock().await;
+                let players = orig_players.lock().await;
                 for (_, player) in players.iter() {
                     tx.send(Ok(player.clone())).await.unwrap();
                 }
-
-                println!("Sent {:?}", players);
             });
 
             Ok(Response::new(rx))
@@ -103,6 +109,7 @@ impl Game for GameAPI {
                          request: Request<MovePlayerRequest>
                          ) ->
         Result<Response<Player>, Status> {
+
             let request = request.into_inner();
             let player_uuid = String::from(request.id);
             let player_uuid = match Uuid::parse_str(&player_uuid) {
@@ -110,11 +117,17 @@ impl Game for GameAPI {
                 Err(e) => return Err(
                     Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
             };
+            let update_time = match SystemTime::now().duration_since(self.start_time) {
+                Ok(t) => t.as_millis() as u64,
+                Err(e) => return Err(
+                    Status::new(Code::Internal, format!("internal error: {}", e)))
+            };
 
             match self.players.lock().await.get_mut(&player_uuid) {
                 Some(player) => {
                     player.position = request.position;
                     player.direction = request.direction;
+                    player.last_updatedms = update_time;
                     return Ok(Response::new(player.clone()))
                 }
                 None => return Err(Status::new(Code::Internal, "Cannot fetch player")),
@@ -122,17 +135,49 @@ impl Game for GameAPI {
         }
 }
 
+impl GameAPI {
+    async fn cleanup(&self) {
+        let mut to_delete = Vec::new();
+        {
+            let players = self.players.lock().await;
+            for (k, player) in players.iter() {
+                let last_update = SystemTime::now()
+                    .duration_since(self.start_time)
+                    .unwrap()
+                    .checked_sub(Duration::from_millis(player.last_updatedms))
+                    .unwrap();
+                if last_update > Duration::from_secs(2) {
+                    println!("Will delete {:}", k);
+                    to_delete.push(k.clone());
+                }
+            }
+        } // Release players Mutex Guard
+
+        // Cleanup to_delete resources
+        for del in to_delete {
+            self.players.lock().await.remove(&del);
+        }
+    }
+}
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = "[::1]:50051".parse()?;
-    let extra = GameAPI::default();
-    let game = GameAPI::default();
+    let extra_api = GameAPI {
+        players: Arc::new(Mutex::default()),
+        start_time: SystemTime::now(),
+    };
+
+    let game_api = GameAPI {
+        players: Arc::new(Mutex::default()),
+        start_time: SystemTime::now(),
+    };
 
     println!("Running game server on {:?}", addr);
 
     Server::builder()
-        .add_service(ExtraServer::new(extra))
-        .add_service(GameServer::new(game))
+        .add_service(ExtraServer::new(extra_api))
+        .add_service(GameServer::new(game_api))
         .serve(addr)
         .await?;
 

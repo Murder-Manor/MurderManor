@@ -9,18 +9,16 @@ using System.Collections;
 // frame.
 
 public class CharacterMove : MonoBehaviour {
-    CharacterController characterController;
-
     public float speed = 6.0f;
-
     public string id;
 
     // These variables must be set in unity interface
     public Animator m_Animator = null;
     public string characterName;
 
+    private float lastUpdatedTime = 0.0f;
+
     void Start() {
-        characterController = GetComponent<CharacterController>();
     }
 
     void Update() {
@@ -28,8 +26,6 @@ public class CharacterMove : MonoBehaviour {
                                     Input.GetAxis("Vertical"));
         MoveTo(transform.position + moveDirection * speed * Time.deltaTime);
     }
-
-
 
     public Vector3 GetPosition() {
         return transform.position;
@@ -39,7 +35,12 @@ public class CharacterMove : MonoBehaviour {
         return transform.rotation.eulerAngles;
     }
 
+    public float GetLastUpdatedTime() {
+        return lastUpdatedTime;
+    }
+
     public void MoveTo(Vector3 pos) {
+        lastUpdatedTime = Time.time;
         var movement = pos - transform.position;
 
         m_Animator.SetBool("Walk", movement != Vector3.zero);
@@ -52,7 +53,13 @@ public class CharacterMove : MonoBehaviour {
         GetComponent<CharacterController>().Move(movement);
     }
 
+    public void SetPosition(Vector3 pos) {
+        lastUpdatedTime = Time.time;
+        transform.position = pos;
+    }
+
     public void SetDirection(Vector3 dir) {
+        lastUpdatedTime = Time.time;
         transform.rotation = Quaternion.Euler(dir);
     }
 }
