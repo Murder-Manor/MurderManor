@@ -14,7 +14,7 @@ public class CharacterMove : MonoBehaviour {
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
 
-    private string id;
+    public string id;
     private Vector3 moveDirection = Vector3.zero;
 
     // These variables must be set in unity interface
@@ -25,7 +25,6 @@ public class CharacterMove : MonoBehaviour {
     void Start() {
         characterController = GetComponent<CharacterController>();
         id = playersManager.NewPlayer(characterName);
-        Debug.Log(id);
     }
 
     void Update() {

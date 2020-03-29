@@ -91,7 +91,7 @@ impl Game for GameAPI {
                     tx.send(Ok(player.clone())).await.unwrap();
                 }
 
-                println!("Sent");
+                println!("Sent {:?}", players);
             });
 
             Ok(Response::new(rx))
