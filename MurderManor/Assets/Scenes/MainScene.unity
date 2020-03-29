@@ -5625,8 +5625,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.48281157, y: -0.000020551879, z: 0.000011330888, w: 0.8757243}
-  m_LocalPosition: {x: 0.00014362842, y: 4.8538566, z: -3.0639312}
+  m_LocalRotation: {x: 0.48281157, y: -0.00002052578, z: 0.000011316499, w: 0.8757243}
+  m_LocalPosition: {x: 0.00014381105, y: 4.8538566, z: -3.0639312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 196818850}
@@ -6095,8 +6095,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104912640}
-  m_LocalRotation: {x: 0.48281157, y: -0.000020551879, z: 0.000011330888, w: 0.8757243}
-  m_LocalPosition: {x: 0.00014362842, y: 4.8538566, z: -3.0639312}
+  m_LocalRotation: {x: 0.48281157, y: -0.00002052578, z: 0.000011316499, w: 0.8757243}
+  m_LocalPosition: {x: 0.00014381105, y: 4.8538566, z: -3.0639312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1128828035}
@@ -7357,7 +7357,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -7536,8 +7536,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.3
+      scalar: 0.3
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7998,7 +7998,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.0001
+      value: 0.3
       mode: 0
       spread: 0
       speed:
@@ -8170,7 +8170,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
