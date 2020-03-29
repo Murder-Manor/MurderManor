@@ -19,6 +19,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let response = game_client.new_player(request).await?;
     println!("RESPONSE: {:?}", response);
 
+    let request = tonic::Request::new(NewPlayerRequest{name: String::from("Waf")});
+    let response = game_client.new_player(request).await?;
+    println!("RESPONSE: {:?}", response);
+
     let request = tonic::Request::new(ListPlayersRequest{});
     let mut stream = game_client
         .list_players(request)

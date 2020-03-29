@@ -30,15 +30,16 @@ message GetPlayerRequest {
 message ListPlayersRequest {
 }
 
-message Vector2 {
+message Vector3 {
    float x = 1;
    float y = 2;
+   float z = 3;
 }
 
 message MovePlayerRequest {
    string id = 1;
-   Vector2 newCoordinates = 2;
-   Vector2 newDirection = 3;
+   Vector3 position = 2;
+   Vector3 direction = 3;
 }
 
 message Player {
@@ -51,6 +52,6 @@ message Player {
    string id = 1;
    string name = 2;
    Role role = 3;
-   Vector2 coordinates = 4;
-   Vector2 direction = 5;
+   Vector3 position = 4;
+   Vector3 direction = 5;
 }

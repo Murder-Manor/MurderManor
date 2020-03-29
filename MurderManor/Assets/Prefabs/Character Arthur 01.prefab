@@ -4822,7 +4822,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3437808100020103351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95c95ebbbe5b944479dbfbe0ce5ea248, type: 3}
   m_Name: 
@@ -4830,7 +4830,6 @@ MonoBehaviour:
   speed: 4
   jumpSpeed: 8
   m_Animator: {fileID: 3437808100098800730}
-  playersManager: {fileID: 0}
   characterName: Arthur
 --- !u!95 &3437808100098800730
 Animator:
