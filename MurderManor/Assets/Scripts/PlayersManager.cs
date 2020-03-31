@@ -22,8 +22,9 @@ public class PlayersManager : MonoBehaviour {
     private void Start() {
     }
 
-    public bool Connect(string name, string endpoint) {
-        if (name == "") name= "Arthur";
+    // Connect instantiates a new server connexion and instatiantes the main
+    // character.
+    public bool Connect(string endpoint) {
         if (endpoint == "") endpoint = "[::1]:50051";
         Debug.Log(endpoint);
 
@@ -32,13 +33,27 @@ public class PlayersManager : MonoBehaviour {
         _client = new Game.GameClient(_grpc_channel);
         started = true;
 
-        mainCharacter.GetComponent<CharacterMove>().SetCharacterName(name);
-        NewPlayer(mainCharacter);
         return true;
+    }
+
+    // SetMainCharacter includes the player's character in the manager.
+    // Takes the name of the main character and returns its UUID.
+    public string SetMainCharacter(string name) {
+        if(!started) return "";
+        if(name == "") name = "Arthur";
+
+        var character = mainCharacter.GetComponent<CharacterMove>();
+        character.SetCharacterName(name);
+        var returnedPlayer = _client.NewPlayer(new NewPlayerRequest{Name = character.GetCharacterName()});
+        _controlled_characters[returnedPlayer.Id] = character;
+        character.id = returnedPlayer.Id;
+        character.enabled = true;
+        return returnedPlayer.Id;
     }
 
     private void Update() {
         if(!started) return;
+
         // Update every update_rate_ms
         _time_to_next_update_ms -= Time.deltaTime * 1000;
         if(_time_to_next_update_ms > 0.0f)
@@ -63,12 +78,38 @@ public class PlayersManager : MonoBehaviour {
         SendCharsUpdate();
     }
 
+    // SendCharsUpdate sends the status of the controllable characters to the server
     private void SendCharsUpdate() {
         foreach(var entry in _controlled_characters) {
             MovePlayer(entry.Key, entry.Value.GetPosition(), entry.Value.GetDirection());
         }
     }
 
+    // MovePlayer notifies the server of a player's movement
+    private void MovePlayer(string id, UnityEngine.Vector3 position,
+                           UnityEngine.Vector3 direction) {
+        if(!started) return;
+        _client.MovePlayer(new MovePlayerRequest{
+            Id = id,
+            Position =
+                new Gameapi.Vector3{
+                    X = position.x,
+                    Y = position.y,
+                    Z = position.z,
+                },
+            Direction =
+                new Gameapi.Vector3{
+                    X = direction.x,
+                    Y = direction.y,
+                    Z = direction.z,
+                },
+        });
+    }
+
+    // UpdateCharsMap queries the server for updates and updates the internal map
+    // of characters with their new states.
+    // It takes care of instantiating the new characters. Old characters are
+    // cleaned up automatically in the Update method.
     private void UpdateCharsMap() {
         using (var response = _client.ListPlayers(new ListPlayersRequest{})) {
             var cancellationToken = default(System.Threading.CancellationToken);
@@ -98,35 +139,6 @@ public class PlayersManager : MonoBehaviour {
         }
     }
 
-    public string NewPlayer(GameObject player) {
-        if(!started) return "";
-        var character = player.GetComponent<CharacterMove>();
-        var returnedPlayer = _client.NewPlayer(new NewPlayerRequest{Name = character.GetCharacterName()});
-        _controlled_characters[returnedPlayer.Id] = character;
-        character.id = returnedPlayer.Id;
-        character.enabled = true;
-        return returnedPlayer.Id;
-    }
-
-    public void MovePlayer(string id, UnityEngine.Vector3 position,
-                           UnityEngine.Vector3 direction) {
-        if(!started) return;
-        _client.MovePlayer(new MovePlayerRequest{
-            Id = id,
-            Position =
-                new Gameapi.Vector3{
-                    X = position.x,
-                    Y = position.y,
-                    Z = position.z,
-                },
-            Direction =
-                new Gameapi.Vector3{
-                    X = direction.x,
-                    Y = direction.y,
-                    Z = direction.z,
-                },
-        });
-    }
-
+    // OnDisable shuts down the gRPC channel
     private void OnDisable() { _grpc_channel.ShutdownAsync().Wait(); }
 }
