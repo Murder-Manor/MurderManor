@@ -14,7 +14,9 @@ public class MainMenu: MonoBehaviour {
     public void OnPlay() {
         var endpoint = serverEndpoint.GetComponent<TMPro.TMP_InputField>().text;
         var nick = nickname.GetComponent<TMPro.TMP_InputField>().text;
-        playersManager.GetComponent<PlayersManager>().Connect(nick, endpoint);
+
+        playersManager.GetComponent<PlayersManager>().Connect(endpoint);
+        playersManager.GetComponent<PlayersManager>().SetMainCharacter(nick);
     }
 
     public void OnQuit() {
