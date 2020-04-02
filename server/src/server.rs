@@ -18,13 +18,16 @@ pub mod proto {
     tonic::include_proto!("gameapi");
 }
 
-pub struct GameAPI{
+struct GameCore {
     players: Arc<Mutex<HashMap<Uuid, Player>>>,
     start_time: SystemTime,
 }
 
+pub struct ExtraAPI{
+}
+
 #[tonic::async_trait]
-impl Extra for GameAPI {
+impl Extra for ExtraAPI {
     async fn service_info(&self,
                     request: Request<ServiceInfoRequest>
                     ) ->
@@ -39,6 +42,10 @@ impl Extra for GameAPI {
     }
 }
 
+pub struct GameAPI{
+    core: GameCore,
+}
+
 #[tonic::async_trait]
 impl Game for GameAPI {
     async fn new_player(&self,
@@ -46,7 +53,7 @@ impl Game for GameAPI {
                         ) ->
         Result<Response<Player>, Status> {
             let player_uuid = Uuid::new_v4();
-            let update_time = match SystemTime::now().duration_since(self.start_time) {
+            let update_time = match SystemTime::now().duration_since(self.core.start_time) {
                 Ok(t) => t.as_millis() as u64,
                 Err(e) => return Err(
                     Status::new(Code::Internal, format!("internal error: {}", e)))
@@ -60,7 +67,7 @@ impl Game for GameAPI {
                 last_updatedms: update_time,
             };
 
-            let players = &self.players;
+            let players = &self.core.players;
             players.lock().await.insert(player_uuid, player.clone());
 
             println!("New player: {:?}", player);
@@ -79,7 +86,7 @@ impl Game for GameAPI {
                     Status::new(Code::FailedPrecondition, "Wrong UUID format"))
             };
 
-            match self.players.lock().await.get(&player_uuid) {
+            match self.core.players.lock().await.get(&player_uuid) {
                 Some(player) => Ok(Response::new(player.clone())),
                 None => return Ok(Response::new(Player::default()))
             }
@@ -92,7 +99,7 @@ impl Game for GameAPI {
                         ) ->
         Result<Response<Self::ListPlayersStream>, Status> {
             self.cleanup().await;
-            let orig_players = self.players.clone();
+            let orig_players = self.core.players.clone();
             let (mut tx, rx) = mpsc::channel(4);
 
             tokio::spawn(async move {
@@ -117,13 +124,13 @@ impl Game for GameAPI {
                 Err(e) => return Err(
                     Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
             };
-            let update_time = match SystemTime::now().duration_since(self.start_time) {
+            let update_time = match SystemTime::now().duration_since(self.core.start_time) {
                 Ok(t) => t.as_millis() as u64,
                 Err(e) => return Err(
                     Status::new(Code::Internal, format!("internal error: {}", e)))
             };
 
-            match self.players.lock().await.get_mut(&player_uuid) {
+            match self.core.players.lock().await.get_mut(&player_uuid) {
                 Some(player) => {
                     player.position = request.position;
                     player.direction = request.direction;
@@ -139,10 +146,10 @@ impl GameAPI {
     async fn cleanup(&self) {
         let mut to_delete = Vec::new();
         {
-            let players = self.players.lock().await;
+            let players = self.core.players.lock().await;
             for (k, player) in players.iter() {
                 let last_update = SystemTime::now()
-                    .duration_since(self.start_time)
+                    .duration_since(self.core.start_time)
                     .unwrap()
                     .checked_sub(Duration::from_millis(player.last_updatedms))
                     .unwrap();
@@ -155,22 +162,22 @@ impl GameAPI {
 
         // Cleanup to_delete resources
         for del in to_delete {
-            self.players.lock().await.remove(&del);
+            self.core.players.lock().await.remove(&del);
         }
     }
 }
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let addr = "[::1]:50051".parse()?;
-    let extra_api = GameAPI {
+    let addr = "0.0.0.0:50051".parse()?;
+    let core = GameCore{
         players: Arc::new(Mutex::default()),
         start_time: SystemTime::now(),
     };
+    let extra_api = ExtraAPI {};
 
     let game_api = GameAPI {
-        players: Arc::new(Mutex::default()),
-        start_time: SystemTime::now(),
+        core: core,
     };
 
     println!("Running game server on {:?}", addr);
