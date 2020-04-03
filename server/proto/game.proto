@@ -54,5 +54,5 @@ message Player {
    Role role = 3;
    Vector3 position = 4;
    Vector3 direction = 5;
-   uint64 lastUpdatedms = 6;
+   uint64 lastUpdateds = 6;
 }
