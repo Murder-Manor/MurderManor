@@ -6,45 +6,30 @@ using System.Collections.Generic;
 using Gameapi;
 using UnityEngine;
 
+// It is supposed the PlayersManager will be in the same GameObject as
+// the GrpcManager
 public class PlayersManager : MonoBehaviour {
     private static float update_rate_ms = 10.0f;
-    private Game.GameClient _client;
-    private Grpc.Core.Channel _grpc_channel;
-    private bool started = false;
 
     private float _time_to_next_update_ms = update_rate_ms;
     private Dictionary<string, GameObject> _characters = new Dictionary<String, GameObject>();
     private Dictionary<string, CharacterMove> _controlled_characters = new Dictionary<String, CharacterMove>();
 
+    // These attributes will be set in unity editor
     public GameObject mainCharacter = null;
     public GameObject spawnedPrefab = null;
-
-    private void Start() {
-    }
-
-    // Connect instantiates a new server connexion and instatiantes the main
-    // character.
-    public bool Connect(string endpoint) {
-        if (endpoint == "") endpoint = "[::1]:50051";
-        Debug.Log(endpoint);
-
-        _grpc_channel = new Grpc.Core.Channel(
-            endpoint, Grpc.Core.ChannelCredentials.Insecure);
-        _client = new Game.GameClient(_grpc_channel);
-        started = true;
-
-        return true;
-    }
 
     // SetMainCharacter includes the player's character in the manager.
     // Takes the name of the main character and returns its UUID.
     public string SetMainCharacter(string name) {
-        if(!started) return "";
         if(name == "") name = "Arthur";
 
         var character = mainCharacter.GetComponent<CharacterMove>();
         character.SetCharacterName(name);
-        var returnedPlayer = _client.NewPlayer(new NewPlayerRequest{Name = character.GetCharacterName()});
+        var returnedPlayer = GetComponent<GrpcManager>()
+            .GetClient()
+            .NewPlayer(new NewPlayerRequest{
+                    Name = character.GetCharacterName()});
         _controlled_characters[returnedPlayer.Id] = character;
         character.id = returnedPlayer.Id;
         character.enabled = true;
@@ -52,8 +37,9 @@ public class PlayersManager : MonoBehaviour {
     }
 
     private void Update() {
-        if(!started) return;
-
+        // PlayersManager is useless if the Grpc Channel is not ready
+        if(!GetComponent<GrpcManager>().IsConnected())
+            return;
         // Update every update_rate_ms
         _time_to_next_update_ms -= Time.deltaTime * 1000;
         if(_time_to_next_update_ms > 0.0f)
@@ -88,8 +74,8 @@ public class PlayersManager : MonoBehaviour {
     // MovePlayer notifies the server of a player's movement
     private void MovePlayer(string id, UnityEngine.Vector3 position,
                            UnityEngine.Vector3 direction) {
-        if(!started) return;
-        _client.MovePlayer(new MovePlayerRequest{
+        GetComponent<GrpcManager>().GetClient().MovePlayer(
+                new MovePlayerRequest{
             Id = id,
             Position =
                 new Gameapi.Vector3{
@@ -111,7 +97,7 @@ public class PlayersManager : MonoBehaviour {
     // It takes care of instantiating the new characters. Old characters are
     // cleaned up automatically in the Update method.
     private void UpdateCharsMap() {
-        using (var response = _client.ListPlayers(new ListPlayersRequest{})) {
+        using (var response = GetComponent<GrpcManager>().GetClient().ListPlayers(new ListPlayersRequest{})) {
             var cancellationToken = default(System.Threading.CancellationToken);
             while(true) {
                 var next = response.ResponseStream.MoveNext(cancellationToken);
@@ -138,7 +124,4 @@ public class PlayersManager : MonoBehaviour {
             }
         }
     }
-
-    // OnDisable shuts down the gRPC channel
-    private void OnDisable() { _grpc_channel.ShutdownAsync().Wait(); }
 }
