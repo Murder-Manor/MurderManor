@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class MainMenu: MonoBehaviour {
     // These values will be filled in unity
-    public GameObject playersManager = null;
+    public GameObject networkManager = null;
     public GameObject serverEndpoint = null;
     public GameObject nickname = null;
 
@@ -15,8 +15,8 @@ public class MainMenu: MonoBehaviour {
         var endpoint = serverEndpoint.GetComponent<TMPro.TMP_InputField>().text;
         var nick = nickname.GetComponent<TMPro.TMP_InputField>().text;
 
-        playersManager.GetComponent<PlayersManager>().Connect(endpoint);
-        playersManager.GetComponent<PlayersManager>().SetMainCharacter(nick);
+        networkManager.GetComponent<GrpcManager>().Connect(endpoint);
+        networkManager.GetComponent<PlayersManager>().SetMainCharacter(nick);
     }
 
     public void OnQuit() {
