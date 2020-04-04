@@ -9,6 +9,7 @@ use proto::game_server::GameServer;
 mod api;
 mod proto;
 mod players;
+mod objects;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -16,6 +17,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let core = GameCore{
         players: Arc::new(Mutex::new(players::Players::default())),
+        objects: Arc::new(Mutex::new(objects::Objects::default())),
     };
     core.start();
 

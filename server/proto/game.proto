@@ -17,6 +17,8 @@ service Game {
    rpc GetPlayer(GetPlayerRequest) returns (Player);
    rpc ListPlayers(ListPlayersRequest) returns (stream Player);
    rpc MovePlayer(MovePlayerRequest) returns (Player);
+
+   rpc TakeObject(TakeObjectRequest) returns (ObjectStatus) ;
 }
 
 message NewPlayerRequest {
@@ -55,4 +57,19 @@ message Player {
    Vector3 position = 4;
    Vector3 direction = 5;
    uint64 lastUpdateds = 6;
+}
+
+message TakeObjectRequest {
+    string object_id = 1;
+    string player_id = 2;
+}
+
+message ObjectStatus {
+    enum Status {
+        Unknown = 0;
+        Ok = 1;
+        AlreadyTaken = 2;
+    }
+
+    Status status = 1;
 }

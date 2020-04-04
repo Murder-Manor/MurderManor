@@ -30,11 +30,14 @@ use crate::proto::{
     GetPlayerRequest,
     ListPlayersRequest,
     MovePlayerRequest,
+    TakeObjectRequest,
     Player,
-    Vector3
+    Vector3,
+    ObjectStatus,
 };
 
 use crate::players::Players;
+use crate::objects::Objects;
 
 use uuid::Uuid;
 
@@ -74,6 +77,7 @@ impl Extra for ExtraAPI {
 
 pub struct GameCore {
     pub players: Arc<Mutex<Players>>,
+    pub objects: Arc<Mutex<Objects>>,
 }
 
 impl GameCore {
@@ -198,5 +202,29 @@ impl Game for GameAPI {
                     }
                     None => return Err(Status::new(Code::Internal, "Cannot fetch player")),
                 };
+        }
+
+    async fn take_object(&self,
+                         request: Request<TakeObjectRequest>
+                         ) ->
+        Result<Response<ObjectStatus>, Status> {
+            let request = request.into_inner();
+            let player_uuid = String::from(request.player_id);
+            let player_uuid = match Uuid::parse_str(&player_uuid) {
+                Ok(id) => id,
+                Err(e) => return Err(
+                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
+            };
+            let object_uuid = String::from(request.object_id);
+            let object_uuid = match Uuid::parse_str(&object_uuid) {
+                Ok(id) => id,
+                Err(e) => return Err(
+                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
+            };
+            self.core.lock().await
+                .objects.lock().await
+                .take_object(object_uuid, player_uuid)
+                .unwrap();
+            Ok(Response::new(ObjectStatus::default()))
         }
 }
