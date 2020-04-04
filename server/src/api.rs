@@ -31,9 +31,12 @@ use crate::proto::{
     ListPlayersRequest,
     MovePlayerRequest,
     TakeObjectRequest,
+    GetObjectTakersRequest,
     Player,
     Vector3,
     ObjectStatus,
+    GetObjectTakersResponse,
+    PlayerScore,
 };
 
 use crate::players::Players;
@@ -226,5 +229,32 @@ impl Game for GameAPI {
                 .take_object(object_uuid, player_uuid)
                 .unwrap();
             Ok(Response::new(ObjectStatus::default()))
+        }
+
+    async fn get_object_takers(&self,
+                               request: Request<GetObjectTakersRequest>
+                               ) ->
+        Result<Response<GetObjectTakersResponse>, Status> {
+            let object_uuid = String::from(request.into_inner().object_id);
+            let object_uuid = match Uuid::parse_str(&object_uuid) {
+                Ok(id) => id,
+                Err(e) => return Err(
+                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
+            };
+            match self.core.lock().await.objects.lock().await.get_object_takers(object_uuid) {
+                Some(takers) => {
+                    let mut players_score = vec![];
+                    for (idx, taker) in takers.iter().enumerate() {
+                        players_score.push(PlayerScore {
+                            player_id: taker.to_hyphenated().to_string(),
+                            score: (takers.len() - idx) as i32,
+                        });
+                    }
+                    Ok(Response::new(GetObjectTakersResponse {
+                    players: players_score,
+                }))
+                }
+                None => Ok(Response::new(GetObjectTakersResponse::default()))
+            }
         }
 }

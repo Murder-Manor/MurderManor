@@ -31,4 +31,11 @@ impl Objects {
         object.taken_by.push(player_id);
         Ok(())
     }
+
+    pub fn get_object_takers(&self, object_id: Uuid) -> Option<Vec<Uuid>> {
+        match self.objects.get(&object_id) {
+            Some(object) => Some(object.taken_by.clone()),
+            None => None,
+        }
+    }
 }
