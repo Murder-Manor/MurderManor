@@ -131,7 +131,7 @@ public class PlayersManager : MonoBehaviour {
                 }
                 // Update position of each character in case a change have been made
                 var charMove = _characters[currChar.Id].GetComponent<CharacterMove>();
-                charMove.MoveTo(new UnityEngine.Vector3(
+                charMove.SetPosition(new UnityEngine.Vector3(
                             currChar.Position.X, currChar.Position.Y, currChar.Position.Z));
                 charMove.SetDirection(new UnityEngine.Vector3(
                             currChar.Direction.X, currChar.Direction.Y, currChar.Direction.Z));
