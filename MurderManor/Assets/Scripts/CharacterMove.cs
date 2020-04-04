@@ -4,12 +4,11 @@ using System.Collections;
 
 // This script moves the character controller forward
 // and sideways based on the arrow keys.
-// Make sure to attach a character controller to the same game object.
-// It is recommended that you make only one call to Move or SimpleMove per
-// frame.
+// Make sure to attach a capsule collider to the same game object.
+// It is recommended that you make only one call to Move per frame.
 
 public class CharacterMove : MonoBehaviour {
-    public float speed = 6.0f;
+    public float speed = 1.0f;
     public string id;
 
     // These variables must be set in unity interface
@@ -17,9 +16,6 @@ public class CharacterMove : MonoBehaviour {
 
     private float lastUpdatedTime = 0.0f;
     private string characterName;
-
-    void Start() {
-    }
 
     public void SetCharacterName(string characterName) {
         this.characterName = characterName;
@@ -32,9 +28,11 @@ public class CharacterMove : MonoBehaviour {
     }
 
     void Update() {
-        var moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f,
-                                    Input.GetAxis("Vertical"));
-        MoveTo(transform.position + moveDirection * speed * Time.deltaTime);
+        // Normalization also ensures a "small" vector will be set to vector3.zero
+        var moveDirection = Vector3.Normalize(
+               new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical")));
+        MoveTo(moveDirection);
+        RotateTo(moveDirection);
     }
 
     public Vector3 GetPosition() {
@@ -49,28 +47,28 @@ public class CharacterMove : MonoBehaviour {
         return lastUpdatedTime;
     }
 
-    public void MoveTo(Vector3 pos) {
-        lastUpdatedTime = Time.time;
-        var movement = pos - transform.position;
-
-        m_Animator.SetBool("Walk", movement != Vector3.zero);
-
-        if(movement != Vector3.zero)
-            transform.rotation = Quaternion.Slerp(
+    public void RotateTo(Vector3 dir) {
+        if(dir == Vector3.zero)
+            return;
+        GetComponent<Rigidbody>().rotation = Quaternion.Slerp(
                 transform.rotation,
-                Quaternion.LookRotation(movement.normalized), 0.5f);
+                Quaternion.LookRotation(dir.normalized), 0.5f);
+    }
 
-        GetComponent<CharacterController>().Move(movement);
+    public void MoveTo(Vector3 dir) {
+        lastUpdatedTime = Time.time;
+        m_Animator.SetBool("Walk", dir != Vector3.zero);
+        GetComponent<Rigidbody>().AddForce(dir * speed);
     }
 
     public void SetPosition(Vector3 pos) {
         lastUpdatedTime = Time.time;
-        transform.position = pos;
+        GetComponent<Rigidbody>().position = pos;
     }
 
     public void SetDirection(Vector3 dir) {
         lastUpdatedTime = Time.time;
-        transform.rotation = Quaternion.Euler(dir);
+        GetComponent<Rigidbody>().rotation = Quaternion.Euler(dir);
     }
 }
 
