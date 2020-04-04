@@ -4902,10 +4902,10 @@ CharacterController:
   m_GameObject: {fileID: 3437808100020103351}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 1.5
-  m_Radius: 0.3
+  m_Radius: 0.33295918
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -4926,7 +4926,6 @@ MonoBehaviour:
   speed: 60
   id: 
   m_Animator: {fileID: 3437808100098800730}
-  characterName: Arthur
 --- !u!136 &7504431319624747719
 CapsuleCollider:
   m_ObjectHideFlags: 0
