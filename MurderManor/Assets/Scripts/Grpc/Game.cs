@@ -26,54 +26,55 @@ namespace Gameapi {
           string.Concat(
             "CgpnYW1lLnByb3RvEgdnYW1lYXBpIhQKElNlcnZpY2VJbmZvUmVxdWVzdCIh",
             "ChBTZXJ2aWNlSW5mb1JlcGx5Eg0KBXJlYWR5GAEgASgIIhgKFkdldEdhbWVQ",
-            "cm9ncmVzc1JlcXVlc3QisAEKDEdhbWVQcm9ncmVzcxIsCgZzdGF0dXMYASAB",
+            "cm9ncmVzc1JlcXVlc3QiyAEKDEdhbWVQcm9ncmVzcxIsCgZzdGF0dXMYASAB",
             "KA4yHC5nYW1lYXBpLkdhbWVQcm9ncmVzcy5TdGF0dXMSIQoZbWlsbGlzZWNv",
-            "bmRzX2JlZm9yZV9zdGFydBgCIAEoDSJPCgZTdGF0dXMSFQoRV2FpdGluZ0Zv",
-            "clBsYXllcnMQABISCg5TdGFydENvdW50ZG93bhABEgoKBkluR2FtZRACEg4K",
-            "ClNjb3JlQm9hcmQQAyIgChBOZXdQbGF5ZXJSZXF1ZXN0EgwKBG5hbWUYASAB",
-            "KAkiHgoQR2V0UGxheWVyUmVxdWVzdBIKCgJpZBgBIAEoCSIUChJMaXN0UGxh",
-            "eWVyc1JlcXVlc3QiKgoHVmVjdG9yMxIJCgF4GAEgASgCEgkKAXkYAiABKAIS",
-            "CQoBehgDIAEoAiJoChFNb3ZlUGxheWVyUmVxdWVzdBIKCgJpZBgBIAEoCRIi",
-            "Cghwb3NpdGlvbhgCIAEoCzIQLmdhbWVhcGkuVmVjdG9yMxIjCglkaXJlY3Rp",
-            "b24YAyABKAsyEC5nYW1lYXBpLlZlY3RvcjMi2AEKBlBsYXllchIKCgJpZBgB",
-            "IAEoCRIMCgRuYW1lGAIgASgJEiIKBHJvbGUYAyABKA4yFC5nYW1lYXBpLlBs",
-            "YXllci5Sb2xlEiIKCHBvc2l0aW9uGAQgASgLMhAuZ2FtZWFwaS5WZWN0b3Iz",
-            "EiMKCWRpcmVjdGlvbhgFIAEoCzIQLmdhbWVhcGkuVmVjdG9yMxIUCgxsYXN0",
-            "VXBkYXRlZHMYBiABKAQiMQoEUm9sZRIICgRXb2xmEAASCAoERmlzaBABEgkK",
-            "BVRpZ2VyEAISCgoGVHVya2V5EAMiOQoRVGFrZU9iamVjdFJlcXVlc3QSEQoJ",
-            "b2JqZWN0X2lkGAEgASgJEhEKCXBsYXllcl9pZBgCIAEoCSJtCgxPYmplY3RT",
-            "dGF0dXMSLAoGc3RhdHVzGAEgASgOMhwuZ2FtZWFwaS5PYmplY3RTdGF0dXMu",
-            "U3RhdHVzIi8KBlN0YXR1cxILCgdVbmtub3duEAASBgoCT2sQARIQCgxBbHJl",
-            "YWR5VGFrZW4QAiIrChZHZXRPYmplY3RUYWtlcnNSZXF1ZXN0EhEKCW9iamVj",
-            "dF9pZBgBIAEoCSIvCgtQbGF5ZXJTY29yZRIRCglwbGF5ZXJfaWQYASABKAkS",
-            "DQoFc2NvcmUYAiABKAUiQAoXR2V0T2JqZWN0VGFrZXJzUmVzcG9uc2USJQoH",
-            "cGxheWVycxgBIAMoCzIULmdhbWVhcGkuUGxheWVyU2NvcmUyTgoFRXh0cmES",
-            "RQoLU2VydmljZUluZm8SGy5nYW1lYXBpLlNlcnZpY2VJbmZvUmVxdWVzdBoZ",
-            "LmdhbWVhcGkuU2VydmljZUluZm9SZXBseTLUAwoER2FtZRJJCg9HZXRHYW1l",
-            "UHJvZ3Jlc3MSHy5nYW1lYXBpLkdldEdhbWVQcm9ncmVzc1JlcXVlc3QaFS5n",
-            "YW1lYXBpLkdhbWVQcm9ncmVzcxI3CglOZXdQbGF5ZXISGS5nYW1lYXBpLk5l",
-            "d1BsYXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllchI3CglHZXRQbGF5ZXIS",
-            "GS5nYW1lYXBpLkdldFBsYXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllchI9",
-            "CgtMaXN0UGxheWVycxIbLmdhbWVhcGkuTGlzdFBsYXllcnNSZXF1ZXN0Gg8u",
-            "Z2FtZWFwaS5QbGF5ZXIwARI5CgpNb3ZlUGxheWVyEhouZ2FtZWFwaS5Nb3Zl",
-            "UGxheWVyUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyEj8KClRha2VPYmplY3QS",
-            "Gi5nYW1lYXBpLlRha2VPYmplY3RSZXF1ZXN0GhUuZ2FtZWFwaS5PYmplY3RT",
-            "dGF0dXMSVAoPR2V0T2JqZWN0VGFrZXJzEh8uZ2FtZWFwaS5HZXRPYmplY3RU",
-            "YWtlcnNSZXF1ZXN0GiAuZ2FtZWFwaS5HZXRPYmplY3RUYWtlcnNSZXNwb25z",
-            "ZWIGcHJvdG8z"));
+            "bmRzX2JlZm9yZV9zdGFydBgCIAEoDRIWCg5vYmplY3RfdG9fdGFrZRgDIAEo",
+            "CSJPCgZTdGF0dXMSFQoRV2FpdGluZ0ZvclBsYXllcnMQABISCg5TdGFydENv",
+            "dW50ZG93bhABEgoKBkluR2FtZRACEg4KClNjb3JlQm9hcmQQAyIgChBOZXdQ",
+            "bGF5ZXJSZXF1ZXN0EgwKBG5hbWUYASABKAkiHgoQR2V0UGxheWVyUmVxdWVz",
+            "dBIKCgJpZBgBIAEoCSIUChJMaXN0UGxheWVyc1JlcXVlc3QiKgoHVmVjdG9y",
+            "MxIJCgF4GAEgASgCEgkKAXkYAiABKAISCQoBehgDIAEoAiJoChFNb3ZlUGxh",
+            "eWVyUmVxdWVzdBIKCgJpZBgBIAEoCRIiCghwb3NpdGlvbhgCIAEoCzIQLmdh",
+            "bWVhcGkuVmVjdG9yMxIjCglkaXJlY3Rpb24YAyABKAsyEC5nYW1lYXBpLlZl",
+            "Y3RvcjMi7gEKBlBsYXllchIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEiIK",
+            "BHJvbGUYAyABKA4yFC5nYW1lYXBpLlBsYXllci5Sb2xlEiIKCHBvc2l0aW9u",
+            "GAQgASgLMhAuZ2FtZWFwaS5WZWN0b3IzEiMKCWRpcmVjdGlvbhgFIAEoCzIQ",
+            "LmdhbWVhcGkuVmVjdG9yMxIUCgxsYXN0VXBkYXRlZHMYBiABKAQSFAoMY3Vy",
+            "cmVudFNjb3JlGAcgASgNIjEKBFJvbGUSCAoEV29sZhAAEggKBEZpc2gQARIJ",
+            "CgVUaWdlchACEgoKBlR1cmtleRADIjkKEVRha2VPYmplY3RSZXF1ZXN0EhEK",
+            "CW9iamVjdF9pZBgBIAEoCRIRCglwbGF5ZXJfaWQYAiABKAkibQoMT2JqZWN0",
+            "U3RhdHVzEiwKBnN0YXR1cxgBIAEoDjIcLmdhbWVhcGkuT2JqZWN0U3RhdHVz",
+            "LlN0YXR1cyIvCgZTdGF0dXMSCwoHVW5rbm93bhAAEgYKAk9rEAESEAoMQWxy",
+            "ZWFkeVRha2VuEAIiKwoWR2V0T2JqZWN0VGFrZXJzUmVxdWVzdBIRCglvYmpl",
+            "Y3RfaWQYASABKAkiLwoLUGxheWVyU2NvcmUSEQoJcGxheWVyX2lkGAEgASgJ",
+            "Eg0KBXNjb3JlGAIgASgFIkAKF0dldE9iamVjdFRha2Vyc1Jlc3BvbnNlEiUK",
+            "B3BsYXllcnMYASADKAsyFC5nYW1lYXBpLlBsYXllclNjb3JlMk4KBUV4dHJh",
+            "EkUKC1NlcnZpY2VJbmZvEhsuZ2FtZWFwaS5TZXJ2aWNlSW5mb1JlcXVlc3Qa",
+            "GS5nYW1lYXBpLlNlcnZpY2VJbmZvUmVwbHky1AMKBEdhbWUSSQoPR2V0R2Ft",
+            "ZVByb2dyZXNzEh8uZ2FtZWFwaS5HZXRHYW1lUHJvZ3Jlc3NSZXF1ZXN0GhUu",
+            "Z2FtZWFwaS5HYW1lUHJvZ3Jlc3MSNwoJTmV3UGxheWVyEhkuZ2FtZWFwaS5O",
+            "ZXdQbGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISNwoJR2V0UGxheWVy",
+            "EhkuZ2FtZWFwaS5HZXRQbGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXIS",
+            "PQoLTGlzdFBsYXllcnMSGy5nYW1lYXBpLkxpc3RQbGF5ZXJzUmVxdWVzdBoP",
+            "LmdhbWVhcGkuUGxheWVyMAESOQoKTW92ZVBsYXllchIaLmdhbWVhcGkuTW92",
+            "ZVBsYXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllchI/CgpUYWtlT2JqZWN0",
+            "EhouZ2FtZWFwaS5UYWtlT2JqZWN0UmVxdWVzdBoVLmdhbWVhcGkuT2JqZWN0",
+            "U3RhdHVzElQKD0dldE9iamVjdFRha2VycxIfLmdhbWVhcGkuR2V0T2JqZWN0",
+            "VGFrZXJzUmVxdWVzdBogLmdhbWVhcGkuR2V0T2JqZWN0VGFrZXJzUmVzcG9u",
+            "c2ViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ServiceInfoRequest), global::Gameapi.ServiceInfoRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ServiceInfoReply), global::Gameapi.ServiceInfoReply.Parser, new[]{ "Ready" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetGameProgressRequest), global::Gameapi.GetGameProgressRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GameProgress), global::Gameapi.GameProgress.Parser, new[]{ "Status", "MillisecondsBeforeStart" }, null, new[]{ typeof(global::Gameapi.GameProgress.Types.Status) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GameProgress), global::Gameapi.GameProgress.Parser, new[]{ "Status", "MillisecondsBeforeStart", "ObjectToTake" }, null, new[]{ typeof(global::Gameapi.GameProgress.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.NewPlayerRequest), global::Gameapi.NewPlayerRequest.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetPlayerRequest), global::Gameapi.GetPlayerRequest.Parser, new[]{ "Id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ListPlayersRequest), global::Gameapi.ListPlayersRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Vector3), global::Gameapi.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.MovePlayerRequest), global::Gameapi.MovePlayerRequest.Parser, new[]{ "Id", "Position", "Direction" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Position", "Direction", "LastUpdateds" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Position", "Direction", "LastUpdateds", "CurrentScore" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.TakeObjectRequest), global::Gameapi.TakeObjectRequest.Parser, new[]{ "ObjectId", "PlayerId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ObjectStatus), global::Gameapi.ObjectStatus.Parser, new[]{ "Status" }, null, new[]{ typeof(global::Gameapi.ObjectStatus.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetObjectTakersRequest), global::Gameapi.GetObjectTakersRequest.Parser, new[]{ "ObjectId" }, null, null, null),
@@ -443,6 +444,7 @@ namespace Gameapi {
     public GameProgress(GameProgress other) : this() {
       status_ = other.status_;
       millisecondsBeforeStart_ = other.millisecondsBeforeStart_;
+      objectToTake_ = other.objectToTake_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -473,6 +475,17 @@ namespace Gameapi {
       }
     }
 
+    /// <summary>Field number for the "object_to_take" field.</summary>
+    public const int ObjectToTakeFieldNumber = 3;
+    private string objectToTake_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ObjectToTake {
+      get { return objectToTake_; }
+      set {
+        objectToTake_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GameProgress);
@@ -488,6 +501,7 @@ namespace Gameapi {
       }
       if (Status != other.Status) return false;
       if (MillisecondsBeforeStart != other.MillisecondsBeforeStart) return false;
+      if (ObjectToTake != other.ObjectToTake) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -496,6 +510,7 @@ namespace Gameapi {
       int hash = 1;
       if (Status != 0) hash ^= Status.GetHashCode();
       if (MillisecondsBeforeStart != 0) hash ^= MillisecondsBeforeStart.GetHashCode();
+      if (ObjectToTake.Length != 0) hash ^= ObjectToTake.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -517,6 +532,10 @@ namespace Gameapi {
         output.WriteRawTag(16);
         output.WriteUInt32(MillisecondsBeforeStart);
       }
+      if (ObjectToTake.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ObjectToTake);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -530,6 +549,9 @@ namespace Gameapi {
       }
       if (MillisecondsBeforeStart != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MillisecondsBeforeStart);
+      }
+      if (ObjectToTake.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ObjectToTake);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -548,6 +570,9 @@ namespace Gameapi {
       if (other.MillisecondsBeforeStart != 0) {
         MillisecondsBeforeStart = other.MillisecondsBeforeStart;
       }
+      if (other.ObjectToTake.Length != 0) {
+        ObjectToTake = other.ObjectToTake;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -565,6 +590,10 @@ namespace Gameapi {
           }
           case 16: {
             MillisecondsBeforeStart = input.ReadUInt32();
+            break;
+          }
+          case 26: {
+            ObjectToTake = input.ReadString();
             break;
           }
         }
@@ -1359,6 +1388,7 @@ namespace Gameapi {
       position_ = other.position_ != null ? other.position_.Clone() : null;
       direction_ = other.direction_ != null ? other.direction_.Clone() : null;
       lastUpdateds_ = other.lastUpdateds_;
+      currentScore_ = other.currentScore_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1433,6 +1463,17 @@ namespace Gameapi {
       }
     }
 
+    /// <summary>Field number for the "currentScore" field.</summary>
+    public const int CurrentScoreFieldNumber = 7;
+    private uint currentScore_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint CurrentScore {
+      get { return currentScore_; }
+      set {
+        currentScore_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Player);
@@ -1452,6 +1493,7 @@ namespace Gameapi {
       if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Direction, other.Direction)) return false;
       if (LastUpdateds != other.LastUpdateds) return false;
+      if (CurrentScore != other.CurrentScore) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1464,6 +1506,7 @@ namespace Gameapi {
       if (position_ != null) hash ^= Position.GetHashCode();
       if (direction_ != null) hash ^= Direction.GetHashCode();
       if (LastUpdateds != 0UL) hash ^= LastUpdateds.GetHashCode();
+      if (CurrentScore != 0) hash ^= CurrentScore.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1501,6 +1544,10 @@ namespace Gameapi {
         output.WriteRawTag(48);
         output.WriteUInt64(LastUpdateds);
       }
+      if (CurrentScore != 0) {
+        output.WriteRawTag(56);
+        output.WriteUInt32(CurrentScore);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1526,6 +1573,9 @@ namespace Gameapi {
       }
       if (LastUpdateds != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(LastUpdateds);
+      }
+      if (CurrentScore != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentScore);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1561,6 +1611,9 @@ namespace Gameapi {
       }
       if (other.LastUpdateds != 0UL) {
         LastUpdateds = other.LastUpdateds;
+      }
+      if (other.CurrentScore != 0) {
+        CurrentScore = other.CurrentScore;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1601,6 +1654,10 @@ namespace Gameapi {
           }
           case 48: {
             LastUpdateds = input.ReadUInt64();
+            break;
+          }
+          case 56: {
+            CurrentScore = input.ReadUInt32();
             break;
           }
         }
