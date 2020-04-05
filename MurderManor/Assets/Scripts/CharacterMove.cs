@@ -71,6 +71,7 @@ public class CharacterMove : MonoBehaviour {
     }
 
     public void SetPosition(Vector3 pos) {
+        m_Animator.SetBool("Walk", GetComponent<Rigidbody>().position != pos);
         lastUpdatedTime = Time.time;
         GetComponent<Rigidbody>().position = pos;
     }
