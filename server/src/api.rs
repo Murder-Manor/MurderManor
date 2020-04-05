@@ -6,38 +6,43 @@ use std::{
 use std::sync::Arc;
 use std::time::SystemTime;
 
-use tokio::time::delay_for;
+use tokio::time::{
+    delay_for,
+};
 use tokio::sync::{
     mpsc,
-    Mutex
+    Mutex,
 };
 use tonic::{
     Request,
     Response,
     Status,
-    Code
+    Code,
 };
 
 use crate::proto::extra_server::Extra;
 use crate::proto::{
     ServiceInfoRequest,
-    ServiceInfoReply
+    ServiceInfoReply,
 };
 
 use crate::proto::game_server::Game;
 use crate::proto::{
+    GameProgressRequest,
     NewPlayerRequest,
     GetPlayerRequest,
     ListPlayersRequest,
     MovePlayerRequest,
     TakeObjectRequest,
     GetObjectTakersRequest,
+    GameProgress,
     Player,
     Vector3,
     ObjectStatus,
     GetObjectTakersResponse,
     PlayerScore,
 };
+use crate::proto::game_progress::Status as GameStatus;
 
 use crate::players::Players;
 use crate::objects::Objects;
@@ -78,13 +83,22 @@ impl Extra for ExtraAPI {
         }
 }
 
+#[derive(Default)]
+pub struct GameStateMachine {
+    pub game_state: GameStatus,
+    pub start_time: Option<SystemTime>,
+}
+
+#[derive(Default)]
 pub struct GameCore {
+    pub game_state_machine: Arc<Mutex<GameStateMachine>>,
+    pub max_players: i8,
     pub players: Arc<Mutex<Players>>,
     pub objects: Arc<Mutex<Objects>>,
 }
 
 impl GameCore {
-    pub fn start(&self) {
+    pub fn start(&mut self) {
         let players = self.players.clone();
         tokio::spawn(async move {
             loop {
@@ -92,9 +106,29 @@ impl GameCore {
                 delay_for(time::Duration::from_millis(100)).await;
             }
         });
+
+        let state_machine = self.game_state_machine.clone();
+        tokio::spawn(async move {
+            loop {
+                if state_machine.lock().await.game_state == GameStatus::StartCountdown {
+                    let start_time = state_machine.lock().await.start_time;
+                    match start_time {
+                        Some(start_time) =>
+                            delay_for(start_time.duration_since(SystemTime::now()).unwrap()).await,
+                        None => println!("WARNING: Waiting time not defined, starting now")
+                    }
+                    state_machine.lock().await.game_state = GameStatus::InGame;
+                    println!("Starting game now!");
+                }
+            }
+        });
     }
 
     async fn new_player(&mut self, player_uuid: Uuid, name: String) -> Result<Player, GenericError> {
+        if self.game_state_machine.lock().await.game_state != GameStatus::WaitingForPlayers {
+            return Err(GenericError)
+        }
+
         let update_time = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs();
 
         let player = Player {
@@ -107,6 +141,16 @@ impl GameCore {
         };
 
         self.players.lock().await.internal_players.insert(player_uuid, player.clone());
+
+        // As soon as we reached our maximum number of players, start the countdown!
+        if self.players.lock().await
+            .internal_players.keys().len() >= self.max_players as usize {
+                self.game_state_machine.lock().await.start_time = Some(
+                    SystemTime::now()
+                    .checked_add(time::Duration::from_secs(5))
+                    .unwrap());
+                self.game_state_machine.lock().await.game_state = GameStatus::StartCountdown;
+            }
 
         Ok(player)
     }
@@ -224,6 +268,7 @@ impl Game for GameAPI {
                 Err(e) => return Err(
                     Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
             };
+            println!("{:} took {:}", player_uuid, object_uuid);
             self.core.lock().await
                 .objects.lock().await
                 .take_object(object_uuid, player_uuid)
