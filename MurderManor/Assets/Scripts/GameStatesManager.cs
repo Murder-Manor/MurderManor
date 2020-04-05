@@ -15,16 +15,27 @@ public class GameStatesManager: MonoBehaviour {
     private Status _current_state = Status.WaitingForPlayers;
     private bool player_finished = false;
     private string object_to_take = "";
+    private Dictionary<String, FindableObject> _takable_objects =
+        new Dictionary<String, FindableObject>();
 
     // These attributes will be set in unity editor
     public GameObject gameHUD = null;
+    public GameObject findableItems = null;
+
+    private void Start() {
+        foreach(Transform child in findableItems.transform) {
+            var fo = child.gameObject.GetComponent<FindableObject>();
+            _takable_objects[fo.itemId] = fo;
+        }
+    }
 
     public Status GetCurrentState() {
         return _current_state;
     }
 
     public void NotifyObjectTaken(string object_id) {
-        player_finished = true;
+        if (!player_finished && (object_id == object_to_take))
+            player_finished = true;
     }
 
     private void Update() {
@@ -58,13 +69,15 @@ public class GameStatesManager: MonoBehaviour {
             case Status.InGame:
                 if(player_finished)
                     text_to_display = "Finished!";
-                else
-                    text_to_display = "Find " + object_to_take;
+                else {
+                    var object_name = _takable_objects[object_to_take].itemName;
+                    text_to_display = "Find " + object_name;
+                }
                 break;
             case Status.ScoreBoard:
                 text_to_display = "And the winner is...\n";
                 foreach(KeyValuePair<string, uint> score in GetComponent<PlayersManager>().GetScoreBoard()) {
-                    text_to_display += score.Key + " -> " + score.Value;
+                    text_to_display += score.Key + " -> " + score.Value + "\n";
                 }
                 break;
             default:
