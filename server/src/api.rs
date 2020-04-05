@@ -122,6 +122,20 @@ impl GameCore {
                 }
             }
         });
+
+        // Reset game state if all the players left the game
+        let players = self.players.clone();
+        let state_machine = self.game_state_machine.clone();
+        tokio::spawn(async move {
+            loop {
+                if players.lock().await.internal_players.keys().len() == 0 {
+                    if state_machine.lock().await.game_state != GameStatus::WaitingForPlayers {
+                        println!("No more player, resetting game state");
+                        state_machine.lock().await.game_state = GameStatus::WaitingForPlayers;
+                    }
+                }
+            }
+        });
     }
 
     async fn new_player(&mut self, player_uuid: Uuid, name: String) -> Result<Player, GenericError> {
