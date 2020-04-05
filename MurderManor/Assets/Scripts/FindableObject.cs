@@ -27,6 +27,7 @@ public class FindableObject : MonoBehaviour
         if(collider != mainCharacterCollider)
             return;
         objectsManager.GetComponent<ObjectsManager>().TakeObject(itemId);
+        Debug.Log("Entering");
         taken = true;
     }
 }

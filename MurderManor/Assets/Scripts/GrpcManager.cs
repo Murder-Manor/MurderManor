@@ -12,6 +12,7 @@ public class GrpcManager : MonoBehaviour {
     private bool is_connected = false;
 
     private void Start() {
+        Connect("");
     }
 
     // Connect instantiates a new server connexion and instatiantes the main
