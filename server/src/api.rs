@@ -87,6 +87,7 @@ impl Extra for ExtraAPI {
 pub struct GameStateMachine {
     pub game_state: GameStatus,
     pub start_time: Option<SystemTime>,
+    pub object_to_take: Option<Uuid>,
 }
 
 #[derive(Default)]
@@ -108,17 +109,37 @@ impl GameCore {
         });
 
         let state_machine = self.game_state_machine.clone();
+        let objects = self.objects.clone();
+        let max_players = self.max_players.clone();
         tokio::spawn(async move {
             loop {
-                if state_machine.lock().await.game_state == GameStatus::StartCountdown {
-                    let start_time = state_machine.lock().await.start_time;
-                    match start_time {
-                        Some(start_time) =>
-                            delay_for(start_time.duration_since(SystemTime::now()).unwrap()).await,
-                        None => println!("WARNING: Waiting time not defined, starting now")
-                    }
-                    state_machine.lock().await.game_state = GameStatus::InGame;
-                    println!("Starting game now!");
+                delay_for(time::Duration::from_millis(100)).await;
+                let game_state = state_machine.lock().await.game_state;
+                match game_state {
+                    GameStatus::WaitingForPlayers => continue,
+                    GameStatus::StartCountdown => {
+                        let start_time = state_machine.lock().await.start_time;
+                        match start_time {
+                            Some(start_time) =>
+                                delay_for(start_time.duration_since(SystemTime::now()).unwrap()).await,
+                            None => println!("WARNING: Waiting time not defined, starting now")
+                        }
+
+                        println!("Starting game now!");
+
+                        state_machine.lock().await.object_to_take =
+                            Some(objects.lock().await.take_random_takable_object());
+
+                        state_machine.lock().await.game_state = GameStatus::InGame;
+                    },
+                    GameStatus::InGame => {
+                        let takers = objects.lock().await
+                            .takers_for(state_machine.lock().await.object_to_take.unwrap());
+                        if takers.len() >= max_players as usize {
+                            state_machine.lock().await.game_state = GameStatus::ScoreBoard;
+                        }
+                    },
+                    GameStatus::ScoreBoard => continue,
                 }
             }
         });
@@ -190,7 +211,10 @@ impl Game for GameAPI {
                             st.duration_since(SystemTime::now()).unwrap().as_millis() as u32
                         } else { 0 },
                     None => 0,
-                }
+                },
+                object_to_take: if sm.game_state == GameStatus::InGame {
+                    String::default()
+                } else { String::default() },
             };
             Ok(Response::new(progress))
         }
