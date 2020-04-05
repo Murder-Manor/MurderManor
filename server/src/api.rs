@@ -28,7 +28,7 @@ use crate::proto::{
 
 use crate::proto::game_server::Game;
 use crate::proto::{
-    GameProgressRequest,
+    GetGameProgressRequest,
     NewPlayerRequest,
     GetPlayerRequest,
     ListPlayersRequest,
@@ -162,6 +162,25 @@ pub struct GameAPI{
 
 #[tonic::async_trait]
 impl Game for GameAPI {
+    async fn get_game_progress(&self,
+                               _request: Request<GetGameProgressRequest>
+                               ) ->
+        Result<Response<GameProgress>, Status> {
+            let core = self.core.lock().await;
+            let sm = core.game_state_machine.lock().await;
+            let progress = GameProgress {
+                status: sm.game_state as i32,
+                milliseconds_before_start: match sm.start_time {
+                    Some(st) =>
+                        if SystemTime::now() < st {
+                            st.duration_since(SystemTime::now()).unwrap().as_millis() as u32
+                        } else { 0 },
+                    None => 0,
+                }
+            };
+            Ok(Response::new(progress))
+        }
+
     async fn new_player(&self,
                         request: Request<NewPlayerRequest>
                        ) ->
