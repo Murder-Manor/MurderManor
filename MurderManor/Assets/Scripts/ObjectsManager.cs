@@ -27,6 +27,6 @@ public class ObjectsManager : MonoBehaviour {
                 PlayerId = player_id,
                 ObjectId = object_id,
                 });
-        GetComponent<GameStatesManager>().SetStatePlayerFinished();
+        GetComponent<GameStatesManager>().NotifyObjectTaken(object_id);
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 using Gameapi;
 using static Gameapi.GameProgress.Types;
@@ -12,6 +14,7 @@ public class GameStatesManager: MonoBehaviour {
     private float _time_to_next_update_ms = update_rate_ms;
     private Status _current_state = Status.WaitingForPlayers;
     private bool player_finished = false;
+    private string object_to_take = "";
 
     // These attributes will be set in unity editor
     public GameObject gameHUD = null;
@@ -20,7 +23,7 @@ public class GameStatesManager: MonoBehaviour {
         return _current_state;
     }
 
-    public void SetStatePlayerFinished() {
+    public void NotifyObjectTaken(string object_id) {
         player_finished = true;
     }
 
@@ -36,6 +39,14 @@ public class GameStatesManager: MonoBehaviour {
 
         _current_state = progress.Status;
 
+        if(_current_state == Status.InGame)
+            object_to_take = progress.ObjectToTake;
+
+        var text_to_display = HUDTextFromState();
+        gameHUD.GetComponent<TMPro.TMP_Text>().text = text_to_display;
+    }
+
+    private string HUDTextFromState() {
         var text_to_display = "";
         switch(_current_state) {
             case Status.WaitingForPlayers:
@@ -48,16 +59,18 @@ public class GameStatesManager: MonoBehaviour {
                 if(player_finished)
                     text_to_display = "Finished!";
                 else
-                    text_to_display = "Find the gramophone!";
+                    text_to_display = "Find " + object_to_take;
                 break;
             case Status.ScoreBoard:
-                text_to_display = "And the winner is...";
+                text_to_display = "And the winner is...\n";
+                foreach(KeyValuePair<string, uint> score in GetComponent<PlayersManager>().GetScoreBoard()) {
+                    text_to_display += score.Key + " -> " + score.Value;
+                }
                 break;
             default:
                 text_to_display = "Unknown state!";
                 break;
         };
-
-        gameHUD.GetComponent<TMPro.TMP_Text>().text = text_to_display;
+        return text_to_display;
     }
 }

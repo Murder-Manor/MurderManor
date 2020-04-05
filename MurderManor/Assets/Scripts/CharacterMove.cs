@@ -16,6 +16,7 @@ public class CharacterMove : MonoBehaviour {
 
     private float lastUpdatedTime = 0.0f;
     private string characterName;
+    private uint score = 0;
 
     public void SetCharacterName(string characterName) {
         this.characterName = characterName;
@@ -25,6 +26,14 @@ public class CharacterMove : MonoBehaviour {
 
     public string GetCharacterName() {
         return characterName;
+    }
+
+    public void SetScore(uint score) {
+        this.score = score;
+    }
+
+    public uint GetScore() {
+        return score;
     }
 
     void Update() {

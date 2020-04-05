@@ -106,23 +106,34 @@ public class PlayersManager : MonoBehaviour {
                 if(!next.Result)
                     break;
                 var currChar = response.ResponseStream.Current;
-                // Pass our turn if this is one of ours controller characters
-                if(_controlled_characters.ContainsKey(currChar.Id))
-                    continue;
-                // Instantiate a new character if we didn't have it
-                if(!_characters.ContainsKey(currChar.Id)) {
-                    _characters[currChar.Id] = Instantiate(spawnedPrefab);
-                    _characters[currChar.Id].GetComponent<CharacterMove>().SetCharacterName(currChar.Name);
-                    // Teleport it at the beginning to avoid collision issues
-                    Debug.Log("Adding " + currChar.Id);
-                }
-                // Update position of each character in case a change have been made
-                var charMove = _characters[currChar.Id].GetComponent<CharacterMove>();
-                charMove.SetPosition(new UnityEngine.Vector3(
-                            currChar.Position.X, currChar.Position.Y, currChar.Position.Z));
-                charMove.SetDirection(new UnityEngine.Vector3(
-                            currChar.Direction.X, currChar.Direction.Y, currChar.Direction.Z));
+                // Pass our turn if this is one of ours controlled characters
+                if(! _controlled_characters.ContainsKey(currChar.Id)) {
+                    // Instantiate a new character if we didn't have it
+                    if(!_characters.ContainsKey(currChar.Id)) {
+                        _characters[currChar.Id] = Instantiate(spawnedPrefab);
+                        _characters[currChar.Id].GetComponent<CharacterMove>().SetCharacterName(currChar.Name);
+                        // Teleport it at the beginning to avoid collision issues
+                        Debug.Log("Adding " + currChar.Id);
+                    }
+                    // Update position of each character in case a change have been made
+                    var charMove = _characters[currChar.Id].GetComponent<CharacterMove>();
+                    charMove.SetPosition(new UnityEngine.Vector3(
+                                currChar.Position.X, currChar.Position.Y, currChar.Position.Z));
+                    charMove.SetDirection(new UnityEngine.Vector3(
+                                currChar.Direction.X, currChar.Direction.Y, currChar.Direction.Z));
+                    // Update player score
+                    _characters[currChar.Id].GetComponent<CharacterMove>().SetScore(currChar.CurrentScore);
+                } else
+                    // Update player score
+                    _controlled_characters[currChar.Id].GetComponent<CharacterMove>().SetScore(currChar.CurrentScore);
             }
         }
+    }
+
+    public Dictionary<string, uint> GetScoreBoard() {
+        var score_board = new Dictionary<string, uint>();
+        foreach(KeyValuePair<string, GameObject> character in _characters)
+            score_board[character.Key] = character.Value.GetComponent<CharacterMove>().GetScore();
+        return score_board;
     }
 }
