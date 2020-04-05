@@ -132,8 +132,10 @@ public class PlayersManager : MonoBehaviour {
 
     public Dictionary<string, uint> GetScoreBoard() {
         var score_board = new Dictionary<string, uint>();
+        foreach(KeyValuePair<string, CharacterMove> character in _controlled_characters)
+            score_board[character.Value.GetCharacterName()] = character.Value.GetScore();
         foreach(KeyValuePair<string, GameObject> character in _characters)
-            score_board[character.Key] = character.Value.GetComponent<CharacterMove>().GetScore();
+            score_board[character.Value.GetComponent<CharacterMove>().GetCharacterName()] = character.Value.GetComponent<CharacterMove>().GetScore();
         return score_board;
     }
 }

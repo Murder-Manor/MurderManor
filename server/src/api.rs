@@ -193,16 +193,18 @@ impl GameCore {
         Ok(player)
     }
 
-    async fn take_object(&mut self, player_uuid: Uuid, object_uuid: Uuid) -> Result<(), GenericError> {
+    async fn take_object(&mut self, object_uuid: Uuid, player_uuid: Uuid) -> Result<(), GenericError> {
         println!("{:} took {:}", player_uuid, object_uuid);
         // Take the object physically
         let score = self.objects.lock().await
             .take_object(object_uuid, player_uuid)
             .unwrap() as u32;
         // Update the player scoreboard
-        self.players.lock().await
-            .internal_players.get_mut(&player_uuid).unwrap()
-            .current_score += self.max_players as u32 - score;
+        match self.players.lock().await
+            .internal_players.get_mut(&player_uuid) {
+                Some(player) => player.current_score += self.max_players as u32 - score,
+                None => println!("Player {:} not found", player_uuid),
+            }
         Ok(())
     }
 }
