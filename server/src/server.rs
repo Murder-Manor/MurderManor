@@ -2,7 +2,7 @@ use std::sync::Arc;
 use tokio::sync::Mutex;
 use tonic::{transport::Server};
 
-use api::{GameCore, ExtraAPI, GameAPI};
+use api::{GameCore, ExtraAPI, GameAPI, GameStateMachine};
 use proto::extra_server::ExtraServer;
 use proto::game_server::GameServer;
 
@@ -15,7 +15,9 @@ mod objects;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = "[::]:50051".parse()?;
 
-    let core = GameCore{
+    let mut core = GameCore{
+        game_state_machine: Arc::new(Mutex::new(GameStateMachine::default())),
+        max_players: 2,
         players: Arc::new(Mutex::new(players::Players::default())),
         objects: Arc::new(Mutex::new(objects::Objects::default())),
     };

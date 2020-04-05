@@ -22,6 +22,15 @@ service Game {
    rpc GetObjectTakers(GetObjectTakersRequest) returns (GetObjectTakersResponse) ;
 }
 
+message GameProgress {
+    enum Status {
+        WaitingForPlayers = 0;
+        StartCountdown = 1;
+        InGame = 2;
+        ScoreBoard = 3;
+    }
+}
+
 message NewPlayerRequest {
    string name = 1;
 }
