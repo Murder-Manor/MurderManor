@@ -229,7 +229,7 @@ impl Game for GameAPI {
                     None => 0,
                 },
                 object_to_take: if sm.game_state == GameStatus::InGame {
-                    String::default()
+                    sm.object_to_take.unwrap().to_hyphenated().to_string()
                 } else { String::default() },
             };
             Ok(Response::new(progress))
