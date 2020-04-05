@@ -33,6 +33,7 @@ public class PlayersManager : MonoBehaviour {
         _controlled_characters[returnedPlayer.Id] = character;
         character.id = returnedPlayer.Id;
         character.enabled = true;
+        GetComponent<ObjectsManager>().SetPlayerID(returnedPlayer.Id);
         return returnedPlayer.Id;
     }
 
