@@ -8,6 +8,11 @@ using UnityEngine;
 public class ObjectsManager : MonoBehaviour {
     private static float update_rate_ms = 10.0f;
     private float _time_to_next_update_ms = update_rate_ms;
+    private string player_id;
+
+    public void SetPlayerID(string ID) {
+        player_id = ID;
+    }
 
     private void Update() {
         // Update every update_rate_ms
@@ -17,9 +22,10 @@ public class ObjectsManager : MonoBehaviour {
         _time_to_next_update_ms = update_rate_ms;
     }
 
-    public void TakeObject(string playerID) {
+    public void TakeObject(string object_id) {
         GetComponent<GrpcManager>().GetClient().TakeObject(new TakeObjectRequest{
-                PlayerId = playerID,
+                PlayerId = player_id,
+                ObjectId = object_id,
                 });
     }
 }
