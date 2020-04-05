@@ -139,7 +139,9 @@ impl GameCore {
                             state_machine.lock().await.game_state = GameStatus::ScoreBoard;
                         }
                     },
-                    GameStatus::ScoreBoard => continue,
+                    GameStatus::ScoreBoard => {
+                        println!("Game finished");
+                    },
                 }
             }
         });
@@ -173,6 +175,7 @@ impl GameCore {
             position: Some(Vector3::default()),
             direction: Some(Vector3::default()),
             last_updateds: update_time,
+            current_score: 0,
         };
 
         self.players.lock().await.internal_players.insert(player_uuid, player.clone());
@@ -188,6 +191,19 @@ impl GameCore {
             }
 
         Ok(player)
+    }
+
+    async fn take_object(&mut self, player_uuid: Uuid, object_uuid: Uuid) -> Result<(), GenericError> {
+        println!("{:} took {:}", player_uuid, object_uuid);
+        // Take the object physically
+        let score = self.objects.lock().await
+            .take_object(object_uuid, player_uuid)
+            .unwrap() as u32;
+        // Update the player scoreboard
+        self.players.lock().await
+            .internal_players.get_mut(&player_uuid).unwrap()
+            .current_score += self.max_players as u32 - score;
+        Ok(())
     }
 }
 
@@ -327,8 +343,7 @@ impl Game for GameAPI {
             };
             println!("{:} took {:}", player_uuid, object_uuid);
             self.core.lock().await
-                .objects.lock().await
-                .take_object(object_uuid, player_uuid)
+                .take_object(object_uuid, player_uuid).await
                 .unwrap();
             Ok(Response::new(ObjectStatus::default()))
         }
