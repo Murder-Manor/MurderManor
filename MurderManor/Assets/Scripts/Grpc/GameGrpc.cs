@@ -107,6 +107,8 @@ namespace Gameapi {
   {
     static readonly string __ServiceName = "gameapi.Game";
 
+    static readonly grpc::Marshaller<global::Gameapi.GetGameProgressRequest> __Marshaller_gameapi_GetGameProgressRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GetGameProgressRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gameapi.GameProgress> __Marshaller_gameapi_GameProgress = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GameProgress.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gameapi.NewPlayerRequest> __Marshaller_gameapi_NewPlayerRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.NewPlayerRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gameapi.Player> __Marshaller_gameapi_Player = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.Player.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gameapi.GetPlayerRequest> __Marshaller_gameapi_GetPlayerRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GetPlayerRequest.Parser.ParseFrom);
@@ -116,6 +118,13 @@ namespace Gameapi {
     static readonly grpc::Marshaller<global::Gameapi.ObjectStatus> __Marshaller_gameapi_ObjectStatus = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.ObjectStatus.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gameapi.GetObjectTakersRequest> __Marshaller_gameapi_GetObjectTakersRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GetObjectTakersRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gameapi.GetObjectTakersResponse> __Marshaller_gameapi_GetObjectTakersResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GetObjectTakersResponse.Parser.ParseFrom);
+
+    static readonly grpc::Method<global::Gameapi.GetGameProgressRequest, global::Gameapi.GameProgress> __Method_GetGameProgress = new grpc::Method<global::Gameapi.GetGameProgressRequest, global::Gameapi.GameProgress>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetGameProgress",
+        __Marshaller_gameapi_GetGameProgressRequest,
+        __Marshaller_gameapi_GameProgress);
 
     static readonly grpc::Method<global::Gameapi.NewPlayerRequest, global::Gameapi.Player> __Method_NewPlayer = new grpc::Method<global::Gameapi.NewPlayerRequest, global::Gameapi.Player>(
         grpc::MethodType.Unary,
@@ -169,6 +178,11 @@ namespace Gameapi {
     [grpc::BindServiceMethod(typeof(Game), "BindService")]
     public abstract partial class GameBase
     {
+      public virtual global::System.Threading.Tasks.Task<global::Gameapi.GameProgress> GetGameProgress(global::Gameapi.GetGameProgressRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
       public virtual global::System.Threading.Tasks.Task<global::Gameapi.Player> NewPlayer(global::Gameapi.NewPlayerRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -224,6 +238,22 @@ namespace Gameapi {
       {
       }
 
+      public virtual global::Gameapi.GameProgress GetGameProgress(global::Gameapi.GetGameProgressRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameProgress(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Gameapi.GameProgress GetGameProgress(global::Gameapi.GetGameProgressRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetGameProgress, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Gameapi.GameProgress> GetGameProgressAsync(global::Gameapi.GetGameProgressRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameProgressAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Gameapi.GameProgress> GetGameProgressAsync(global::Gameapi.GetGameProgressRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetGameProgress, null, options, request);
+      }
       public virtual global::Gameapi.Player NewPlayer(global::Gameapi.NewPlayerRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return NewPlayer(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -324,6 +354,7 @@ namespace Gameapi {
     public static grpc::ServerServiceDefinition BindService(GameBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_GetGameProgress, serviceImpl.GetGameProgress)
           .AddMethod(__Method_NewPlayer, serviceImpl.NewPlayer)
           .AddMethod(__Method_GetPlayer, serviceImpl.GetPlayer)
           .AddMethod(__Method_ListPlayers, serviceImpl.ListPlayers)
@@ -338,6 +369,7 @@ namespace Gameapi {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, GameBase serviceImpl)
     {
+      serviceBinder.AddMethod(__Method_GetGameProgress, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Gameapi.GetGameProgressRequest, global::Gameapi.GameProgress>(serviceImpl.GetGameProgress));
       serviceBinder.AddMethod(__Method_NewPlayer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Gameapi.NewPlayerRequest, global::Gameapi.Player>(serviceImpl.NewPlayer));
       serviceBinder.AddMethod(__Method_GetPlayer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Gameapi.GetPlayerRequest, global::Gameapi.Player>(serviceImpl.GetPlayer));
       serviceBinder.AddMethod(__Method_ListPlayers, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Gameapi.ListPlayersRequest, global::Gameapi.Player>(serviceImpl.ListPlayers));

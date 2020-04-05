@@ -25,40 +25,49 @@ namespace Gameapi {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgpnYW1lLnByb3RvEgdnYW1lYXBpIhQKElNlcnZpY2VJbmZvUmVxdWVzdCIh",
-            "ChBTZXJ2aWNlSW5mb1JlcGx5Eg0KBXJlYWR5GAEgASgIIiAKEE5ld1BsYXll",
-            "clJlcXVlc3QSDAoEbmFtZRgBIAEoCSIeChBHZXRQbGF5ZXJSZXF1ZXN0EgoK",
-            "AmlkGAEgASgJIhQKEkxpc3RQbGF5ZXJzUmVxdWVzdCIqCgdWZWN0b3IzEgkK",
-            "AXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCImgKEU1vdmVQbGF5ZXJS",
-            "ZXF1ZXN0EgoKAmlkGAEgASgJEiIKCHBvc2l0aW9uGAIgASgLMhAuZ2FtZWFw",
-            "aS5WZWN0b3IzEiMKCWRpcmVjdGlvbhgDIAEoCzIQLmdhbWVhcGkuVmVjdG9y",
-            "MyLYAQoGUGxheWVyEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSIgoEcm9s",
-            "ZRgDIAEoDjIULmdhbWVhcGkuUGxheWVyLlJvbGUSIgoIcG9zaXRpb24YBCAB",
-            "KAsyEC5nYW1lYXBpLlZlY3RvcjMSIwoJZGlyZWN0aW9uGAUgASgLMhAuZ2Ft",
-            "ZWFwaS5WZWN0b3IzEhQKDGxhc3RVcGRhdGVkcxgGIAEoBCIxCgRSb2xlEggK",
-            "BFdvbGYQABIICgRGaXNoEAESCQoFVGlnZXIQAhIKCgZUdXJrZXkQAyI5ChFU",
-            "YWtlT2JqZWN0UmVxdWVzdBIRCglvYmplY3RfaWQYASABKAkSEQoJcGxheWVy",
-            "X2lkGAIgASgJIm0KDE9iamVjdFN0YXR1cxIsCgZzdGF0dXMYASABKA4yHC5n",
-            "YW1lYXBpLk9iamVjdFN0YXR1cy5TdGF0dXMiLwoGU3RhdHVzEgsKB1Vua25v",
-            "d24QABIGCgJPaxABEhAKDEFscmVhZHlUYWtlbhACIisKFkdldE9iamVjdFRh",
-            "a2Vyc1JlcXVlc3QSEQoJb2JqZWN0X2lkGAEgASgJIi8KC1BsYXllclNjb3Jl",
-            "EhEKCXBsYXllcl9pZBgBIAEoCRINCgVzY29yZRgCIAEoBSJAChdHZXRPYmpl",
-            "Y3RUYWtlcnNSZXNwb25zZRIlCgdwbGF5ZXJzGAEgAygLMhQuZ2FtZWFwaS5Q",
-            "bGF5ZXJTY29yZTJOCgVFeHRyYRJFCgtTZXJ2aWNlSW5mbxIbLmdhbWVhcGku",
-            "U2VydmljZUluZm9SZXF1ZXN0GhkuZ2FtZWFwaS5TZXJ2aWNlSW5mb1JlcGx5",
-            "MokDCgRHYW1lEjcKCU5ld1BsYXllchIZLmdhbWVhcGkuTmV3UGxheWVyUmVx",
-            "dWVzdBoPLmdhbWVhcGkuUGxheWVyEjcKCUdldFBsYXllchIZLmdhbWVhcGku",
-            "R2V0UGxheWVyUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyEj0KC0xpc3RQbGF5",
-            "ZXJzEhsuZ2FtZWFwaS5MaXN0UGxheWVyc1JlcXVlc3QaDy5nYW1lYXBpLlBs",
-            "YXllcjABEjkKCk1vdmVQbGF5ZXISGi5nYW1lYXBpLk1vdmVQbGF5ZXJSZXF1",
-            "ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISPwoKVGFrZU9iamVjdBIaLmdhbWVhcGku",
-            "VGFrZU9iamVjdFJlcXVlc3QaFS5nYW1lYXBpLk9iamVjdFN0YXR1cxJUCg9H",
-            "ZXRPYmplY3RUYWtlcnMSHy5nYW1lYXBpLkdldE9iamVjdFRha2Vyc1JlcXVl",
-            "c3QaIC5nYW1lYXBpLkdldE9iamVjdFRha2Vyc1Jlc3BvbnNlYgZwcm90bzM="));
+            "ChBTZXJ2aWNlSW5mb1JlcGx5Eg0KBXJlYWR5GAEgASgIIhgKFkdldEdhbWVQ",
+            "cm9ncmVzc1JlcXVlc3QisAEKDEdhbWVQcm9ncmVzcxIsCgZzdGF0dXMYASAB",
+            "KA4yHC5nYW1lYXBpLkdhbWVQcm9ncmVzcy5TdGF0dXMSIQoZbWlsbGlzZWNv",
+            "bmRzX2JlZm9yZV9zdGFydBgCIAEoDSJPCgZTdGF0dXMSFQoRV2FpdGluZ0Zv",
+            "clBsYXllcnMQABISCg5TdGFydENvdW50ZG93bhABEgoKBkluR2FtZRACEg4K",
+            "ClNjb3JlQm9hcmQQAyIgChBOZXdQbGF5ZXJSZXF1ZXN0EgwKBG5hbWUYASAB",
+            "KAkiHgoQR2V0UGxheWVyUmVxdWVzdBIKCgJpZBgBIAEoCSIUChJMaXN0UGxh",
+            "eWVyc1JlcXVlc3QiKgoHVmVjdG9yMxIJCgF4GAEgASgCEgkKAXkYAiABKAIS",
+            "CQoBehgDIAEoAiJoChFNb3ZlUGxheWVyUmVxdWVzdBIKCgJpZBgBIAEoCRIi",
+            "Cghwb3NpdGlvbhgCIAEoCzIQLmdhbWVhcGkuVmVjdG9yMxIjCglkaXJlY3Rp",
+            "b24YAyABKAsyEC5nYW1lYXBpLlZlY3RvcjMi2AEKBlBsYXllchIKCgJpZBgB",
+            "IAEoCRIMCgRuYW1lGAIgASgJEiIKBHJvbGUYAyABKA4yFC5nYW1lYXBpLlBs",
+            "YXllci5Sb2xlEiIKCHBvc2l0aW9uGAQgASgLMhAuZ2FtZWFwaS5WZWN0b3Iz",
+            "EiMKCWRpcmVjdGlvbhgFIAEoCzIQLmdhbWVhcGkuVmVjdG9yMxIUCgxsYXN0",
+            "VXBkYXRlZHMYBiABKAQiMQoEUm9sZRIICgRXb2xmEAASCAoERmlzaBABEgkK",
+            "BVRpZ2VyEAISCgoGVHVya2V5EAMiOQoRVGFrZU9iamVjdFJlcXVlc3QSEQoJ",
+            "b2JqZWN0X2lkGAEgASgJEhEKCXBsYXllcl9pZBgCIAEoCSJtCgxPYmplY3RT",
+            "dGF0dXMSLAoGc3RhdHVzGAEgASgOMhwuZ2FtZWFwaS5PYmplY3RTdGF0dXMu",
+            "U3RhdHVzIi8KBlN0YXR1cxILCgdVbmtub3duEAASBgoCT2sQARIQCgxBbHJl",
+            "YWR5VGFrZW4QAiIrChZHZXRPYmplY3RUYWtlcnNSZXF1ZXN0EhEKCW9iamVj",
+            "dF9pZBgBIAEoCSIvCgtQbGF5ZXJTY29yZRIRCglwbGF5ZXJfaWQYASABKAkS",
+            "DQoFc2NvcmUYAiABKAUiQAoXR2V0T2JqZWN0VGFrZXJzUmVzcG9uc2USJQoH",
+            "cGxheWVycxgBIAMoCzIULmdhbWVhcGkuUGxheWVyU2NvcmUyTgoFRXh0cmES",
+            "RQoLU2VydmljZUluZm8SGy5nYW1lYXBpLlNlcnZpY2VJbmZvUmVxdWVzdBoZ",
+            "LmdhbWVhcGkuU2VydmljZUluZm9SZXBseTLUAwoER2FtZRJJCg9HZXRHYW1l",
+            "UHJvZ3Jlc3MSHy5nYW1lYXBpLkdldEdhbWVQcm9ncmVzc1JlcXVlc3QaFS5n",
+            "YW1lYXBpLkdhbWVQcm9ncmVzcxI3CglOZXdQbGF5ZXISGS5nYW1lYXBpLk5l",
+            "d1BsYXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllchI3CglHZXRQbGF5ZXIS",
+            "GS5nYW1lYXBpLkdldFBsYXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllchI9",
+            "CgtMaXN0UGxheWVycxIbLmdhbWVhcGkuTGlzdFBsYXllcnNSZXF1ZXN0Gg8u",
+            "Z2FtZWFwaS5QbGF5ZXIwARI5CgpNb3ZlUGxheWVyEhouZ2FtZWFwaS5Nb3Zl",
+            "UGxheWVyUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyEj8KClRha2VPYmplY3QS",
+            "Gi5nYW1lYXBpLlRha2VPYmplY3RSZXF1ZXN0GhUuZ2FtZWFwaS5PYmplY3RT",
+            "dGF0dXMSVAoPR2V0T2JqZWN0VGFrZXJzEh8uZ2FtZWFwaS5HZXRPYmplY3RU",
+            "YWtlcnNSZXF1ZXN0GiAuZ2FtZWFwaS5HZXRPYmplY3RUYWtlcnNSZXNwb25z",
+            "ZWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ServiceInfoRequest), global::Gameapi.ServiceInfoRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ServiceInfoReply), global::Gameapi.ServiceInfoReply.Parser, new[]{ "Ready" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetGameProgressRequest), global::Gameapi.GetGameProgressRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GameProgress), global::Gameapi.GameProgress.Parser, new[]{ "Status", "MillisecondsBeforeStart" }, null, new[]{ typeof(global::Gameapi.GameProgress.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.NewPlayerRequest), global::Gameapi.NewPlayerRequest.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetPlayerRequest), global::Gameapi.GetPlayerRequest.Parser, new[]{ "Id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ListPlayersRequest), global::Gameapi.ListPlayersRequest.Parser, null, null, null, null),
@@ -306,6 +315,278 @@ namespace Gameapi {
 
   }
 
+  public sealed partial class GetGameProgressRequest : pb::IMessage<GetGameProgressRequest> {
+    private static readonly pb::MessageParser<GetGameProgressRequest> _parser = new pb::MessageParser<GetGameProgressRequest>(() => new GetGameProgressRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetGameProgressRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameProgressRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameProgressRequest(GetGameProgressRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameProgressRequest Clone() {
+      return new GetGameProgressRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetGameProgressRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetGameProgressRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetGameProgressRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameProgress : pb::IMessage<GameProgress> {
+    private static readonly pb::MessageParser<GameProgress> _parser = new pb::MessageParser<GameProgress>(() => new GameProgress());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameProgress> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameProgress() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameProgress(GameProgress other) : this() {
+      status_ = other.status_;
+      millisecondsBeforeStart_ = other.millisecondsBeforeStart_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameProgress Clone() {
+      return new GameProgress(this);
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 1;
+    private global::Gameapi.GameProgress.Types.Status status_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Gameapi.GameProgress.Types.Status Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "milliseconds_before_start" field.</summary>
+    public const int MillisecondsBeforeStartFieldNumber = 2;
+    private uint millisecondsBeforeStart_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint MillisecondsBeforeStart {
+      get { return millisecondsBeforeStart_; }
+      set {
+        millisecondsBeforeStart_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameProgress);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameProgress other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Status != other.Status) return false;
+      if (MillisecondsBeforeStart != other.MillisecondsBeforeStart) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Status != 0) hash ^= Status.GetHashCode();
+      if (MillisecondsBeforeStart != 0) hash ^= MillisecondsBeforeStart.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Status != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Status);
+      }
+      if (MillisecondsBeforeStart != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(MillisecondsBeforeStart);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Status != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      }
+      if (MillisecondsBeforeStart != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MillisecondsBeforeStart);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameProgress other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Status != 0) {
+        Status = other.Status;
+      }
+      if (other.MillisecondsBeforeStart != 0) {
+        MillisecondsBeforeStart = other.MillisecondsBeforeStart;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Status = (global::Gameapi.GameProgress.Types.Status) input.ReadEnum();
+            break;
+          }
+          case 16: {
+            MillisecondsBeforeStart = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the GameProgress message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum Status {
+        [pbr::OriginalName("WaitingForPlayers")] WaitingForPlayers = 0,
+        [pbr::OriginalName("StartCountdown")] StartCountdown = 1,
+        [pbr::OriginalName("InGame")] InGame = 2,
+        [pbr::OriginalName("ScoreBoard")] ScoreBoard = 3,
+      }
+
+    }
+    #endregion
+
+  }
+
   public sealed partial class NewPlayerRequest : pb::IMessage<NewPlayerRequest> {
     private static readonly pb::MessageParser<NewPlayerRequest> _parser = new pb::MessageParser<NewPlayerRequest>(() => new NewPlayerRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -314,7 +595,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -443,7 +724,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -572,7 +853,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -673,7 +954,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -858,7 +1139,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1055,7 +1336,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1350,7 +1631,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1507,7 +1788,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1649,7 +1930,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1778,7 +2059,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1935,7 +2216,7 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Gameapi.GameReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
