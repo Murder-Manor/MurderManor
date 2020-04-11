@@ -26,47 +26,48 @@ namespace Gameapi {
           string.Concat(
             "CgpnYW1lLnByb3RvEgdnYW1lYXBpIhQKElNlcnZpY2VJbmZvUmVxdWVzdCIh",
             "ChBTZXJ2aWNlSW5mb1JlcGx5Eg0KBXJlYWR5GAEgASgIIhgKFkdldEdhbWVQ",
-            "cm9ncmVzc1JlcXVlc3QiyAEKDEdhbWVQcm9ncmVzcxIsCgZzdGF0dXMYASAB",
+            "cm9ncmVzc1JlcXVlc3Qi3wEKDEdhbWVQcm9ncmVzcxIsCgZzdGF0dXMYASAB",
             "KA4yHC5nYW1lYXBpLkdhbWVQcm9ncmVzcy5TdGF0dXMSIQoZbWlsbGlzZWNv",
             "bmRzX2JlZm9yZV9zdGFydBgCIAEoDRIWCg5vYmplY3RfdG9fdGFrZRgDIAEo",
-            "CSJPCgZTdGF0dXMSFQoRV2FpdGluZ0ZvclBsYXllcnMQABISCg5TdGFydENv",
-            "dW50ZG93bhABEgoKBkluR2FtZRACEg4KClNjb3JlQm9hcmQQAyIgChBOZXdQ",
-            "bGF5ZXJSZXF1ZXN0EgwKBG5hbWUYASABKAkiHgoQR2V0UGxheWVyUmVxdWVz",
-            "dBIKCgJpZBgBIAEoCSIUChJMaXN0UGxheWVyc1JlcXVlc3QiKgoHVmVjdG9y",
-            "MxIJCgF4GAEgASgCEgkKAXkYAiABKAISCQoBehgDIAEoAiJoChFNb3ZlUGxh",
-            "eWVyUmVxdWVzdBIKCgJpZBgBIAEoCRIiCghwb3NpdGlvbhgCIAEoCzIQLmdh",
-            "bWVhcGkuVmVjdG9yMxIjCglkaXJlY3Rpb24YAyABKAsyEC5nYW1lYXBpLlZl",
-            "Y3RvcjMi2AEKBlBsYXllchIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEiIK",
-            "BHJvbGUYAyABKA4yFC5nYW1lYXBpLlBsYXllci5Sb2xlEiIKCHBvc2l0aW9u",
-            "GAQgASgLMhAuZ2FtZWFwaS5WZWN0b3IzEiMKCWRpcmVjdGlvbhgFIAEoCzIQ",
-            "LmdhbWVhcGkuVmVjdG9yMxIUCgxsYXN0VXBkYXRlZHMYBiABKAQiMQoEUm9s",
-            "ZRIICgRXb2xmEAASCAoERmlzaBABEgkKBVRpZ2VyEAISCgoGVHVya2V5EAMi",
-            "OQoRVGFrZU9iamVjdFJlcXVlc3QSEQoJb2JqZWN0X2lkGAEgASgJEhEKCXBs",
-            "YXllcl9pZBgCIAEoCSJtCgxPYmplY3RTdGF0dXMSLAoGc3RhdHVzGAEgASgO",
-            "MhwuZ2FtZWFwaS5PYmplY3RTdGF0dXMuU3RhdHVzIi8KBlN0YXR1cxILCgdV",
-            "bmtub3duEAASBgoCT2sQARIQCgxBbHJlYWR5VGFrZW4QAiIWChRHZXRTY29y",
-            "ZUJvYXJkUmVxdWVzdCIvCgtQbGF5ZXJTY29yZRIRCglwbGF5ZXJfaWQYASAB",
-            "KAkSDQoFc2NvcmUYAiABKA0iMwoKU2NvcmVCb2FyZBIlCgdwbGF5ZXJzGAEg",
-            "AygLMhQuZ2FtZWFwaS5QbGF5ZXJTY29yZTJOCgVFeHRyYRJFCgtTZXJ2aWNl",
-            "SW5mbxIbLmdhbWVhcGkuU2VydmljZUluZm9SZXF1ZXN0GhkuZ2FtZWFwaS5T",
-            "ZXJ2aWNlSW5mb1JlcGx5MsMDCgRHYW1lEkkKD0dldEdhbWVQcm9ncmVzcxIf",
-            "LmdhbWVhcGkuR2V0R2FtZVByb2dyZXNzUmVxdWVzdBoVLmdhbWVhcGkuR2Ft",
-            "ZVByb2dyZXNzEjcKCU5ld1BsYXllchIZLmdhbWVhcGkuTmV3UGxheWVyUmVx",
-            "dWVzdBoPLmdhbWVhcGkuUGxheWVyEjcKCUdldFBsYXllchIZLmdhbWVhcGku",
-            "R2V0UGxheWVyUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyEj0KC0xpc3RQbGF5",
-            "ZXJzEhsuZ2FtZWFwaS5MaXN0UGxheWVyc1JlcXVlc3QaDy5nYW1lYXBpLlBs",
-            "YXllcjABEjkKCk1vdmVQbGF5ZXISGi5nYW1lYXBpLk1vdmVQbGF5ZXJSZXF1",
-            "ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISPwoKVGFrZU9iamVjdBIaLmdhbWVhcGku",
-            "VGFrZU9iamVjdFJlcXVlc3QaFS5nYW1lYXBpLk9iamVjdFN0YXR1cxJDCg1H",
-            "ZXRTY29yZUJvYXJkEh0uZ2FtZWFwaS5HZXRTY29yZUJvYXJkUmVxdWVzdBoT",
-            "LmdhbWVhcGkuU2NvcmVCb2FyZGIGcHJvdG8z"));
+            "CRIVCg1jdXJyZW50X3JvdW5kGAQgASgNIk8KBlN0YXR1cxIVChFXYWl0aW5n",
+            "Rm9yUGxheWVycxAAEhIKDlN0YXJ0Q291bnRkb3duEAESCgoGSW5HYW1lEAIS",
+            "DgoKU2NvcmVCb2FyZBADIiAKEE5ld1BsYXllclJlcXVlc3QSDAoEbmFtZRgB",
+            "IAEoCSIeChBHZXRQbGF5ZXJSZXF1ZXN0EgoKAmlkGAEgASgJIhQKEkxpc3RQ",
+            "bGF5ZXJzUmVxdWVzdCIqCgdWZWN0b3IzEgkKAXgYASABKAISCQoBeRgCIAEo",
+            "AhIJCgF6GAMgASgCImgKEU1vdmVQbGF5ZXJSZXF1ZXN0EgoKAmlkGAEgASgJ",
+            "EiIKCHBvc2l0aW9uGAIgASgLMhAuZ2FtZWFwaS5WZWN0b3IzEiMKCWRpcmVj",
+            "dGlvbhgDIAEoCzIQLmdhbWVhcGkuVmVjdG9yMyLYAQoGUGxheWVyEgoKAmlk",
+            "GAEgASgJEgwKBG5hbWUYAiABKAkSIgoEcm9sZRgDIAEoDjIULmdhbWVhcGku",
+            "UGxheWVyLlJvbGUSIgoIcG9zaXRpb24YBCABKAsyEC5nYW1lYXBpLlZlY3Rv",
+            "cjMSIwoJZGlyZWN0aW9uGAUgASgLMhAuZ2FtZWFwaS5WZWN0b3IzEhQKDGxh",
+            "c3RVcGRhdGVkcxgGIAEoBCIxCgRSb2xlEggKBFdvbGYQABIICgRGaXNoEAES",
+            "CQoFVGlnZXIQAhIKCgZUdXJrZXkQAyI5ChFUYWtlT2JqZWN0UmVxdWVzdBIR",
+            "CglvYmplY3RfaWQYASABKAkSEQoJcGxheWVyX2lkGAIgASgJIm0KDE9iamVj",
+            "dFN0YXR1cxIsCgZzdGF0dXMYASABKA4yHC5nYW1lYXBpLk9iamVjdFN0YXR1",
+            "cy5TdGF0dXMiLwoGU3RhdHVzEgsKB1Vua25vd24QABIGCgJPaxABEhAKDEFs",
+            "cmVhZHlUYWtlbhACIhYKFEdldFNjb3JlQm9hcmRSZXF1ZXN0Ii8KC1BsYXll",
+            "clNjb3JlEhEKCXBsYXllcl9pZBgBIAEoCRINCgVzY29yZRgCIAEoDSIzCgpT",
+            "Y29yZUJvYXJkEiUKB3BsYXllcnMYASADKAsyFC5nYW1lYXBpLlBsYXllclNj",
+            "b3JlMk4KBUV4dHJhEkUKC1NlcnZpY2VJbmZvEhsuZ2FtZWFwaS5TZXJ2aWNl",
+            "SW5mb1JlcXVlc3QaGS5nYW1lYXBpLlNlcnZpY2VJbmZvUmVwbHkywwMKBEdh",
+            "bWUSSQoPR2V0R2FtZVByb2dyZXNzEh8uZ2FtZWFwaS5HZXRHYW1lUHJvZ3Jl",
+            "c3NSZXF1ZXN0GhUuZ2FtZWFwaS5HYW1lUHJvZ3Jlc3MSNwoJTmV3UGxheWVy",
+            "EhkuZ2FtZWFwaS5OZXdQbGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXIS",
+            "NwoJR2V0UGxheWVyEhkuZ2FtZWFwaS5HZXRQbGF5ZXJSZXF1ZXN0Gg8uZ2Ft",
+            "ZWFwaS5QbGF5ZXISPQoLTGlzdFBsYXllcnMSGy5nYW1lYXBpLkxpc3RQbGF5",
+            "ZXJzUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyMAESOQoKTW92ZVBsYXllchIa",
+            "LmdhbWVhcGkuTW92ZVBsYXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllchI/",
+            "CgpUYWtlT2JqZWN0EhouZ2FtZWFwaS5UYWtlT2JqZWN0UmVxdWVzdBoVLmdh",
+            "bWVhcGkuT2JqZWN0U3RhdHVzEkMKDUdldFNjb3JlQm9hcmQSHS5nYW1lYXBp",
+            "LkdldFNjb3JlQm9hcmRSZXF1ZXN0GhMuZ2FtZWFwaS5TY29yZUJvYXJkYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ServiceInfoRequest), global::Gameapi.ServiceInfoRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ServiceInfoReply), global::Gameapi.ServiceInfoReply.Parser, new[]{ "Ready" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetGameProgressRequest), global::Gameapi.GetGameProgressRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GameProgress), global::Gameapi.GameProgress.Parser, new[]{ "Status", "MillisecondsBeforeStart", "ObjectToTake" }, null, new[]{ typeof(global::Gameapi.GameProgress.Types.Status) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GameProgress), global::Gameapi.GameProgress.Parser, new[]{ "Status", "MillisecondsBeforeStart", "ObjectToTake", "CurrentRound" }, null, new[]{ typeof(global::Gameapi.GameProgress.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.NewPlayerRequest), global::Gameapi.NewPlayerRequest.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetPlayerRequest), global::Gameapi.GetPlayerRequest.Parser, new[]{ "Id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ListPlayersRequest), global::Gameapi.ListPlayersRequest.Parser, null, null, null, null),
@@ -443,6 +444,7 @@ namespace Gameapi {
       status_ = other.status_;
       millisecondsBeforeStart_ = other.millisecondsBeforeStart_;
       objectToTake_ = other.objectToTake_;
+      currentRound_ = other.currentRound_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -484,6 +486,17 @@ namespace Gameapi {
       }
     }
 
+    /// <summary>Field number for the "current_round" field.</summary>
+    public const int CurrentRoundFieldNumber = 4;
+    private uint currentRound_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint CurrentRound {
+      get { return currentRound_; }
+      set {
+        currentRound_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GameProgress);
@@ -500,6 +513,7 @@ namespace Gameapi {
       if (Status != other.Status) return false;
       if (MillisecondsBeforeStart != other.MillisecondsBeforeStart) return false;
       if (ObjectToTake != other.ObjectToTake) return false;
+      if (CurrentRound != other.CurrentRound) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -509,6 +523,7 @@ namespace Gameapi {
       if (Status != 0) hash ^= Status.GetHashCode();
       if (MillisecondsBeforeStart != 0) hash ^= MillisecondsBeforeStart.GetHashCode();
       if (ObjectToTake.Length != 0) hash ^= ObjectToTake.GetHashCode();
+      if (CurrentRound != 0) hash ^= CurrentRound.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -534,6 +549,10 @@ namespace Gameapi {
         output.WriteRawTag(26);
         output.WriteString(ObjectToTake);
       }
+      if (CurrentRound != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(CurrentRound);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -550,6 +569,9 @@ namespace Gameapi {
       }
       if (ObjectToTake.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ObjectToTake);
+      }
+      if (CurrentRound != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentRound);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -570,6 +592,9 @@ namespace Gameapi {
       }
       if (other.ObjectToTake.Length != 0) {
         ObjectToTake = other.ObjectToTake;
+      }
+      if (other.CurrentRound != 0) {
+        CurrentRound = other.CurrentRound;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -592,6 +617,10 @@ namespace Gameapi {
           }
           case 26: {
             ObjectToTake = input.ReadString();
+            break;
+          }
+          case 32: {
+            CurrentRound = input.ReadUInt32();
             break;
           }
         }
