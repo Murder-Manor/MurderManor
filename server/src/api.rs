@@ -26,12 +26,12 @@ use crate::proto::{
     ListPlayersRequest,
     MovePlayerRequest,
     TakeObjectRequest,
-    GetObjectTakersRequest,
+    GetScoreBoardRequest,
     GameProgress,
     Player,
     ObjectStatus,
-    GetObjectTakersResponse,
     PlayerScore,
+    ScoreBoard,
 };
 use crate::proto::game_progress::Status as GameStatus;
 
@@ -199,30 +199,17 @@ impl Game for GameAPI {
             Ok(Response::new(ObjectStatus::default()))
         }
 
-    async fn get_object_takers(&self,
-                               request: Request<GetObjectTakersRequest>
-                               ) ->
-        Result<Response<GetObjectTakersResponse>, Status> {
-            let object_uuid = String::from(request.into_inner().object_id);
-            let object_uuid = match Uuid::parse_str(&object_uuid) {
-                Ok(id) => id,
-                Err(e) => return Err(
-                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
+    async fn get_score_board(&self,
+                             _: Request<GetScoreBoardRequest>
+                            ) ->
+        Result<Response<ScoreBoard>, Status> {
+            let score = self.core.lock().await.score_board.lock().await.score_board.clone();
+            let resp = ScoreBoard {
+                players: score.iter().map(|(id, &sc)| PlayerScore{
+                    player_id: id.to_hyphenated().to_string(),
+                    score: sc,
+                }).collect(),
             };
-            match self.core.lock().await.objects.lock().await.get_object_takers(object_uuid) {
-                Some(takers) => {
-                    let mut players_score = vec![];
-                    for (idx, taker) in takers.iter().enumerate() {
-                        players_score.push(PlayerScore {
-                            player_id: taker.to_hyphenated().to_string(),
-                            score: (takers.len() - idx) as i32,
-                        });
-                    }
-                    Ok(Response::new(GetObjectTakersResponse {
-                    players: players_score,
-                }))
-                }
-                None => Ok(Response::new(GetObjectTakersResponse::default()))
-            }
+            Ok(Response::new(resp))
         }
 }
