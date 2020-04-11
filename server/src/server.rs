@@ -3,7 +3,8 @@ use std::collections::HashMap;
 use tokio::sync::Mutex;
 use tonic::{transport::Server};
 
-use api::{GameCore, ExtraAPI, GameAPI, GameStateMachine};
+use api::{ExtraAPI, GameAPI};
+use find_game::{GameCore, GameStateMachine};
 use proto::extra_server::ExtraServer;
 use proto::game_server::GameServer;
 
@@ -13,6 +14,7 @@ mod api;
 mod proto;
 mod players;
 mod objects;
+mod find_game;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
