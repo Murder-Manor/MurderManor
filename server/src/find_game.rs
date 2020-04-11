@@ -42,6 +42,7 @@ pub enum GameStatus {
     WaitingForPlayers,
     StartCountdown(SystemTime),
     InGame(u8),
+    CountDownTilNextRound(SystemTime, u8),
     ScoreBoard,
 }
 
@@ -55,6 +56,7 @@ impl GameStatus {
             GameStatus::WaitingForPlayers => ProtoGameStatus::WaitingForPlayers as i32,
             GameStatus::StartCountdown(_) => ProtoGameStatus::StartCountdown as i32,
             GameStatus::InGame(_) => ProtoGameStatus::InGame as i32,
+            GameStatus::CountDownTilNextRound(_, _) => ProtoGameStatus::InGame as i32,
             GameStatus::ScoreBoard => ProtoGameStatus::ScoreBoard as i32,
         }
     }
@@ -77,6 +79,7 @@ pub struct GameCore {
 
 impl GameCore {
     pub fn start(&mut self) {
+        // Remove dead players routine
         let players = self.players.clone();
         tokio::spawn(async move {
             loop {
@@ -85,7 +88,9 @@ impl GameCore {
             }
         });
 
+        // State machine transitions routine
         let state_machine = self.game_state_machine.clone();
+        let players = self.players.clone();
         let objects = self.objects.clone();
         let max_players = self.max_players.clone();
         tokio::spawn(async move {
@@ -93,7 +98,17 @@ impl GameCore {
                 delay_for(time::Duration::from_millis(100)).await;
                 let game_state = state_machine.lock().await.game_state;
                 match game_state {
-                    GameStatus::WaitingForPlayers => continue,
+                    GameStatus::WaitingForPlayers => {
+                        if players.lock().await.internal_players.keys().len()
+                            >= max_players as usize {
+                                println!("All players are in the room, starting game in 5s!");
+                                let st = SystemTime::now()
+                                    .checked_add(time::Duration::from_secs(5))
+                                    .unwrap();
+                                state_machine.lock().await.game_state =
+                                    GameStatus::StartCountdown(st);
+                            }
+                    },
                     GameStatus::StartCountdown(start_time) => {
                         delay_for(
                             start_time.duration_since(SystemTime::now()).unwrap())
@@ -105,12 +120,33 @@ impl GameCore {
 
                         state_machine.lock().await.game_state = GameStatus::InGame(0);
                     },
-                    GameStatus::InGame(_round) => {
+                    GameStatus::InGame(round) => {
                         let takers = objects.lock().await
                             .takers_for(state_machine.lock().await.object_to_take.unwrap());
                         if takers.len() >= max_players as usize {
-                            state_machine.lock().await.game_state = GameStatus::ScoreBoard;
+                            // Depending or round number we will take another round or
+                            // go to the score board.
+                            if round <= 2 {
+                                let st = SystemTime::now()
+                                    .checked_add(time::Duration::from_secs(5))
+                                    .unwrap();
+                                state_machine.lock().await.game_state =
+                                    GameStatus::CountDownTilNextRound(st, round + 1);
+                            } else {
+                                state_machine.lock().await.game_state = GameStatus::ScoreBoard;
+                            }
                         }
+                    },
+                    GameStatus::CountDownTilNextRound(start_time, next_round) => {
+                        delay_for(
+                            start_time.duration_since(SystemTime::now()).unwrap())
+                            .await;
+                        println!("Starting round {:} now!", next_round);
+
+                        state_machine.lock().await.object_to_take =
+                            Some(objects.lock().await.take_random_takable_object());
+
+                        state_machine.lock().await.game_state = GameStatus::InGame(next_round);
                     },
                     GameStatus::ScoreBoard => {
                         println!("Game finished");
@@ -153,15 +189,6 @@ impl GameCore {
         };
 
         self.players.lock().await.internal_players.insert(player_uuid, player.clone());
-
-        // As soon as we reached our maximum number of players, start the countdown!
-        if self.players.lock().await
-            .internal_players.keys().len() >= self.max_players as usize {
-                let st = SystemTime::now()
-                    .checked_add(time::Duration::from_secs(5))
-                    .unwrap();
-                self.game_state_machine.lock().await.game_state = GameStatus::StartCountdown(st);
-            }
 
         Ok(player)
     }
