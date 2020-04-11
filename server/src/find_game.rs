@@ -14,7 +14,7 @@ use crate::proto::{
     Vector3,
 };
 
-use crate::proto::game_progress::Status as GameStatus;
+use crate::proto::game_progress::Status as ProtoGameStatus;
 
 use crate::players::Players;
 use crate::objects::Objects;
@@ -37,10 +37,32 @@ impl error::Error for GenericError {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum GameStatus {
+    WaitingForPlayers,
+    StartCountdown(SystemTime),
+    InGame(u8),
+    ScoreBoard,
+}
+
+impl Default for GameStatus {
+    fn default() -> Self { GameStatus::WaitingForPlayers }
+}
+
+impl GameStatus {
+    pub fn to_proto(&self) -> i32 {
+        match self {
+            GameStatus::WaitingForPlayers => ProtoGameStatus::WaitingForPlayers as i32,
+            GameStatus::StartCountdown(_) => ProtoGameStatus::StartCountdown as i32,
+            GameStatus::InGame(_) => ProtoGameStatus::InGame as i32,
+            GameStatus::ScoreBoard => ProtoGameStatus::ScoreBoard as i32,
+        }
+    }
+}
+
 #[derive(Default)]
 pub struct GameStateMachine {
     pub game_state: GameStatus,
-    pub start_time: Option<SystemTime>,
     pub object_to_take: Option<Uuid>,
 }
 
@@ -72,22 +94,18 @@ impl GameCore {
                 let game_state = state_machine.lock().await.game_state;
                 match game_state {
                     GameStatus::WaitingForPlayers => continue,
-                    GameStatus::StartCountdown => {
-                        let start_time = state_machine.lock().await.start_time;
-                        match start_time {
-                            Some(start_time) =>
-                                delay_for(start_time.duration_since(SystemTime::now()).unwrap()).await,
-                            None => println!("WARNING: Waiting time not defined, starting now")
-                        }
-
+                    GameStatus::StartCountdown(start_time) => {
+                        delay_for(
+                            start_time.duration_since(SystemTime::now()).unwrap())
+                            .await;
                         println!("Starting game now!");
 
                         state_machine.lock().await.object_to_take =
                             Some(objects.lock().await.take_random_takable_object());
 
-                        state_machine.lock().await.game_state = GameStatus::InGame;
+                        state_machine.lock().await.game_state = GameStatus::InGame(0);
                     },
-                    GameStatus::InGame => {
+                    GameStatus::InGame(_round) => {
                         let takers = objects.lock().await
                             .takers_for(state_machine.lock().await.object_to_take.unwrap());
                         if takers.len() >= max_players as usize {
@@ -139,11 +157,10 @@ impl GameCore {
         // As soon as we reached our maximum number of players, start the countdown!
         if self.players.lock().await
             .internal_players.keys().len() >= self.max_players as usize {
-                self.game_state_machine.lock().await.start_time = Some(
-                    SystemTime::now()
+                let st = SystemTime::now()
                     .checked_add(time::Duration::from_secs(5))
-                    .unwrap());
-                self.game_state_machine.lock().await.game_state = GameStatus::StartCountdown;
+                    .unwrap();
+                self.game_state_machine.lock().await.game_state = GameStatus::StartCountdown(st);
             }
 
         Ok(player)
