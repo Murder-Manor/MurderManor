@@ -13,7 +13,8 @@ public class GameStatesManager: MonoBehaviour {
     private static float update_rate_ms = 10.0f;
     private float _time_to_next_update_ms = update_rate_ms;
     private Status _current_state = Status.WaitingForPlayers;
-    private bool player_finished = false;
+    private bool player_finished_round = false;
+    private uint _current_round = 0;
     private string object_to_take = "";
     private Dictionary<String, FindableObject> _takable_objects =
         new Dictionary<String, FindableObject>();
@@ -34,8 +35,8 @@ public class GameStatesManager: MonoBehaviour {
     }
 
     public void NotifyObjectTaken(string object_id) {
-        if (!player_finished && (object_id == object_to_take))
-            player_finished = true;
+        if (!player_finished_round && (object_id == object_to_take))
+            player_finished_round = true;
     }
 
     private void Update() {
@@ -50,8 +51,14 @@ public class GameStatesManager: MonoBehaviour {
 
         _current_state = progress.Status;
 
-        if(_current_state == Status.InGame)
+        if(_current_state == Status.InGame) {
             object_to_take = progress.ObjectToTake;
+            if(_current_round != progress.CurrentRound) {
+                _current_round = progress.CurrentRound;
+                player_finished_round = false;
+            }
+        }
+
 
         var text_to_display = HUDTextFromState();
         gameHUD.GetComponent<TMPro.TMP_Text>().text = text_to_display;
@@ -67,7 +74,7 @@ public class GameStatesManager: MonoBehaviour {
                 text_to_display = "Game starting! Ready?";
                 break;
             case Status.InGame:
-                if(player_finished)
+                if(player_finished_round)
                     text_to_display = "Finished!";
                 else {
                     var object_name = _takable_objects[object_to_take].itemName;
