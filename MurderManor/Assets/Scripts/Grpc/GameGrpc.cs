@@ -116,8 +116,8 @@ namespace Gameapi {
     static readonly grpc::Marshaller<global::Gameapi.MovePlayerRequest> __Marshaller_gameapi_MovePlayerRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.MovePlayerRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gameapi.TakeObjectRequest> __Marshaller_gameapi_TakeObjectRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.TakeObjectRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gameapi.ObjectStatus> __Marshaller_gameapi_ObjectStatus = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.ObjectStatus.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Gameapi.GetObjectTakersRequest> __Marshaller_gameapi_GetObjectTakersRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GetObjectTakersRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Gameapi.GetObjectTakersResponse> __Marshaller_gameapi_GetObjectTakersResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GetObjectTakersResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gameapi.GetScoreBoardRequest> __Marshaller_gameapi_GetScoreBoardRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.GetScoreBoardRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gameapi.ScoreBoard> __Marshaller_gameapi_ScoreBoard = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gameapi.ScoreBoard.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Gameapi.GetGameProgressRequest, global::Gameapi.GameProgress> __Method_GetGameProgress = new grpc::Method<global::Gameapi.GetGameProgressRequest, global::Gameapi.GameProgress>(
         grpc::MethodType.Unary,
@@ -161,12 +161,12 @@ namespace Gameapi {
         __Marshaller_gameapi_TakeObjectRequest,
         __Marshaller_gameapi_ObjectStatus);
 
-    static readonly grpc::Method<global::Gameapi.GetObjectTakersRequest, global::Gameapi.GetObjectTakersResponse> __Method_GetObjectTakers = new grpc::Method<global::Gameapi.GetObjectTakersRequest, global::Gameapi.GetObjectTakersResponse>(
+    static readonly grpc::Method<global::Gameapi.GetScoreBoardRequest, global::Gameapi.ScoreBoard> __Method_GetScoreBoard = new grpc::Method<global::Gameapi.GetScoreBoardRequest, global::Gameapi.ScoreBoard>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "GetObjectTakers",
-        __Marshaller_gameapi_GetObjectTakersRequest,
-        __Marshaller_gameapi_GetObjectTakersResponse);
+        "GetScoreBoard",
+        __Marshaller_gameapi_GetScoreBoardRequest,
+        __Marshaller_gameapi_ScoreBoard);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -208,7 +208,7 @@ namespace Gameapi {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Gameapi.GetObjectTakersResponse> GetObjectTakers(global::Gameapi.GetObjectTakersRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Gameapi.ScoreBoard> GetScoreBoard(global::Gameapi.GetScoreBoardRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -326,21 +326,21 @@ namespace Gameapi {
       {
         return CallInvoker.AsyncUnaryCall(__Method_TakeObject, null, options, request);
       }
-      public virtual global::Gameapi.GetObjectTakersResponse GetObjectTakers(global::Gameapi.GetObjectTakersRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Gameapi.ScoreBoard GetScoreBoard(global::Gameapi.GetScoreBoardRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetObjectTakers(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetScoreBoard(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Gameapi.GetObjectTakersResponse GetObjectTakers(global::Gameapi.GetObjectTakersRequest request, grpc::CallOptions options)
+      public virtual global::Gameapi.ScoreBoard GetScoreBoard(global::Gameapi.GetScoreBoardRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_GetObjectTakers, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_GetScoreBoard, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Gameapi.GetObjectTakersResponse> GetObjectTakersAsync(global::Gameapi.GetObjectTakersRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Gameapi.ScoreBoard> GetScoreBoardAsync(global::Gameapi.GetScoreBoardRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetObjectTakersAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetScoreBoardAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Gameapi.GetObjectTakersResponse> GetObjectTakersAsync(global::Gameapi.GetObjectTakersRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Gameapi.ScoreBoard> GetScoreBoardAsync(global::Gameapi.GetScoreBoardRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_GetObjectTakers, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_GetScoreBoard, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GameClient NewInstance(ClientBaseConfiguration configuration)
@@ -360,7 +360,7 @@ namespace Gameapi {
           .AddMethod(__Method_ListPlayers, serviceImpl.ListPlayers)
           .AddMethod(__Method_MovePlayer, serviceImpl.MovePlayer)
           .AddMethod(__Method_TakeObject, serviceImpl.TakeObject)
-          .AddMethod(__Method_GetObjectTakers, serviceImpl.GetObjectTakers).Build();
+          .AddMethod(__Method_GetScoreBoard, serviceImpl.GetScoreBoard).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -375,7 +375,7 @@ namespace Gameapi {
       serviceBinder.AddMethod(__Method_ListPlayers, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Gameapi.ListPlayersRequest, global::Gameapi.Player>(serviceImpl.ListPlayers));
       serviceBinder.AddMethod(__Method_MovePlayer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Gameapi.MovePlayerRequest, global::Gameapi.Player>(serviceImpl.MovePlayer));
       serviceBinder.AddMethod(__Method_TakeObject, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Gameapi.TakeObjectRequest, global::Gameapi.ObjectStatus>(serviceImpl.TakeObject));
-      serviceBinder.AddMethod(__Method_GetObjectTakers, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Gameapi.GetObjectTakersRequest, global::Gameapi.GetObjectTakersResponse>(serviceImpl.GetObjectTakers));
+      serviceBinder.AddMethod(__Method_GetScoreBoard, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Gameapi.GetScoreBoardRequest, global::Gameapi.ScoreBoard>(serviceImpl.GetScoreBoard));
     }
 
   }

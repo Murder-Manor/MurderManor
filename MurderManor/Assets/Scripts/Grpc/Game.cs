@@ -36,32 +36,30 @@ namespace Gameapi {
             "MxIJCgF4GAEgASgCEgkKAXkYAiABKAISCQoBehgDIAEoAiJoChFNb3ZlUGxh",
             "eWVyUmVxdWVzdBIKCgJpZBgBIAEoCRIiCghwb3NpdGlvbhgCIAEoCzIQLmdh",
             "bWVhcGkuVmVjdG9yMxIjCglkaXJlY3Rpb24YAyABKAsyEC5nYW1lYXBpLlZl",
-            "Y3RvcjMi7gEKBlBsYXllchIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEiIK",
+            "Y3RvcjMi2AEKBlBsYXllchIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEiIK",
             "BHJvbGUYAyABKA4yFC5nYW1lYXBpLlBsYXllci5Sb2xlEiIKCHBvc2l0aW9u",
             "GAQgASgLMhAuZ2FtZWFwaS5WZWN0b3IzEiMKCWRpcmVjdGlvbhgFIAEoCzIQ",
-            "LmdhbWVhcGkuVmVjdG9yMxIUCgxsYXN0VXBkYXRlZHMYBiABKAQSFAoMY3Vy",
-            "cmVudFNjb3JlGAcgASgNIjEKBFJvbGUSCAoEV29sZhAAEggKBEZpc2gQARIJ",
-            "CgVUaWdlchACEgoKBlR1cmtleRADIjkKEVRha2VPYmplY3RSZXF1ZXN0EhEK",
-            "CW9iamVjdF9pZBgBIAEoCRIRCglwbGF5ZXJfaWQYAiABKAkibQoMT2JqZWN0",
-            "U3RhdHVzEiwKBnN0YXR1cxgBIAEoDjIcLmdhbWVhcGkuT2JqZWN0U3RhdHVz",
-            "LlN0YXR1cyIvCgZTdGF0dXMSCwoHVW5rbm93bhAAEgYKAk9rEAESEAoMQWxy",
-            "ZWFkeVRha2VuEAIiKwoWR2V0T2JqZWN0VGFrZXJzUmVxdWVzdBIRCglvYmpl",
-            "Y3RfaWQYASABKAkiLwoLUGxheWVyU2NvcmUSEQoJcGxheWVyX2lkGAEgASgJ",
-            "Eg0KBXNjb3JlGAIgASgFIkAKF0dldE9iamVjdFRha2Vyc1Jlc3BvbnNlEiUK",
-            "B3BsYXllcnMYASADKAsyFC5nYW1lYXBpLlBsYXllclNjb3JlMk4KBUV4dHJh",
-            "EkUKC1NlcnZpY2VJbmZvEhsuZ2FtZWFwaS5TZXJ2aWNlSW5mb1JlcXVlc3Qa",
-            "GS5nYW1lYXBpLlNlcnZpY2VJbmZvUmVwbHky1AMKBEdhbWUSSQoPR2V0R2Ft",
-            "ZVByb2dyZXNzEh8uZ2FtZWFwaS5HZXRHYW1lUHJvZ3Jlc3NSZXF1ZXN0GhUu",
-            "Z2FtZWFwaS5HYW1lUHJvZ3Jlc3MSNwoJTmV3UGxheWVyEhkuZ2FtZWFwaS5O",
-            "ZXdQbGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISNwoJR2V0UGxheWVy",
-            "EhkuZ2FtZWFwaS5HZXRQbGF5ZXJSZXF1ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXIS",
-            "PQoLTGlzdFBsYXllcnMSGy5nYW1lYXBpLkxpc3RQbGF5ZXJzUmVxdWVzdBoP",
-            "LmdhbWVhcGkuUGxheWVyMAESOQoKTW92ZVBsYXllchIaLmdhbWVhcGkuTW92",
-            "ZVBsYXllclJlcXVlc3QaDy5nYW1lYXBpLlBsYXllchI/CgpUYWtlT2JqZWN0",
-            "EhouZ2FtZWFwaS5UYWtlT2JqZWN0UmVxdWVzdBoVLmdhbWVhcGkuT2JqZWN0",
-            "U3RhdHVzElQKD0dldE9iamVjdFRha2VycxIfLmdhbWVhcGkuR2V0T2JqZWN0",
-            "VGFrZXJzUmVxdWVzdBogLmdhbWVhcGkuR2V0T2JqZWN0VGFrZXJzUmVzcG9u",
-            "c2ViBnByb3RvMw=="));
+            "LmdhbWVhcGkuVmVjdG9yMxIUCgxsYXN0VXBkYXRlZHMYBiABKAQiMQoEUm9s",
+            "ZRIICgRXb2xmEAASCAoERmlzaBABEgkKBVRpZ2VyEAISCgoGVHVya2V5EAMi",
+            "OQoRVGFrZU9iamVjdFJlcXVlc3QSEQoJb2JqZWN0X2lkGAEgASgJEhEKCXBs",
+            "YXllcl9pZBgCIAEoCSJtCgxPYmplY3RTdGF0dXMSLAoGc3RhdHVzGAEgASgO",
+            "MhwuZ2FtZWFwaS5PYmplY3RTdGF0dXMuU3RhdHVzIi8KBlN0YXR1cxILCgdV",
+            "bmtub3duEAASBgoCT2sQARIQCgxBbHJlYWR5VGFrZW4QAiIWChRHZXRTY29y",
+            "ZUJvYXJkUmVxdWVzdCIvCgtQbGF5ZXJTY29yZRIRCglwbGF5ZXJfaWQYASAB",
+            "KAkSDQoFc2NvcmUYAiABKA0iMwoKU2NvcmVCb2FyZBIlCgdwbGF5ZXJzGAEg",
+            "AygLMhQuZ2FtZWFwaS5QbGF5ZXJTY29yZTJOCgVFeHRyYRJFCgtTZXJ2aWNl",
+            "SW5mbxIbLmdhbWVhcGkuU2VydmljZUluZm9SZXF1ZXN0GhkuZ2FtZWFwaS5T",
+            "ZXJ2aWNlSW5mb1JlcGx5MsMDCgRHYW1lEkkKD0dldEdhbWVQcm9ncmVzcxIf",
+            "LmdhbWVhcGkuR2V0R2FtZVByb2dyZXNzUmVxdWVzdBoVLmdhbWVhcGkuR2Ft",
+            "ZVByb2dyZXNzEjcKCU5ld1BsYXllchIZLmdhbWVhcGkuTmV3UGxheWVyUmVx",
+            "dWVzdBoPLmdhbWVhcGkuUGxheWVyEjcKCUdldFBsYXllchIZLmdhbWVhcGku",
+            "R2V0UGxheWVyUmVxdWVzdBoPLmdhbWVhcGkuUGxheWVyEj0KC0xpc3RQbGF5",
+            "ZXJzEhsuZ2FtZWFwaS5MaXN0UGxheWVyc1JlcXVlc3QaDy5nYW1lYXBpLlBs",
+            "YXllcjABEjkKCk1vdmVQbGF5ZXISGi5nYW1lYXBpLk1vdmVQbGF5ZXJSZXF1",
+            "ZXN0Gg8uZ2FtZWFwaS5QbGF5ZXISPwoKVGFrZU9iamVjdBIaLmdhbWVhcGku",
+            "VGFrZU9iamVjdFJlcXVlc3QaFS5nYW1lYXBpLk9iamVjdFN0YXR1cxJDCg1H",
+            "ZXRTY29yZUJvYXJkEh0uZ2FtZWFwaS5HZXRTY29yZUJvYXJkUmVxdWVzdBoT",
+            "LmdhbWVhcGkuU2NvcmVCb2FyZGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -74,12 +72,12 @@ namespace Gameapi {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ListPlayersRequest), global::Gameapi.ListPlayersRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Vector3), global::Gameapi.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.MovePlayerRequest), global::Gameapi.MovePlayerRequest.Parser, new[]{ "Id", "Position", "Direction" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Position", "Direction", "LastUpdateds", "CurrentScore" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.Player), global::Gameapi.Player.Parser, new[]{ "Id", "Name", "Role", "Position", "Direction", "LastUpdateds" }, null, new[]{ typeof(global::Gameapi.Player.Types.Role) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.TakeObjectRequest), global::Gameapi.TakeObjectRequest.Parser, new[]{ "ObjectId", "PlayerId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ObjectStatus), global::Gameapi.ObjectStatus.Parser, new[]{ "Status" }, null, new[]{ typeof(global::Gameapi.ObjectStatus.Types.Status) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetObjectTakersRequest), global::Gameapi.GetObjectTakersRequest.Parser, new[]{ "ObjectId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetScoreBoardRequest), global::Gameapi.GetScoreBoardRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.PlayerScore), global::Gameapi.PlayerScore.Parser, new[]{ "PlayerId", "Score" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.GetObjectTakersResponse), global::Gameapi.GetObjectTakersResponse.Parser, new[]{ "Players" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gameapi.ScoreBoard), global::Gameapi.ScoreBoard.Parser, new[]{ "Players" }, null, null, null)
           }));
     }
     #endregion
@@ -1388,7 +1386,6 @@ namespace Gameapi {
       position_ = other.position_ != null ? other.position_.Clone() : null;
       direction_ = other.direction_ != null ? other.direction_.Clone() : null;
       lastUpdateds_ = other.lastUpdateds_;
-      currentScore_ = other.currentScore_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1463,17 +1460,6 @@ namespace Gameapi {
       }
     }
 
-    /// <summary>Field number for the "currentScore" field.</summary>
-    public const int CurrentScoreFieldNumber = 7;
-    private uint currentScore_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public uint CurrentScore {
-      get { return currentScore_; }
-      set {
-        currentScore_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Player);
@@ -1493,7 +1479,6 @@ namespace Gameapi {
       if (!object.Equals(Position, other.Position)) return false;
       if (!object.Equals(Direction, other.Direction)) return false;
       if (LastUpdateds != other.LastUpdateds) return false;
-      if (CurrentScore != other.CurrentScore) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1506,7 +1491,6 @@ namespace Gameapi {
       if (position_ != null) hash ^= Position.GetHashCode();
       if (direction_ != null) hash ^= Direction.GetHashCode();
       if (LastUpdateds != 0UL) hash ^= LastUpdateds.GetHashCode();
-      if (CurrentScore != 0) hash ^= CurrentScore.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1544,10 +1528,6 @@ namespace Gameapi {
         output.WriteRawTag(48);
         output.WriteUInt64(LastUpdateds);
       }
-      if (CurrentScore != 0) {
-        output.WriteRawTag(56);
-        output.WriteUInt32(CurrentScore);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1573,9 +1553,6 @@ namespace Gameapi {
       }
       if (LastUpdateds != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(LastUpdateds);
-      }
-      if (CurrentScore != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentScore);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1611,9 +1588,6 @@ namespace Gameapi {
       }
       if (other.LastUpdateds != 0UL) {
         LastUpdateds = other.LastUpdateds;
-      }
-      if (other.CurrentScore != 0) {
-        CurrentScore = other.CurrentScore;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1654,10 +1628,6 @@ namespace Gameapi {
           }
           case 48: {
             LastUpdateds = input.ReadUInt64();
-            break;
-          }
-          case 56: {
-            CurrentScore = input.ReadUInt32();
             break;
           }
         }
@@ -1979,11 +1949,11 @@ namespace Gameapi {
 
   }
 
-  public sealed partial class GetObjectTakersRequest : pb::IMessage<GetObjectTakersRequest> {
-    private static readonly pb::MessageParser<GetObjectTakersRequest> _parser = new pb::MessageParser<GetObjectTakersRequest>(() => new GetObjectTakersRequest());
+  public sealed partial class GetScoreBoardRequest : pb::IMessage<GetScoreBoardRequest> {
+    private static readonly pb::MessageParser<GetScoreBoardRequest> _parser = new pb::MessageParser<GetScoreBoardRequest>(() => new GetScoreBoardRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetObjectTakersRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<GetScoreBoardRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1996,55 +1966,41 @@ namespace Gameapi {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetObjectTakersRequest() {
+    public GetScoreBoardRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetObjectTakersRequest(GetObjectTakersRequest other) : this() {
-      objectId_ = other.objectId_;
+    public GetScoreBoardRequest(GetScoreBoardRequest other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetObjectTakersRequest Clone() {
-      return new GetObjectTakersRequest(this);
-    }
-
-    /// <summary>Field number for the "object_id" field.</summary>
-    public const int ObjectIdFieldNumber = 1;
-    private string objectId_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string ObjectId {
-      get { return objectId_; }
-      set {
-        objectId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public GetScoreBoardRequest Clone() {
+      return new GetScoreBoardRequest(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GetObjectTakersRequest);
+      return Equals(other as GetScoreBoardRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetObjectTakersRequest other) {
+    public bool Equals(GetScoreBoardRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ObjectId != other.ObjectId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ObjectId.Length != 0) hash ^= ObjectId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2058,10 +2014,6 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ObjectId.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(ObjectId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2070,9 +2022,6 @@ namespace Gameapi {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ObjectId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ObjectId);
-      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2080,12 +2029,9 @@ namespace Gameapi {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetObjectTakersRequest other) {
+    public void MergeFrom(GetScoreBoardRequest other) {
       if (other == null) {
         return;
-      }
-      if (other.ObjectId.Length != 0) {
-        ObjectId = other.ObjectId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2098,10 +2044,6 @@ namespace Gameapi {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            ObjectId = input.ReadString();
-            break;
-          }
         }
       }
     }
@@ -2156,9 +2098,9 @@ namespace Gameapi {
 
     /// <summary>Field number for the "score" field.</summary>
     public const int ScoreFieldNumber = 2;
-    private int score_;
+    private uint score_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Score {
+    public uint Score {
       get { return score_; }
       set {
         score_ = value;
@@ -2207,7 +2149,7 @@ namespace Gameapi {
       }
       if (Score != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Score);
+        output.WriteUInt32(Score);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2221,7 +2163,7 @@ namespace Gameapi {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerId);
       }
       if (Score != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score);
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Score);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2256,7 +2198,7 @@ namespace Gameapi {
             break;
           }
           case 16: {
-            Score = input.ReadInt32();
+            Score = input.ReadUInt32();
             break;
           }
         }
@@ -2265,11 +2207,11 @@ namespace Gameapi {
 
   }
 
-  public sealed partial class GetObjectTakersResponse : pb::IMessage<GetObjectTakersResponse> {
-    private static readonly pb::MessageParser<GetObjectTakersResponse> _parser = new pb::MessageParser<GetObjectTakersResponse>(() => new GetObjectTakersResponse());
+  public sealed partial class ScoreBoard : pb::IMessage<ScoreBoard> {
+    private static readonly pb::MessageParser<ScoreBoard> _parser = new pb::MessageParser<ScoreBoard>(() => new ScoreBoard());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetObjectTakersResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<ScoreBoard> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2282,21 +2224,21 @@ namespace Gameapi {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetObjectTakersResponse() {
+    public ScoreBoard() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetObjectTakersResponse(GetObjectTakersResponse other) : this() {
+    public ScoreBoard(ScoreBoard other) : this() {
       players_ = other.players_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetObjectTakersResponse Clone() {
-      return new GetObjectTakersResponse(this);
+    public ScoreBoard Clone() {
+      return new ScoreBoard(this);
     }
 
     /// <summary>Field number for the "players" field.</summary>
@@ -2311,11 +2253,11 @@ namespace Gameapi {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GetObjectTakersResponse);
+      return Equals(other as ScoreBoard);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetObjectTakersResponse other) {
+    public bool Equals(ScoreBoard other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2360,7 +2302,7 @@ namespace Gameapi {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetObjectTakersResponse other) {
+    public void MergeFrom(ScoreBoard other) {
       if (other == null) {
         return;
       }
