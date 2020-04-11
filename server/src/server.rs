@@ -4,7 +4,7 @@ use tokio::sync::Mutex;
 use tonic::{transport::Server};
 
 use api::{ExtraAPI, GameAPI};
-use find_game::{GameCore, GameStateMachine};
+use find_game::GameCore;
 use proto::extra_server::ExtraServer;
 use proto::game_server::GameServer;
 
@@ -15,6 +15,7 @@ mod proto;
 mod players;
 mod objects;
 mod find_game;
+mod scoreboard;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

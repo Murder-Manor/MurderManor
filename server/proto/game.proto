@@ -21,7 +21,8 @@ service Game {
    rpc MovePlayer(MovePlayerRequest) returns (Player);
 
    rpc TakeObject(TakeObjectRequest) returns (ObjectStatus) ;
-   rpc GetObjectTakers(GetObjectTakersRequest) returns (GetObjectTakersResponse) ;
+
+   rpc GetScoreBoard(GetScoreBoardRequest) returns (ScoreBoard);
 }
 
 message GetGameProgressRequest {
@@ -75,7 +76,6 @@ message Player {
    Vector3 position = 4;
    Vector3 direction = 5;
    uint64 lastUpdateds = 6;
-   uint32 currentScore = 7;
 }
 
 message TakeObjectRequest {
@@ -92,15 +92,15 @@ message ObjectStatus {
 
     Status status = 1;
 }
-message GetObjectTakersRequest {
-    string object_id = 1;
-}
+
+message GetScoreBoardRequest{
+};
 
 message PlayerScore {
     string player_id = 1;
-    int32 score = 2;
+    uint32 score = 2;
 }
 
-message GetObjectTakersResponse {
+message ScoreBoard {
     repeated PlayerScore players = 1;
-}
+};

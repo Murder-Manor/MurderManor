@@ -18,6 +18,7 @@ use crate::proto::game_progress::Status as GameStatus;
 
 use crate::players::Players;
 use crate::objects::Objects;
+use crate::scoreboard::ScoreBoard;
 
 use uuid::Uuid;
 
@@ -49,6 +50,7 @@ pub struct GameCore {
     pub max_players: i8,
     pub players: Arc<Mutex<Players>>,
     pub objects: Arc<Mutex<Objects>>,
+    pub score_board: Arc<Mutex<ScoreBoard>>,
 }
 
 impl GameCore {
@@ -128,7 +130,6 @@ impl GameCore {
             position: Some(Vector3::default()),
             direction: Some(Vector3::default()),
             last_updateds: update_time,
-            current_score: 0,
         };
 
         self.players.lock().await.internal_players.insert(player_uuid, player.clone());
@@ -149,16 +150,14 @@ impl GameCore {
     pub async fn take_object(&mut self, object_uuid: Uuid, player_uuid: Uuid) -> Result<(), GenericError> {
         println!("{:} took {:}", player_uuid, object_uuid);
         // Take the object physically
-        let score = self.objects.lock().await
+        self.objects.lock().await
             .take_object(object_uuid, player_uuid)
-            .unwrap() as u32;
+            .unwrap();
+
         // In case it was the object to find, update the scoreboard
-        if self.objects.lock().await.is_takable(&object_uuid) {
-            match self.players.lock().await
-                .internal_players.get_mut(&player_uuid) {
-                    Some(player) => player.current_score += self.max_players as u32 - score,
-                    None => println!("Player {:} not found", player_uuid),
-                }
+        if object_uuid == self.game_state_machine.lock().await
+            .object_to_take.unwrap_or_default() {
+                self.score_board.lock().await.player_win(player_uuid);
         }
         Ok(())
     }
