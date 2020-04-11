@@ -61,6 +61,9 @@ public class PlayersManager : MonoBehaviour {
         foreach(var key in toDelete)
             _characters.Remove(key);
 
+        // Update Score Board
+        UpdateScoreBoard();
+
         // Update controlled characters
         SendCharsUpdate();
     }
@@ -107,35 +110,45 @@ public class PlayersManager : MonoBehaviour {
                     break;
                 var currChar = response.ResponseStream.Current;
                 // Pass our turn if this is one of ours controlled characters
-                if(! _controlled_characters.ContainsKey(currChar.Id)) {
-                    // Instantiate a new character if we didn't have it
-                    if(!_characters.ContainsKey(currChar.Id)) {
-                        _characters[currChar.Id] = Instantiate(spawnedPrefab);
-                        _characters[currChar.Id].GetComponent<CharacterMove>().SetCharacterName(currChar.Name);
-                        // Teleport it at the beginning to avoid collision issues
-                        Debug.Log("Adding " + currChar.Id);
-                    }
-                    // Update position of each character in case a change have been made
-                    var charMove = _characters[currChar.Id].GetComponent<CharacterMove>();
-                    charMove.SetPosition(new UnityEngine.Vector3(
-                                currChar.Position.X, currChar.Position.Y, currChar.Position.Z));
-                    charMove.SetDirection(new UnityEngine.Vector3(
-                                currChar.Direction.X, currChar.Direction.Y, currChar.Direction.Z));
-                    // Update player score
-                    _characters[currChar.Id].GetComponent<CharacterMove>().SetScore(currChar.CurrentScore);
-                } else
-                    // Update player score
-                    _controlled_characters[currChar.Id].GetComponent<CharacterMove>().SetScore(currChar.CurrentScore);
+                if(_controlled_characters.ContainsKey(currChar.Id))
+                    continue;
+                // Instantiate a new character if we didn't have it
+                if(!_characters.ContainsKey(currChar.Id)) {
+                    _characters[currChar.Id] = Instantiate(spawnedPrefab);
+                    _characters[currChar.Id].GetComponent<CharacterMove>().SetCharacterName(currChar.Name);
+                    // Teleport it at the beginning to avoid collision issues
+                    Debug.Log("Adding " + currChar.Id);
+                }
+                // Update position of each character in case a change have been made
+                var charMove = _characters[currChar.Id].GetComponent<CharacterMove>();
+                charMove.SetPosition(new UnityEngine.Vector3(
+                            currChar.Position.X, currChar.Position.Y, currChar.Position.Z));
+                charMove.SetDirection(new UnityEngine.Vector3(
+                            currChar.Direction.X, currChar.Direction.Y, currChar.Direction.Z));
             }
         }
     }
 
-    public Dictionary<string, uint> GetScoreBoard() {
-        var score_board = new Dictionary<string, uint>();
+    // UpdateScoreBoard queries the server for updates and updates the players score
+    private void UpdateScoreBoard() {
+        var sb = GetComponent<GrpcManager>().GetClient().GetScoreBoard(new GetScoreBoardRequest{});
+        foreach(var score in sb.Players)
+            if(_controlled_characters.ContainsKey(score.PlayerId))
+                    _controlled_characters[score.PlayerId].GetComponent<CharacterMove>().SetScore(score.Score);
+            else if(_characters.ContainsKey(score.PlayerId))
+                _characters[score.PlayerId].GetComponent<CharacterMove>().SetScore(score.Score);
+    }
+
+    public List<Tuple<string, uint>> GetScoreBoard() {
+        var score_board = new List<Tuple<string, uint>>();
         foreach(KeyValuePair<string, CharacterMove> character in _controlled_characters)
-            score_board[character.Value.GetCharacterName()] = character.Value.GetScore();
+            score_board.Add(Tuple.Create(
+                        character.Value.GetCharacterName(),
+                        character.Value.GetScore()));
         foreach(KeyValuePair<string, GameObject> character in _characters)
-            score_board[character.Value.GetComponent<CharacterMove>().GetCharacterName()] = character.Value.GetComponent<CharacterMove>().GetScore();
+            score_board.Add(Tuple.Create(
+                        character.Value.GetComponent<CharacterMove>().GetCharacterName(),
+                        character.Value.GetComponent<CharacterMove>().GetScore()));
         return score_board;
     }
 }
