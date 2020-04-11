@@ -76,8 +76,8 @@ public class GameStatesManager: MonoBehaviour {
                 break;
             case Status.ScoreBoard:
                 text_to_display = "And the winner is...\n";
-                foreach(KeyValuePair<string, uint> score in GetComponent<PlayersManager>().GetScoreBoard()) {
-                    text_to_display += score.Key + " -> " + score.Value + "\n";
+                foreach(var score in GetComponent<PlayersManager>().GetScoreBoard()) {
+                    text_to_display += score.Item1 + " -> " + score.Item2 + "\n";
                 }
                 break;
             default:
