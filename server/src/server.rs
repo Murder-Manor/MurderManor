@@ -43,13 +43,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         Uuid::parse_str("9a492821-bb77-443d-8e61-1188678d4cc2").unwrap()];
 
     let mut core = GameCore{
-        game_state_machine: Arc::new(Mutex::new(GameStateMachine::default())),
         max_players: 2,
-        players: Arc::new(Mutex::new(players::Players::default())),
         objects: Arc::new(Mutex::new(objects::Objects {
             objects: HashMap::new(),
             takable_objects: takable_objects,
         })),
+        ..Default::default()
     };
     core.start();
 
