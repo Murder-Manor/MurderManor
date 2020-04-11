@@ -40,4 +40,9 @@ impl ScoreBoard {
 
         println!("Player {:} now has {:} points", player_uuid, player_score);
     }
+
+    pub fn reset(&mut self) {
+        self.current_state = Rank::First;
+        self.score_board = HashMap::<Uuid, u32>::new();
+    }
 }
