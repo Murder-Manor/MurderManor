@@ -38,6 +38,7 @@ message GameProgress {
     Status status = 1;
     uint32 milliseconds_before_start = 2;
     string object_to_take = 3;
+    uint32 current_round = 4;
 }
 
 message NewPlayerRequest {

@@ -33,9 +33,11 @@ use crate::proto::{
     PlayerScore,
     ScoreBoard,
 };
-use crate::proto::game_progress::Status as GameStatus;
 
-use crate::find_game::GameCore;
+use crate::find_game::{
+    GameCore,
+    GameStatus
+};
 
 use uuid::Uuid;
 
@@ -70,18 +72,29 @@ impl Game for GameAPI {
         Result<Response<GameProgress>, Status> {
             let core = self.core.lock().await;
             let sm = core.game_state_machine.lock().await;
-            let progress = GameProgress {
-                status: sm.game_state as i32,
-                milliseconds_before_start: match sm.start_time {
-                    Some(st) =>
-                        if SystemTime::now() < st {
-                            st.duration_since(SystemTime::now()).unwrap().as_millis() as u32
-                        } else { 0 },
-                    None => 0,
+            let progress = match sm.game_state {
+                GameStatus::WaitingForPlayers => GameProgress {
+                    status: sm.game_state.to_proto(),
+                    ..Default::default()
                 },
-                object_to_take: if sm.game_state == GameStatus::InGame {
-                    sm.object_to_take.unwrap().to_hyphenated().to_string()
-                } else { String::default() },
+                GameStatus::StartCountdown(st) => GameProgress {
+                    status: sm.game_state.to_proto(),
+                    milliseconds_before_start: if SystemTime::now() < st {
+                        st.duration_since(SystemTime::now()).unwrap().as_millis() as u32
+                    } else { 0 },
+                    ..Default::default()
+                },
+                GameStatus::InGame(round) => GameProgress {
+                    status: sm.game_state.to_proto(),
+                    object_to_take: sm.object_to_take.unwrap()
+                        .to_hyphenated().to_string(),
+                    current_round: round as u32,
+                    ..Default::default()
+                },
+                GameStatus::ScoreBoard => GameProgress {
+                    status: sm.game_state.to_proto(),
+                    ..Default::default()
+                },
             };
             Ok(Response::new(progress))
         }
