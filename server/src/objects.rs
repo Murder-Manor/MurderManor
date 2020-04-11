@@ -28,6 +28,10 @@ impl Objects {
         }
     }
 
+    pub fn is_takable(&self, object_id: &Uuid) -> bool {
+        self.takable_objects.contains(object_id)
+    }
+
     // Take an object and return the position of the player in the takers
     pub fn take_object(&mut self, object_id: Uuid, player_id: Uuid) -> Result<usize, Box<dyn error::Error>> {
         let object = match self.objects.get_mut(&object_id) {
