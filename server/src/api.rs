@@ -21,6 +21,7 @@ use crate::proto::{
 use crate::proto::game_server::Game;
 use crate::proto::{
     GetGameProgressRequest,
+    ResetRequest,
     NewPlayerRequest,
     GetPlayerRequest,
     ListPlayersRequest,
@@ -28,6 +29,7 @@ use crate::proto::{
     TakeObjectRequest,
     GetScoreBoardRequest,
     GameProgress,
+    ResetResponse,
     Player,
     ObjectStatus,
     PlayerScore,
@@ -118,6 +120,14 @@ impl Game for GameAPI {
                 },
             };
             Ok(Response::new(progress))
+        }
+
+    async fn reset(&self,
+                   _: Request<ResetRequest>
+                       ) ->
+        Result<Response<ResetResponse>, Status> {
+            self.core.lock().await.reset().await;
+            Ok(Response::new(ResetResponse::default()))
         }
 
     async fn new_player(&self,

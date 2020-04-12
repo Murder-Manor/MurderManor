@@ -14,6 +14,7 @@ message ServiceInfoReply {
 
 service Game {
    rpc GetGameProgress(GetGameProgressRequest) returns (GameProgress);
+   rpc Reset(ResetRequest) returns (ResetResponse);
 
    rpc NewPlayer(NewPlayerRequest) returns (Player);
    rpc GetPlayer(GetPlayerRequest) returns (Player);
@@ -41,6 +42,12 @@ message GameProgress {
     string object_to_take = 3;
     uint32 current_round = 4;
 }
+
+message ResetRequest {
+};
+
+message ResetResponse {
+};
 
 message NewPlayerRequest {
    string name = 1;

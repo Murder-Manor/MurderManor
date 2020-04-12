@@ -242,4 +242,10 @@ impl GameCore {
         }
         Ok(())
     }
+
+    pub async fn reset(&mut self) {
+        self.game_state_machine.lock().await.game_state = GameStatus::WaitingForPlayers;
+        self.objects.lock().await.reset();
+        self.score_board.lock().await.reset();
+    }
 }
