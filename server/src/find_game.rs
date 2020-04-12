@@ -41,7 +41,7 @@ impl error::Error for GenericError {
 pub enum GameStatus {
     WaitingForPlayers,
     StartCountdown(SystemTime),
-    InGame(u8),
+    InGame(u8, Uuid),
     CountDownTilNextRound(SystemTime, u8),
     ScoreBoard,
 }
@@ -55,7 +55,7 @@ impl GameStatus {
         match self {
             GameStatus::WaitingForPlayers => ProtoGameStatus::WaitingForPlayers as i32,
             GameStatus::StartCountdown(_) => ProtoGameStatus::StartCountdown as i32,
-            GameStatus::InGame(_) => ProtoGameStatus::InGame as i32,
+            GameStatus::InGame(_, _) => ProtoGameStatus::InGame as i32,
             GameStatus::CountDownTilNextRound(_, _) => ProtoGameStatus::WaitingForNextRound as i32,
             GameStatus::ScoreBoard => ProtoGameStatus::ScoreBoard as i32,
         }
@@ -65,7 +65,6 @@ impl GameStatus {
 #[derive(Default)]
 pub struct GameStateMachine {
     pub game_state: GameStatus,
-    pub object_to_take: Option<Uuid>,
 }
 
 #[derive(Default)]
@@ -116,14 +115,15 @@ impl GameCore {
                             .await;
                         println!("Starting game now!");
 
-                        state_machine.lock().await.object_to_take =
-                            Some(objects.lock().await.take_random_takable_object());
+                        let object_to_take =
+                            objects.lock().await.take_random_takable_object();
 
-                        state_machine.lock().await.game_state = GameStatus::InGame(0);
+                        state_machine.lock().await.game_state =
+                            GameStatus::InGame(0, object_to_take);
                     },
-                    GameStatus::InGame(round) => {
+                    GameStatus::InGame(round, object_to_take) => {
                         let takers = objects.lock().await
-                            .takers_for(state_machine.lock().await.object_to_take.unwrap());
+                            .takers_for(object_to_take);
                         if takers.len() >= max_players as usize {
                             // Depending or round number we will take another round or
                             // go to the score board.
@@ -145,12 +145,13 @@ impl GameCore {
                             .await;
                         println!("Starting round {:} now!", previous_round + 1);
 
-                        state_machine.lock().await.object_to_take =
-                            Some(objects.lock().await.take_random_takable_object());
+                        let object_to_take =
+                            objects.lock().await.take_random_takable_object();
 
                         score_board.lock().await.next_round();
                         objects.lock().await.reset();
-                        state_machine.lock().await.game_state = GameStatus::InGame(previous_round + 1);
+                        state_machine.lock().await.game_state =
+                            GameStatus::InGame(previous_round + 1, object_to_take);
                     },
                     GameStatus::ScoreBoard => {
                         println!("Game finished, restarting in 30s");
@@ -210,15 +211,20 @@ impl GameCore {
     }
 
     pub async fn take_object(&mut self, object_uuid: Uuid, player_uuid: Uuid) -> Result<(), GenericError> {
+        let object_to_take = match self.game_state_machine.lock().await.game_state {
+            GameStatus::InGame(_, object_to_take) => object_to_take,
+            _ => return Err(GenericError),
+        };
+
         println!("{:} took {:}", player_uuid, object_uuid);
-        // Take the object physically
+
+        // Register the object as taken
         self.objects.lock().await
             .take_object(object_uuid, player_uuid)
             .unwrap();
 
         // In case it was the object to find, update the scoreboard
-        if object_uuid == self.game_state_machine.lock().await
-            .object_to_take.unwrap_or_default() {
+        if object_uuid == object_to_take {
                 self.score_board.lock().await.player_win(player_uuid);
         }
         Ok(())
