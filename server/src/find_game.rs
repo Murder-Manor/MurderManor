@@ -153,7 +153,17 @@ impl GameCore {
                         state_machine.lock().await.game_state = GameStatus::InGame(previous_round + 1);
                     },
                     GameStatus::ScoreBoard => {
-                        println!("Game finished");
+                        println!("Game finished, restarting in 30s");
+                        let st = SystemTime::now()
+                            .checked_add(time::Duration::from_secs(30))
+                            .unwrap();
+                        delay_for(
+                            st.duration_since(SystemTime::now()).unwrap())
+                            .await;
+                        // Reset game
+                        state_machine.lock().await.game_state = GameStatus::WaitingForPlayers;
+                        objects.lock().await.reset();
+                        score_board.lock().await.reset();
                     },
                 }
             }
