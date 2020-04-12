@@ -55,9 +55,7 @@ public class GameStatesManager: MonoBehaviour {
         if(_current_state == Status.InGame) {
             object_to_take = progress.ObjectToTake;
             _current_round = progress.CurrentRound;
-        }
-
-        if(_current_state == Status.WaitingForNextRound) {
+        } else {
             player_finished_round = false;
         }
 
@@ -103,5 +101,10 @@ public class GameStatesManager: MonoBehaviour {
                 break;
         };
         return text_to_display;
+    }
+
+    public void Reset() {
+        GetComponent<GrpcManager>().GetClient()
+            .Reset(new ResetRequest{});
     }
 }
