@@ -69,7 +69,8 @@ pub struct GameStateMachine {
 
 async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
                           players: Arc<Mutex<Players>>, objects: Arc<Mutex<Objects>>,
-                          score_board: Arc<Mutex<ScoreBoard>>, max_players: u8 ) {
+                          score_board: Arc<Mutex<ScoreBoard>>,
+                          max_players: u8, max_rounds: u8) {
     match state_machine.lock().await.game_state {
         GameStatus::WaitingForPlayers => {
             if players.lock().await.internal_players.keys().len()
@@ -92,7 +93,7 @@ async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
                 objects.lock().await.take_random_takable_object();
 
             state_machine.lock().await.game_state =
-                GameStatus::InGame(0, object_to_take);
+                GameStatus::InGame(1, object_to_take);
         },
         GameStatus::InGame(round, object_to_take) => {
             let takers = objects.lock().await
@@ -101,7 +102,7 @@ async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
                 // Depending or round number we will take another round or
                 // go to the score board.
                 println!("Round {:} finished", round);
-                if round < 2 {
+                if round < max_rounds {
                     let st = SystemTime::now()
                         .checked_add(time::Duration::from_secs(5))
                         .unwrap();
@@ -147,6 +148,7 @@ async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
 pub struct GameCore {
     pub game_state_machine: Arc<Mutex<GameStateMachine>>,
     pub max_players: u8,
+    pub max_rounds: u8,
     pub players: Arc<Mutex<Players>>,
     pub objects: Arc<Mutex<Objects>>,
     pub score_board: Arc<Mutex<ScoreBoard>>,
@@ -169,12 +171,13 @@ impl GameCore {
         let objects = self.objects.clone();
         let score_board = self.score_board.clone();
         let max_players = self.max_players.clone();
+        let max_rounds = self.max_rounds.clone();
         tokio::spawn(async move {
             loop {
                 delay_for(time::Duration::from_millis(100)).await;
                 update_state(
                     state_machine.clone(), players.clone(), objects.clone(),
-                    score_board.clone(), max_players).await;
+                    score_board.clone(), max_players, max_rounds).await;
             }
         });
 
