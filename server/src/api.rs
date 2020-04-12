@@ -51,6 +51,10 @@ macro_rules! parse_uuid_or_fail {
     };
 }
 
+fn uuid_to_string(id: Uuid) -> String {
+    id.to_hyphenated().to_string()
+}
+
 pub struct ExtraAPI{
 }
 
@@ -96,8 +100,7 @@ impl Game for GameAPI {
                 },
                 GameStatus::InGame(round) => GameProgress {
                         status: sm.game_state.to_proto(),
-                        object_to_take: sm.object_to_take.unwrap()
-                            .to_hyphenated().to_string(),
+                        object_to_take: uuid_to_string(sm.object_to_take.unwrap()),
                         current_round: round as u32,
                         ..Default::default()
                 },
@@ -216,8 +219,8 @@ impl Game for GameAPI {
         Result<Response<ScoreBoard>, Status> {
             let score = self.core.lock().await.score_board.lock().await.score_board.clone();
             let resp = ScoreBoard {
-                players: score.iter().map(|(id, &sc)| PlayerScore{
-                    player_id: id.to_hyphenated().to_string(),
+                players: score.iter().map(|(&id, &sc)| PlayerScore{
+                    player_id: uuid_to_string(id),
                     score: sc,
                 }).collect(),
             };
