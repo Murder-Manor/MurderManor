@@ -236,7 +236,7 @@ impl GameCore {
             .take_object(object_uuid, player_uuid)
             .unwrap();
 
-        // In case it was the object to find, update the scoreboard
+        // In case it was the object to find, notify the scoreboard to update
         if object_uuid == object_to_take {
                 self.score_board.lock().await.player_win(player_uuid);
         }

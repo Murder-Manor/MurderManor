@@ -1,4 +1,7 @@
-use std::collections::HashMap;
+use std::collections::{
+    HashMap,
+    HashSet,
+};
 
 use uuid::Uuid;
 
@@ -17,11 +20,16 @@ impl Default for Rank {
 #[derive(Default, Debug)]
 pub struct ScoreBoard {
     current_state: Rank,
+    current_winners: HashSet<Uuid>,
     pub score_board: HashMap<Uuid, u32>,
 }
 
 impl ScoreBoard {
     pub fn player_win(&mut self, player_uuid: Uuid) {
+        // Don't update the player score board if he already won ;)
+        if self.current_winners.contains(&player_uuid) {
+            return;
+        }
         let player_score = self.score_board.entry(player_uuid).or_insert(0);
 
         *player_score += match &self.current_state {
@@ -43,10 +51,12 @@ impl ScoreBoard {
 
     pub fn next_round(&mut self) {
         self.current_state = Rank::First;
+        self.current_winners = HashSet::<Uuid>::new();
     }
 
     pub fn reset(&mut self) {
         self.current_state = Rank::First;
+        self.current_winners = HashSet::<Uuid>::new();
         self.score_board = HashMap::<Uuid, u32>::new();
     }
 }
