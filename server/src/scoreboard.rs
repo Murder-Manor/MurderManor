@@ -27,7 +27,7 @@ pub struct ScoreBoard {
 impl ScoreBoard {
     pub fn player_win(&mut self, player_uuid: Uuid) {
         // Don't update the player score board if he already won ;)
-        if self.current_winners.contains(&player_uuid) {
+        if !self.current_winners.insert(player_uuid) {
             return;
         }
         let player_score = self.score_board.entry(player_uuid).or_insert(0);
