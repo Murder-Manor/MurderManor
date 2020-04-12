@@ -219,7 +219,8 @@ impl Game for GameAPI {
             println!("{:} took {:}", player_uuid, object_uuid);
             self.core.lock().await
                 .take_object(object_uuid, player_uuid).await
-                .unwrap();
+                .unwrap_or_else(|e| println!(
+                        "User {:} cannot take {:}: {:}", player_uuid, object_uuid, e));
             Ok(Response::new(ObjectStatus::default()))
         }
 

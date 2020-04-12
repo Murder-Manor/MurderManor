@@ -71,7 +71,8 @@ async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
                           players: Arc<Mutex<Players>>, objects: Arc<Mutex<Objects>>,
                           score_board: Arc<Mutex<ScoreBoard>>,
                           max_players: u8, max_rounds: u8) {
-    match state_machine.lock().await.game_state {
+    let game_state = state_machine.lock().await.game_state.clone();
+    match game_state {
         GameStatus::WaitingForPlayers => {
             if players.lock().await.internal_players.keys().len()
                 >= max_players as usize {
@@ -84,9 +85,10 @@ async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
                 }
         },
         GameStatus::StartCountdown(start_time) => {
-            delay_for(
-                start_time.duration_since(SystemTime::now()).unwrap())
-                .await;
+            // Don't start before start_time
+            if SystemTime::now() < start_time {
+                return;
+            }
             println!("Starting game now!");
 
             let object_to_take =
