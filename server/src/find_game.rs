@@ -67,10 +67,86 @@ pub struct GameStateMachine {
     pub game_state: GameStatus,
 }
 
+async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
+                          players: Arc<Mutex<Players>>, objects: Arc<Mutex<Objects>>,
+                          score_board: Arc<Mutex<ScoreBoard>>, max_players: u8 ) {
+    match state_machine.lock().await.game_state {
+        GameStatus::WaitingForPlayers => {
+            if players.lock().await.internal_players.keys().len()
+                >= max_players as usize {
+                    println!("All players are in the room, starting game in 5s!");
+                    let st = SystemTime::now()
+                        .checked_add(time::Duration::from_secs(5))
+                        .unwrap();
+                    state_machine.lock().await.game_state =
+                        GameStatus::StartCountdown(st);
+                }
+        },
+        GameStatus::StartCountdown(start_time) => {
+            delay_for(
+                start_time.duration_since(SystemTime::now()).unwrap())
+                .await;
+            println!("Starting game now!");
+
+            let object_to_take =
+                objects.lock().await.take_random_takable_object();
+
+            state_machine.lock().await.game_state =
+                GameStatus::InGame(0, object_to_take);
+        },
+        GameStatus::InGame(round, object_to_take) => {
+            let takers = objects.lock().await
+                .takers_for(object_to_take);
+            if takers.len() >= max_players as usize {
+                // Depending or round number we will take another round or
+                // go to the score board.
+                println!("Round {:} finished", round);
+                if round < 2 {
+                    let st = SystemTime::now()
+                        .checked_add(time::Duration::from_secs(5))
+                        .unwrap();
+                    state_machine.lock().await.game_state =
+                        GameStatus::CountDownTilNextRound(st, round);
+                } else {
+                    state_machine.lock().await.game_state = GameStatus::ScoreBoard;
+                }
+            }
+        },
+        GameStatus::CountDownTilNextRound(start_time, previous_round) => {
+            delay_for(
+                start_time.duration_since(SystemTime::now()).unwrap())
+                .await;
+            println!("Starting round {:} now!", previous_round + 1);
+
+            let object_to_take =
+                objects.lock().await.take_random_takable_object();
+
+            score_board.lock().await.next_round();
+            objects.lock().await.reset();
+            state_machine.lock().await.game_state =
+                GameStatus::InGame(previous_round + 1, object_to_take);
+        },
+        GameStatus::ScoreBoard => {
+            println!("Game finished, restarting in 30s");
+            let st = SystemTime::now()
+                .checked_add(time::Duration::from_secs(30))
+                .unwrap();
+            delay_for(
+                st.duration_since(SystemTime::now()).unwrap())
+                .await;
+            // Reset game
+            state_machine.lock().await.game_state = GameStatus::WaitingForPlayers;
+            objects.lock().await.reset();
+            score_board.lock().await.reset();
+        },
+    }
+}
+
+
 #[derive(Default)]
 pub struct GameCore {
     pub game_state_machine: Arc<Mutex<GameStateMachine>>,
-    pub max_players: i8,
+    pub max_players: u8,
     pub players: Arc<Mutex<Players>>,
     pub objects: Arc<Mutex<Objects>>,
     pub score_board: Arc<Mutex<ScoreBoard>>,
@@ -96,77 +172,9 @@ impl GameCore {
         tokio::spawn(async move {
             loop {
                 delay_for(time::Duration::from_millis(100)).await;
-                let game_state = state_machine.lock().await.game_state;
-                match game_state {
-                    GameStatus::WaitingForPlayers => {
-                        if players.lock().await.internal_players.keys().len()
-                            >= max_players as usize {
-                                println!("All players are in the room, starting game in 5s!");
-                                let st = SystemTime::now()
-                                    .checked_add(time::Duration::from_secs(5))
-                                    .unwrap();
-                                state_machine.lock().await.game_state =
-                                    GameStatus::StartCountdown(st);
-                            }
-                    },
-                    GameStatus::StartCountdown(start_time) => {
-                        delay_for(
-                            start_time.duration_since(SystemTime::now()).unwrap())
-                            .await;
-                        println!("Starting game now!");
-
-                        let object_to_take =
-                            objects.lock().await.take_random_takable_object();
-
-                        state_machine.lock().await.game_state =
-                            GameStatus::InGame(0, object_to_take);
-                    },
-                    GameStatus::InGame(round, object_to_take) => {
-                        let takers = objects.lock().await
-                            .takers_for(object_to_take);
-                        if takers.len() >= max_players as usize {
-                            // Depending or round number we will take another round or
-                            // go to the score board.
-                            println!("Round {:} finished", round);
-                            if round <= 2 {
-                                let st = SystemTime::now()
-                                    .checked_add(time::Duration::from_secs(5))
-                                    .unwrap();
-                                state_machine.lock().await.game_state =
-                                    GameStatus::CountDownTilNextRound(st, round);
-                            } else {
-                                state_machine.lock().await.game_state = GameStatus::ScoreBoard;
-                            }
-                        }
-                    },
-                    GameStatus::CountDownTilNextRound(start_time, previous_round) => {
-                        delay_for(
-                            start_time.duration_since(SystemTime::now()).unwrap())
-                            .await;
-                        println!("Starting round {:} now!", previous_round + 1);
-
-                        let object_to_take =
-                            objects.lock().await.take_random_takable_object();
-
-                        score_board.lock().await.next_round();
-                        objects.lock().await.reset();
-                        state_machine.lock().await.game_state =
-                            GameStatus::InGame(previous_round + 1, object_to_take);
-                    },
-                    GameStatus::ScoreBoard => {
-                        println!("Game finished, restarting in 30s");
-                        let st = SystemTime::now()
-                            .checked_add(time::Duration::from_secs(30))
-                            .unwrap();
-                        delay_for(
-                            st.duration_since(SystemTime::now()).unwrap())
-                            .await;
-                        // Reset game
-                        state_machine.lock().await.game_state = GameStatus::WaitingForPlayers;
-                        objects.lock().await.reset();
-                        score_board.lock().await.reset();
-                    },
-                }
+                update_state(
+                    state_machine.clone(), players.clone(), objects.clone(),
+                    score_board.clone(), max_players).await;
             }
         });
 
@@ -188,7 +196,9 @@ impl GameCore {
             }
         });
     }
+}
 
+impl GameCore {
     pub async fn new_player(&mut self, player_uuid: Uuid, name: String) -> Result<Player, GenericError> {
         if self.game_state_machine.lock().await.game_state != GameStatus::WaitingForPlayers {
             return Err(GenericError)
@@ -230,4 +240,3 @@ impl GameCore {
         Ok(())
     }
 }
-
