@@ -41,6 +41,16 @@ use crate::find_game::{
 
 use uuid::Uuid;
 
+macro_rules! parse_uuid_or_fail {
+    ($s:expr) => {
+        match Uuid::parse_str(&String::from($s)) {
+            Ok(id) => id,
+            Err(_) => return Err(
+                Status::new(Code::FailedPrecondition, "Wrong UUID format"))
+        }
+    };
+}
+
 pub struct ExtraAPI{
 }
 
@@ -130,12 +140,7 @@ impl Game for GameAPI {
                         request: Request<GetPlayerRequest>
                        ) ->
         Result<Response<Player>, Status> {
-            let player_uuid = String::from(request.into_inner().id);
-            let player_uuid = match Uuid::parse_str(&player_uuid) {
-                Ok(id) => id,
-                Err(_) => return Err(
-                    Status::new(Code::FailedPrecondition, "Wrong UUID format"))
-            };
+            let player_uuid = parse_uuid_or_fail!(request.into_inner().id);
 
             match self.core
                 .lock().await
@@ -171,12 +176,7 @@ impl Game for GameAPI {
         Result<Response<Player>, Status> {
 
             let request = request.into_inner();
-            let player_uuid = String::from(request.id);
-            let player_uuid = match Uuid::parse_str(&player_uuid) {
-                Ok(id) => id,
-                Err(e) => return Err(
-                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
-            };
+            let player_uuid = parse_uuid_or_fail!(request.id);
             let update_time = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
                 Ok(t) => t.as_secs(),
                 Err(e) => return Err(
@@ -201,18 +201,8 @@ impl Game for GameAPI {
                          ) ->
         Result<Response<ObjectStatus>, Status> {
             let request = request.into_inner();
-            let player_uuid = String::from(request.player_id);
-            let player_uuid = match Uuid::parse_str(&player_uuid) {
-                Ok(id) => id,
-                Err(e) => return Err(
-                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
-            };
-            let object_uuid = String::from(request.object_id);
-            let object_uuid = match Uuid::parse_str(&object_uuid) {
-                Ok(id) => id,
-                Err(e) => return Err(
-                    Status::new(Code::FailedPrecondition, format!("Wrong UUID format: {}", e)))
-            };
+            let player_uuid = parse_uuid_or_fail!(request.player_id);
+            let object_uuid = parse_uuid_or_fail!(request.object_id);
             println!("{:} took {:}", player_uuid, object_uuid);
             self.core.lock().await
                 .take_object(object_uuid, player_uuid).await
