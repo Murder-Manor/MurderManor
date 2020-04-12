@@ -33,7 +33,8 @@ message GameProgress {
         WaitingForPlayers = 0;
         StartCountdown = 1;
         InGame = 2;
-        ScoreBoard = 3;
+        WaitingForNextRound = 3;
+        ScoreBoard = 4;
     }
     Status status = 1;
     uint32 milliseconds_before_start = 2;
