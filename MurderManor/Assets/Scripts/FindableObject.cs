@@ -5,7 +5,6 @@ using UnityEngine;
 public class FindableObject : MonoBehaviour
 {
     private Collider mainCharacterCollider = null;
-    private bool taken = false;
 
     // These fields will be filled in unity editor
     public string itemId;
@@ -23,11 +22,9 @@ public class FindableObject : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider) {
-        if(taken) return;
         if(collider != mainCharacterCollider)
             return;
         objectsManager.GetComponent<ObjectsManager>().TakeObject(itemId);
         Debug.Log("Entering");
-        taken = true;
     }
 }
