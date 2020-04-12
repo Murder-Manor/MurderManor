@@ -53,10 +53,11 @@ public class GameStatesManager: MonoBehaviour {
 
         if(_current_state == Status.InGame) {
             object_to_take = progress.ObjectToTake;
-            if(_current_round != progress.CurrentRound) {
-                _current_round = progress.CurrentRound;
-                player_finished_round = false;
-            }
+            _current_round = progress.CurrentRound;
+        }
+
+        if(_current_state == Status.WaitingForNextRound) {
+            player_finished_round = false;
         }
 
 
@@ -75,11 +76,14 @@ public class GameStatesManager: MonoBehaviour {
                 break;
             case Status.InGame:
                 if(player_finished_round)
-                    text_to_display = "Finished!";
+                    text_to_display = "Round " + _current_round + " finished!";
                 else {
                     var object_name = _takable_objects[object_to_take].itemName;
                     text_to_display = "Find " + object_name;
                 }
+                break;
+            case Status.WaitingForNextRound:
+                text_to_display = "Next round starting... Ready?";
                 break;
             case Status.ScoreBoard:
                 text_to_display = "And the winner is...\n";
