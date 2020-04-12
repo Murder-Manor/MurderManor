@@ -14,6 +14,7 @@ public class PlayersManager : MonoBehaviour {
     private float _time_to_next_update_ms = update_rate_ms;
     private Dictionary<string, GameObject> _characters = new Dictionary<String, GameObject>();
     private Dictionary<string, CharacterMove> _controlled_characters = new Dictionary<String, CharacterMove>();
+    private List<Tuple<string, uint>> _score_board = new List<Tuple<string, uint>>();
 
     // These attributes will be set in unity editor
     public GameObject mainCharacter = null;
@@ -132,23 +133,18 @@ public class PlayersManager : MonoBehaviour {
     // UpdateScoreBoard queries the server for updates and updates the players score
     private void UpdateScoreBoard() {
         var sb = GetComponent<GrpcManager>().GetClient().GetScoreBoard(new GetScoreBoardRequest{});
-        foreach(var score in sb.Players)
+        _score_board = new List<Tuple<string, uint>>();
+        foreach(var score in sb.Players) {
+            var name = "";
             if(_controlled_characters.ContainsKey(score.PlayerId))
-                    _controlled_characters[score.PlayerId].GetComponent<CharacterMove>().SetScore(score.Score);
-            else if(_characters.ContainsKey(score.PlayerId))
-                _characters[score.PlayerId].GetComponent<CharacterMove>().SetScore(score.Score);
+                name = _controlled_characters[score.PlayerId].GetComponent<CharacterMove>().GetCharacterName();
+            else
+                name = _characters[score.PlayerId].GetComponent<CharacterMove>().GetCharacterName();
+            _score_board.Add(Tuple.Create(name, score.Score));
+        }
     }
 
     public List<Tuple<string, uint>> GetScoreBoard() {
-        var score_board = new List<Tuple<string, uint>>();
-        foreach(KeyValuePair<string, CharacterMove> character in _controlled_characters)
-            score_board.Add(Tuple.Create(
-                        character.Value.GetCharacterName(),
-                        character.Value.GetScore()));
-        foreach(KeyValuePair<string, GameObject> character in _characters)
-            score_board.Add(Tuple.Create(
-                        character.Value.GetComponent<CharacterMove>().GetCharacterName(),
-                        character.Value.GetComponent<CharacterMove>().GetScore()));
-        return score_board;
+        return _score_board;
     }
 }
