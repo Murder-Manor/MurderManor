@@ -50,7 +50,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         static_uuid!("9a492821-bb77-443d-8e61-1188678d4cc2")];
 
     let mut core = GameCore{
-        max_players: 2,
+        max_players: 4,
+        max_rounds: 2,
         objects: Arc::new(Mutex::new(objects::Objects {
             objects: HashMap::new(),
             takable_objects: takable_objects,
