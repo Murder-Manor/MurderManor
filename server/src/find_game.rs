@@ -112,6 +112,7 @@ async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
                         GameStatus::CountDownTilNextRound(st, round);
                 } else {
                     state_machine.lock().await.game_state = GameStatus::ScoreBoard;
+                    println!("Game finished");
                 }
             }
         },
@@ -129,19 +130,7 @@ async fn update_state(state_machine: Arc<Mutex<GameStateMachine>>,
             state_machine.lock().await.game_state =
                 GameStatus::InGame(previous_round + 1, object_to_take);
         },
-        GameStatus::ScoreBoard => {
-            println!("Game finished, restarting in 30s");
-            let st = SystemTime::now()
-                .checked_add(time::Duration::from_secs(30))
-                .unwrap();
-            delay_for(
-                st.duration_since(SystemTime::now()).unwrap())
-                .await;
-            // Reset game
-            state_machine.lock().await.game_state = GameStatus::WaitingForPlayers;
-            objects.lock().await.reset();
-            score_board.lock().await.reset();
-        },
+        GameStatus::ScoreBoard => {},
     }
 }
 
