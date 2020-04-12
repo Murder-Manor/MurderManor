@@ -98,9 +98,9 @@ impl Game for GameAPI {
                     } else { 0 },
                     ..Default::default()
                 },
-                GameStatus::InGame(round) => GameProgress {
+                GameStatus::InGame(round, object_to_take) => GameProgress {
                         status: sm.game_state.to_proto(),
-                        object_to_take: uuid_to_string(sm.object_to_take.unwrap()),
+                        object_to_take: uuid_to_string(object_to_take),
                         current_round: round as u32,
                         ..Default::default()
                 },
