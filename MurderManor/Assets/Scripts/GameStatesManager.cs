@@ -20,7 +20,8 @@ public class GameStatesManager: MonoBehaviour {
         new Dictionary<String, FindableObject>();
 
     // These attributes will be set in unity editor
-    public GameObject gameHUD = null;
+    public GameObject mainText = null;
+    public GameObject scoreBoard = null;
     public GameObject findableItems = null;
 
     private void Start() {
@@ -62,7 +63,13 @@ public class GameStatesManager: MonoBehaviour {
 
 
         var text_to_display = HUDTextFromState();
-        gameHUD.GetComponent<TMPro.TMP_Text>().text = text_to_display;
+        mainText.GetComponent<TMPro.TMP_Text>().text = text_to_display;
+
+        var score_text = "";
+        foreach(var score in GetComponent<PlayersManager>().GetScoreBoard()) {
+            score_text += score.Item1 + " -> " + score.Item2 + "\n";
+        }
+        scoreBoard.GetComponent<TMPro.TMP_Text>().text = score_text;
     }
 
     private string HUDTextFromState() {
