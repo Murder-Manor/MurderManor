@@ -84,13 +84,20 @@ impl Game for GameAPI {
                     } else { 0 },
                     ..Default::default()
                 },
-                GameStatus::InGame(round) |
-                    GameStatus::CountDownTilNextRound(_, round) => GameProgress {
+                GameStatus::InGame(round) => GameProgress {
                         status: sm.game_state.to_proto(),
                         object_to_take: sm.object_to_take.unwrap()
                             .to_hyphenated().to_string(),
-                            current_round: round as u32,
-                            ..Default::default()
+                        current_round: round as u32,
+                        ..Default::default()
+                },
+                GameStatus::CountDownTilNextRound(st, round) => GameProgress {
+                        status: sm.game_state.to_proto(),
+                        milliseconds_before_start: if SystemTime::now() < st {
+                            st.duration_since(SystemTime::now()).unwrap().as_millis() as u32
+                        } else { 0 },
+                        current_round: round as u32,
+                        ..Default::default()
                 },
                 GameStatus::ScoreBoard => GameProgress {
                     status: sm.game_state.to_proto(),

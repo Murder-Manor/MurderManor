@@ -45,4 +45,8 @@ impl Objects {
         object.taken_by.push(player_id);
         Ok(object.taken_by.len() - 1)
     }
+
+    pub fn reset(&mut self) {
+        self.objects = HashMap::<Uuid, Object>::new();
+    }
 }
