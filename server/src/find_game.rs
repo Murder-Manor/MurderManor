@@ -56,7 +56,7 @@ impl GameStatus {
             GameStatus::WaitingForPlayers => ProtoGameStatus::WaitingForPlayers as i32,
             GameStatus::StartCountdown(_) => ProtoGameStatus::StartCountdown as i32,
             GameStatus::InGame(_) => ProtoGameStatus::InGame as i32,
-            GameStatus::CountDownTilNextRound(_, _) => ProtoGameStatus::InGame as i32,
+            GameStatus::CountDownTilNextRound(_, _) => ProtoGameStatus::WaitingForNextRound as i32,
             GameStatus::ScoreBoard => ProtoGameStatus::ScoreBoard as i32,
         }
     }
@@ -92,6 +92,7 @@ impl GameCore {
         let state_machine = self.game_state_machine.clone();
         let players = self.players.clone();
         let objects = self.objects.clone();
+        let score_board = self.score_board.clone();
         let max_players = self.max_players.clone();
         tokio::spawn(async move {
             loop {
@@ -126,27 +127,30 @@ impl GameCore {
                         if takers.len() >= max_players as usize {
                             // Depending or round number we will take another round or
                             // go to the score board.
+                            println!("Round {:} finished", round);
                             if round <= 2 {
                                 let st = SystemTime::now()
                                     .checked_add(time::Duration::from_secs(5))
                                     .unwrap();
                                 state_machine.lock().await.game_state =
-                                    GameStatus::CountDownTilNextRound(st, round + 1);
+                                    GameStatus::CountDownTilNextRound(st, round);
                             } else {
                                 state_machine.lock().await.game_state = GameStatus::ScoreBoard;
                             }
                         }
                     },
-                    GameStatus::CountDownTilNextRound(start_time, next_round) => {
+                    GameStatus::CountDownTilNextRound(start_time, previous_round) => {
                         delay_for(
                             start_time.duration_since(SystemTime::now()).unwrap())
                             .await;
-                        println!("Starting round {:} now!", next_round);
+                        println!("Starting round {:} now!", previous_round + 1);
 
                         state_machine.lock().await.object_to_take =
                             Some(objects.lock().await.take_random_takable_object());
 
-                        state_machine.lock().await.game_state = GameStatus::InGame(next_round);
+                        score_board.lock().await.next_round();
+                        objects.lock().await.reset();
+                        state_machine.lock().await.game_state = GameStatus::InGame(previous_round + 1);
                     },
                     GameStatus::ScoreBoard => {
                         println!("Game finished");
@@ -157,6 +161,7 @@ impl GameCore {
 
         // Reset game state if all the players left the game
         let players = self.players.clone();
+        let objects = self.objects.clone();
         let state_machine = self.game_state_machine.clone();
         let score_board = self.score_board.clone();
         tokio::spawn(async move {
@@ -165,6 +170,7 @@ impl GameCore {
                     if state_machine.lock().await.game_state != GameStatus::WaitingForPlayers {
                         println!("No more player, resetting game state");
                         state_machine.lock().await.game_state = GameStatus::WaitingForPlayers;
+                        objects.lock().await.reset();
                         score_board.lock().await.reset();
                     }
                 }
