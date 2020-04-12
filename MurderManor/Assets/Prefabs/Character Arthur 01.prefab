@@ -144,7 +144,7 @@ ParticleSystem:
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
-  useRigidbodyForVelocity: 1
+  useRigidbodyForVelocity: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -4899,7 +4899,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3437808100020103351}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95c95ebbbe5b944479dbfbe0ce5ea248, type: 3}
   m_Name: 
@@ -5030,15 +5030,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ca9b7897bf8b274591acb3d8fd57f85, type: 3}
---- !u!4 &7696432471465492593 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 4ca9b7897bf8b274591acb3d8fd57f85,
-    type: 3}
-  m_PrefabInstance: {fileID: 3437808099939986283}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6671063973341524578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 4ca9b7897bf8b274591acb3d8fd57f85,
+    type: 3}
+  m_PrefabInstance: {fileID: 3437808099939986283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7696432471465492593 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 4ca9b7897bf8b274591acb3d8fd57f85,
     type: 3}
   m_PrefabInstance: {fileID: 3437808099939986283}
   m_PrefabAsset: {fileID: 0}
