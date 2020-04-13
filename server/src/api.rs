@@ -45,11 +45,8 @@ use uuid::Uuid;
 
 macro_rules! parse_uuid_or_fail {
     ($s:expr) => {
-        match Uuid::parse_str(&String::from($s)) {
-            Ok(id) => id,
-            Err(_) => return Err(
-                Status::new(Code::FailedPrecondition, "Wrong UUID format"))
-        }
+        Uuid::parse_str(&String::from(&$s))
+            .map_err(|_| Status::new(Code::FailedPrecondition, "Wrong UUID format"))?
     };
 }
 
@@ -136,13 +133,10 @@ impl Game for GameAPI {
         Result<Response<Player>, Status> {
             let player_uuid = Uuid::new_v4();
 
-            let player = match self.core
+            let player = self.core
                 .lock().await
-                .new_player(player_uuid, request.into_inner().name).await {
-                    Ok(player) => player,
-                    Err(_) => return Err(
-                        Status::new(Code::Internal, "internal error"))
-                };
+                .new_player(player_uuid, request.into_inner().name).await
+                .map_err(|_| Status::new(Code::Internal, "internal error"))?;
 
             println!("New player: {:?}", player);
 
@@ -155,13 +149,13 @@ impl Game for GameAPI {
         Result<Response<Player>, Status> {
             let player_uuid = parse_uuid_or_fail!(request.into_inner().id);
 
-            match self.core
+            let player = self.core
                 .lock().await
                 .players.lock().await
-                .internal_players.get(&player_uuid) {
-                    Some(player) => Ok(Response::new(player.clone())),
-                    None => return Ok(Response::new(Player::default()))
-                }
+                .internal_players.get(&player_uuid)
+                .map_or(Player::default(), |player| player.clone());
+
+            Ok(Response::new(player))
         }
 
     type ListPlayersStream = mpsc::Receiver<Result<Player, Status>>;
@@ -190,23 +184,21 @@ impl Game for GameAPI {
 
             let request = request.into_inner();
             let player_uuid = parse_uuid_or_fail!(request.id);
-            let update_time = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
-                Ok(t) => t.as_secs(),
-                Err(e) => return Err(
-                    Status::new(Code::Internal, format!("internal error: {}", e)))
-            };
+            let update_time = SystemTime::now()
+                .duration_since(SystemTime::UNIX_EPOCH)
+                .map(|t| t.as_secs())
+                .map_err(|e| Status::new(Code::Internal, format!("internal error: {}", e)))?;
 
-            match self.core.lock().await
+            self.core.lock().await
                 .players.lock().await
-                .internal_players.get_mut(&player_uuid) {
-                    Some(player) => {
-                        player.position = request.position;
-                        player.direction = request.direction;
-                        player.last_updateds = update_time;
-                        return Ok(Response::new(player.clone()))
-                    }
-                    None => return Err(Status::new(Code::Internal, "Cannot fetch player")),
-                };
+                .internal_players.get_mut(&player_uuid)
+                .ok_or(Status::new(Code::Internal, "Cannot fetch player"))
+                .map(|player| {
+                    player.position = request.position;
+                    player.direction = request.direction;
+                    player.last_updateds = update_time;
+                    Response::new(player.clone())
+                })
         }
 
     async fn take_object(&self,
