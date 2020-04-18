@@ -5,16 +5,18 @@ use tonic::{transport::Server};
 
 use api::{ExtraAPI, GameAPI};
 use find_game::GameCore;
+use mqtt::MqttAPI;
 use proto::extra_server::ExtraServer;
 use proto::game_server::GameServer;
 
 use uuid::Uuid;
 
 mod api;
+mod find_game;
+mod mqtt;
+mod objects;
 mod proto;
 mod players;
-mod objects;
-mod find_game;
 mod scoreboard;
 
 macro_rules! static_uuid {
@@ -48,6 +50,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         static_uuid!("e4fa2057-a12f-42a8-81e6-58ebb65ad9e4"),
         static_uuid!("0b0e9ce7-fd27-44c7-b1f3-a499efa61d1e"),
         static_uuid!("9a492821-bb77-443d-8e61-1188678d4cc2")];
+
+    let mut mqtt = MqttAPI::new(
+        String::from("ssl://iot.fr-par.scw.cloud:8883"),
+        String::from("1495bd66-3740-48f8-b2c4-4ad346ceb8eb"),
+        "ca.pem".to_string(), "cert.pem".to_string(), "key.pem".to_string(),
+        ).unwrap();
+    mqtt.start().await;
 
     let mut core = GameCore{
         max_players: 4,
